@@ -6,26 +6,32 @@
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"
     type="text/css" />
-<link href="../../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<link href="../../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
-<link href="../../assets/global/plugins/bootstrap/css/bootstrap-rtl.min.css" rel="stylesheet" type="text/css" />
-<link href="../../assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
-<link href="../../assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet"
+<link href="{{ asset('assets/global/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/global/plugins/simple-line-icons/simple-line-icons.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/global/plugins/bootstrap/css/bootstrap-rtl.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/global/plugins/uniform/css/uniform.default.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css') }}" rel="stylesheet"
     type="text/css" />
 <!-- END GLOBAL MANDATORY STYLES -->
 <!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
-<link href="../../assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet"
+<link href="{{ asset('assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css') }}" rel="stylesheet"
     type="text/css" />
-<link href="../../assets/global/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css" />
-<link href="../../assets/global/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/global/plugins/fullcalendar/fullcalendar.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/global/plugins/jqvmap/jqvmap/jqvmap.css') }}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap-rtl.css') }}"/>
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/global/plugins/select2/select2.css') }}"/>
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css') }}"/>
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/global/plugins/bootstrap-markdown/css/bootstrap-markdown.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}"/>
 <!-- END PAGE LEVEL PLUGIN STYLES -->
 <!-- BEGIN PAGE STYLES -->
-<link href="../../assets/admin/pages/css/tasks-rtl.css" rel="stylesheet" type="text/css" />
+<link href="{{ asset('') }}assets/admin/pages/css/tasks-rtl.css" rel="stylesheet" type="text/css" />
 <!-- END PAGE STYLES -->
 <!-- BEGIN THEME STYLES -->
-<link href="../../assets/global/css/components-rtl.css" id="style_components" rel="stylesheet" type="text/css" />
-<link href="../../assets/global/css/plugins-rtl.css" rel="stylesheet" type="text/css" />
-<link href="../../assets/admin/layout/css/layout-rtl.css" rel="stylesheet" type="text/css" />
-<link href="../../assets/admin/layout/css/themes/darkblue-rtl.css" rel="stylesheet" type="text/css" id="style_color" />
-<link href="../../assets/admin/layout/css/custom-rtl.css" rel="stylesheet" type="text/css" /><!-- END THEME STYLES -->
+<link href="{{ asset('assets/global/css/components-rtl.css') }}" id="style_components" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/global/css/plugins-rtl.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/admin/layout/css/layout-rtl.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/admin/layout/css/themes/darkblue-rtl.css') }}" rel="stylesheet" type="text/css" id="style_color" />
+<link href="{{ asset('assets/admin/layout/css/custom-rtl.css') }}" rel="stylesheet" type="text/css" /><!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico" />
+@livewireStyles
