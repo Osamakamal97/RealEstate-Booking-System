@@ -23,10 +23,18 @@ Route::group(['middleware' => 'guest:admin'], function () {
 
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/dashboard/give', [DashboardController::class, 'give'])->name('dashboard.give');
+    Route::get('/dashboard/view', [DashboardController::class, 'view'])->name('dashboard.view');
+    Route::get('/dashboard/edit', [DashboardController::class, 'edit'])->name('dashboard.edit');
     Route::resources([
         'admins' => AdminController::class,
     ]);
-    // ******************* Destroy routes *******************
+    // ? *************************** Permissions **********************************************
+    Route::group(['middleware' => ['permission:delete']], function () {
+        Route::get('/dashboard/delete', [DashboardController::class, 'delete'])->name('dashboard.delete');
+    });
+    // ***************************** Destroy routes *******************************************
     Route::get('admins/{admin}', [AdminController::class, 'destroy'])->name('admins.destroy');
     // ******************* End Destroy routes *******************  
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
