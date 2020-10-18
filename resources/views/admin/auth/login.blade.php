@@ -12,7 +12,7 @@
         <label class="control-label visible-ie8 visible-ie9">البريد الالكتروني</label>
         <div class="input-icon">
             <i class="fa fa-user"></i>
-            <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="البريد الالكتروني"
+            <input class="form-control placeholder-no-fix" type="text" autocomplete="off" autofocus placeholder="البريد الالكتروني"
                 name="email" value="{{ old('email') }}" />
         </div>
     </div>

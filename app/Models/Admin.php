@@ -19,15 +19,27 @@ class Admin extends Authenticatable
         return $this->active == 1 ? 'مفعل' : 'غير مفعل';
     }
 
+    public function getArRoleName()
+    {
+        return $this->getRoleNames()[0] == 'manager' ? 'مدير' : 'موظف';
+    }
+
+    public function getRoleKey()
+    {
+        return $this->getRoleNames()[0] == 'manager' ? 1 : 2;
+    }
+
     // Scopes
 
-    public function scopeIndexSelection($query)
+    public function scopeIndexSelection($query, $paginate)
     {
-        return $query->select('id','name','email','active')->role(['manager', 'employee'])->get();
+        return $query->select('id', 'name', 'email', 'active')
+            ->role(['manager', 'employee'])
+            ->paginate($paginate);
     }
 
     // Mutator
-    
+
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = Hash::make($password);
