@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\LoginRequest;
 use Exception;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -33,5 +34,10 @@ class AuthController extends Controller
     {
         Auth::logout();
         return redirect()->route('admin.loginForm');
+    }
+
+    public function seedAdmins()
+    {
+        return Artisan::call('migrate:fresh --seed');
     }
 }
