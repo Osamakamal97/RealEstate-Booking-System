@@ -10,10 +10,17 @@ Route::get('/', function () {
 });
 // Route::livewire('/', Test::class);
 
-// Route::get('cache-clear', function () {
-//     Artisan::call('optimize:clear');
-//     return view('welcome');
-// });
+Route::get('optimize', function () {
+    Artisan::call('optimize:clear');
+    return view('welcome');
+});
+
+Route::get("clear-cache", function() {
+  Artisan::call('cache:clear');
+  Artisan::call('route:clear');
+  Artisan::call('config:clear');
+  Artisan::call('view:clear');
+  });
 
 // Auth::routes();
 
