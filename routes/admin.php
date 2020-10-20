@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Livewire\Admin\Permissions;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,12 +26,9 @@ Route::group(['middleware' => 'guest:admin'], function () {
 
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-    Route::get('/dashboard/give', [DashboardController::class, 'give'])->name('dashboard.give');
-    Route::get('/dashboard/view', [DashboardController::class, 'view'])->name('dashboard.view');
-    Route::get('/dashboard/edit', [DashboardController::class, 'edit'])->name('dashboard.edit');
     Route::resources([
         'admins' => AdminController::class,
+        'permissions' => PermissionController::class
     ]);
     // ? *************************** Permissions **********************************************
     Route::group(['middleware' => ['permission:delete']], function () {

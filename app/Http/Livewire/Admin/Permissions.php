@@ -2,17 +2,18 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\Admin;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class Admins extends Component
+class Permissions extends Component
 {
+
     use WithPagination, LivewireAlert;
 
-    public $admin_id, $name, $email, $password, $role, $active;
+    public $name, $manager_role, $employee_role;
     public $show_create = false, $show_edit = false, $showPermissions = false;
     public $search = '', $perPage = 5, $page = 1;
     public $showDeleteNotification = false;
@@ -20,41 +21,46 @@ class Admins extends Component
 
     protected $rules = [
         'name' => 'required',
-        'email' => "required|email|unique:admins,email",
-        'password' => 'required_without:admin_id',
-        'role' => 'required|in:1,2',
-        'active' => 'required|in:0,1',
+        'manager_role' => 'required',
+        'employee_role' => 'required',
     ];
 
     public function render()
     {
-        if ($this->search != null) {
-            $admins = Admin::query()
-                ->where('name', 'LIKE', "%{$this->search}%")
-                ->orWhere('email', 'LIKE', "%{$this->search}%")
-                ->orWhere('active', 'LIKE', "%{$this->search}%")
-                ->indexSelection($this->perPage);
-        } else
-            $admins = Admin::indexSelection($this->perPage);
+        // dd(Role::findById(1));
+        //     if ($this->search != null) {
+        //         $admins = Permission::query()
+        //             ->where('name', 'LIKE', "%{$this->search}%")
+        //             ->orWhere('email', 'LIKE', "%{$this->search}%")
+        //             ->orWhere('active', 'LIKE', "%{$this->search}%")
+        //             ->indexSelection($this->perPage);
+        //     } else
+        $permissions = Permission::select('id', 'name')->get();
+        return view('livewire.permissions.index', ['permissions' => $permissions]);
 
-        return view('livewire.admin.index', ['admins' => $admins]);
+        // return view('livewire.admin.index', ['admins' => $admins]);
     }
 
     public function create()
     {
         $this->resetInputFields();
         $this->show_edit = false;
-        $this->showPermissions = false;
+        // $this->showPermissions = false;
         $this->show_create = true;
     }
 
 
     public function store()
     {
+        // validate
         $validate_admin = $this->validate();
+        // permission name
+
+        // assigned roles
+
         // values in form is 1 or 2, so this convert role index to string
         $role = $this->role == 1 ? 'manager' : 'employee';
-        $admin = Admin::create($validate_admin);
+        $admin = Permission::create($validate_admin);
         $assign_role = Role::where('name', $role)->get();
         // give this admin a role
         $admin->assignRole($assign_role);
@@ -83,7 +89,7 @@ class Admins extends Component
 
     public function edit($id)
     {
-        $admin = Admin::find($id);
+        $admin = Permission::find($id);
         if (!$admin)
             session()->flash('error', 'لم يتم إيجاد هذا المسؤول');
 
@@ -108,7 +114,7 @@ class Admins extends Component
             'active' => 'required|in:0,1',
         ]);
 
-        $admin = Admin::find($this->admin_id);
+        $admin = Permission::find($this->admin_id);
         if (!$admin)
             session()->flash('error', 'لم يتم إيجاد هذا المسؤول');
         $admin->update($validate_admin);
@@ -135,7 +141,7 @@ class Admins extends Component
 
     public function deleteConfirm()
     {
-        $admin = Admin::find($this->admin_id);
+        $admin = Permission::find($this->admin_id);
         if (!$admin)
             session()->flash('error', 'لم يتم إيجاد هذا المسؤول');
         $admin->delete();
@@ -158,17 +164,14 @@ class Admins extends Component
     private function resetInputFields()
     {
         $this->name = '';
-        $this->email = '';
-        $this->password = '';
-        $this->role = '';
-        $this->active = '';
+        $this->roles = '';
     }
 
     // permissions things
 
     public function showPermissions($id)
     {
-        $admin = Admin::find($id);
+        $admin = Permission::find($id);
         $admin->givePermissionTo('view');
         // dd($admin);
         Role::findByName('manager', 'admin');

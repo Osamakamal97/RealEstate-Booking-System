@@ -85,6 +85,7 @@
         @endif
 
         <div class="content">
+            <a href="{{ route('admin.login') }}" class="btn btn-info">Login</a>
             @livewire('test')
         </div>
     </div>

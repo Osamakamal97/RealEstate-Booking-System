@@ -8,7 +8,7 @@
     </div>
     @endif
     @if($show_create)
-    @includeIf('livewire.admin.create')
+    @includeIf('livewire.permissions.create')
     @elseif($show_edit)
     @includeIf('livewire.admin.edit')
     @elseif($showPermissions)
@@ -78,33 +78,29 @@
                         <thead>
                             <tr>
                                 <th>الاسم</th>
-                                <th>الايميل</th>
-                                <th>الدور</th>
-                                <th style="width: 60px">الحالة</th>
+                                <th>الادوار المتعلقة</th>
                                 <th style="width: 165px">الاعدادات</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($admins as $admin)
+                            @foreach ($permissions as $permission)
                             <tr class="odd gradeX">
-                                <td>{{ $admin->name }}</td>
-                                <td>{{ $admin->email }}</td>
-                                <td>{{ $admin->getArRoleName() }}</td>
+                                <td>{{ $permission->name }}</td>
                                 <td>
-                                    @if($admin->active == 1)
-                                    <span class="label label-sm label-success">{{ $admin->getActive() }}</span>
+                                    @foreach ($permission->getRoleNames() as $role_name)
+                                    @if ($loop->last)
+                                    {{ __('admin.'.$role_name) }}
                                     @else
-                                    <span class="label label-sm label-danger">{{ $admin->getActive() }}</span>
+                                    {{ __('admin.'.$role_name) }},
+
                                     @endif
+                                    @endforeach
                                 </td>
-                                <td style="width: 265px">
-                                    <button wire:click.prevent="showPermissions({{ $admin->id }})" class="btn btn-sm blue">
-                                        الصلاحيات <i class="fa fa-line-chart"></i>
-                                    </button>
-                                    <button wire:click.prevent="edit({{ $admin->id }})" class="btn btn-sm yellow">
+                                <td style="width: 160px">
+                                    <button wire:click.prevent="edit({{ $permission->id }})" class="btn btn-sm yellow">
                                         تعديل <i class="fa fa-edit"></i>
                                     </button>
-                                    <buttin wire:click.prevent="destroy({{ $admin->id }})" class="btn btn-sm red">
+                                    <buttin wire:click.prevent="destroy({{ $permission->id }})" class="btn btn-sm red">
                                         حذف <i class="fa fa-trash"></i>
                                     </buttin>
                                 </td>
@@ -115,19 +111,20 @@
                     </table>
 
                 </div>
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-md-5 col-sm-5">
                         <div class="dataTables_info" id="sample_1_info" role="status" aria-live="polite"> يظهر
-                            {{$admins->firstItem()}} الى {{ $admins->lastItem() }} عناصر من أصل {{ $admins->total() }}
-                        </div>
-                    </div>
-                    <div class="col-md-7 col-sm-7">
-                        <div class="dataTables_paginate paging_bootstrap_full_number">
-                            {{ $admins->links('livewire.pagination') }}
-                        </div>
-                    </div>
-                </div>
+                            {{$permissions->firstItem()}} الى {{ $permissions->lastItem() }} عناصر من أصل
+                {{ $permissions->total() }}
             </div>
         </div>
-    </div>
+        <div class="col-md-7 col-sm-7">
+            <div class="dataTables_paginate paging_bootstrap_full_number">
+                {{ $permissions->links('livewire.pagination') }}
+            </div>
+        </div>
+    </div> --}}
+</div>
+</div>
+</div>
 </div>

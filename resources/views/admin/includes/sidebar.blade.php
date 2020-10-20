@@ -24,7 +24,7 @@
                     <span class="title">الرئيسة</span>
                 </a>
             </li>
-            @hasanyrole('super-admin')
+            @role('super-admin' ,'admin')
             <li class="{{ request()->is('admin/admins*') ? 'open active' : '' }}">
                 <a href="javascript:;">
                     <i class="icon-user"></i>
@@ -37,22 +37,17 @@
                         <a href="{{ route('admin.admins.index') }}">
                             <i class="icon-bar-chart"></i>المدراء والموظفين</a>
                     </li>
-                    <li>
-                        <a href="index_2.html">
+                    <li class="{{ request()->is('admin/permissions*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.permissions.index') }}">
                             <i class="icon-bulb"></i>الصلاحيات</a>
                     </li>
-                    {{-- <li>
-                        <a href="index_3.html">
-                            <i class="icon-graph"></i>
-                            New Dashboard #2</a>
-                    </li> --}}
                 </ul>
             </li>
-            @endhasanyrole
+            @endrole
             <li class="heading">
                 <h3 class="uppercase">Features</h3>
             </li>
-            @hasanyrole('super-admin')
+            @hasanyrole('super-admin' ,'admin')
             <li class="">
                 <a href="javascript:;">
                     <i class="icon-user"></i>
@@ -61,7 +56,7 @@
                 </a>
             </li>
             @endhasanyrole
-            @hasanyrole('manager|employee|super-admin')
+            @hasanyrole('manager|employee|super-admin' ,'admin')
             <li class="">
                 <a href="javascript:;">
                     <i class="icon-user"></i>
