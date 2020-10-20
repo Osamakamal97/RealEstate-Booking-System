@@ -98,8 +98,8 @@
                                     @endif
                                 </td>
                                 <td style="width: 265px">
-                                    <button wire:click.prevent="showPermissions({{ $admin->id }})" class="btn btn-sm blue">
-                                        الصلاحيات <i class="fa fa-line-chart"></i>
+                                    <button wire:click.prevent="permissions({{ $admin->id }})" class="btn btn-sm blue">
+                                        الصلاحيات <i class="icon-shield"></i>
                                     </button>
                                     <button wire:click.prevent="edit({{ $admin->id }})" class="btn btn-sm yellow">
                                         تعديل <i class="fa fa-edit"></i>

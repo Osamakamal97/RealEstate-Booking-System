@@ -16,7 +16,7 @@ class Admins extends Component
     public $show_create = false, $show_edit = false, $showPermissions = false;
     public $search = '', $perPage = 5, $page = 1;
     public $showDeleteNotification = false;
-    public $userPermissions = [], $rolePermissions = [];
+    public $userPermissions = [], $rolePermissions = [], $checked_permissions;
 
     protected $rules = [
         'name' => 'required',
@@ -158,39 +158,51 @@ class Admins extends Component
     private function resetInputFields()
     {
         $this->name = '';
-        $this->email = '';
-        $this->password = '';
-        $this->role = '';
-        $this->active = '';
+        $this->userPermissions = [];
+        $this->rolePermissions = [];
+        $this->checked_permissions = [];
     }
 
     // permissions things
 
-    public function showPermissions($id)
+    public function permissions($id)
     {
+
         $admin = Admin::find($id);
-        $admin->givePermissionTo('view');
-        // dd($admin);
-        Role::findByName('manager', 'admin');
-        // role permissions
-        // remove permission from role
-        // Role::findByName('manager','admin')->revokePermissionTo('edit');
-        $role = Role::findByName('manager', 'admin');
-        // add permission to role
-        // Role::where('name', $admin->getRoleNames()[0])->first()->givePermissionTo('delete');
-        // dd(Role::where('name', $admin->getRoleNames()[0])->first()->givePermissionTo('view'));
-        // $admin->revokePermissionTo('edit');
-        // $admin->syncPermissions(['edit','delete']);
+        if (!$admin)
+            session()->flash('error', 'لم يتم إيجاد هذا المسؤول');
+        $this->admin_id = $id;
+        $role = Role::findByName($admin->getRoleNames()[0], 'admin');
         // view permissions for role
-        // dd($role->permissions()->get());
         $this->rolePermissions = $role->permissions()->get()->pluck('name');
         // user permissions
-        // dd($admin->permissions());
         $this->userPermissions = $admin->permissions()->get()->pluck('name');
         // clear other forms
         $this->show_create = false;
         $this->show_edit = false;
         $this->showPermissions = true;
+    }
+
+    public function updatePermissions()
+    {
+        $admin = Admin::find($this->admin_id);
+        if (!$admin)
+            session()->flash('error', 'لم يتم إيجاد هذا المسؤول');
+        $permissions = collect(array_keys($this->checked_permissions));
+        foreach ($permissions as $permission)
+            $admin->givePermissionTo($permission);
+
+        $this->show_create = false;
+        $this->show_edit = false;
+        $this->showPermissions = false;
+        $this->resetInputFields();
+        $this->alert('success', 'تم تحديث صلاحيات المسؤول بنجاح', [
+            'position'  =>  'center',
+            'timer'  =>  2000,
+            'toast'  =>  false,
+            'showCancelButton'  =>  false,
+            'showConfirmButton'  =>  false
+        ]);
     }
 
     // pagination things

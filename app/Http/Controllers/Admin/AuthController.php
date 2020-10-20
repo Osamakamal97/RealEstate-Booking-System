@@ -18,13 +18,13 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         try {
-            $credentials = ['email' => $request->email, 'password' => $request->password];
-            if (Auth::guard('admin')->attempt($credentials)) {
-                // $user = Auth::guard('admin')->user();
-                // Auth::guard('admin')->login($user);
-                return redirect()->route('admin.dashboard');
+            $credentials = ['email' => $request->email, 'password' => $request->password, 'active' => 1];
+            if (!Auth::guard('admin')->attempt($credentials)) {
+                return redirect()->back()->with('error', 'البيانات المدخلة غير صحيحة أو لا يمكنك الدخول.')->withInput(['email' => $request->email]);
             }
-            return redirect()->back()->with('error', 'البيانات المدخلة غير صحيحة')->withInput(['email' => $request->email]);
+            // if (!$user->isActive())
+            //     return redirect()->route('admin.logout', ['error' => 'أنت لا تستطيع تسجيل الدخول. راجع الرئيس.']);
+            return redirect()->route('admin.dashboard');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'حصلت مشكلة في النظام.');
         }
@@ -32,6 +32,7 @@ class AuthController extends Controller
 
     public function logout()
     {
+
         Auth::logout();
         return redirect()->route('admin.loginForm');
     }

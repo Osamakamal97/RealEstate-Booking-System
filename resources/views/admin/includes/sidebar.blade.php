@@ -25,21 +25,21 @@
                 </a>
             </li>
             @role('super-admin' ,'admin')
-            <li class="{{ request()->is('admin/admins*') ? 'open active' : '' }}">
+            <li class="{{ request()->is('admin/admins*') || request()->is('admin/permissions')  ? 'open active' : '' }}">
                 <a href="javascript:;">
-                    <i class="icon-user"></i>
-                    <span class="title">مسئولي النظام</span>
+                    <i class="icon-users"></i>
+                    <span class="title">إعدادات مستخدمي النظام</span>
                     <span class="selected"></span>
                     <span class="arrow open"></span>
                 </a>
                 <ul class="sub-menu">
                     <li class="{{ request()->is('admin/admins*') ? 'active' : '' }}">
                         <a href="{{ route('admin.admins.index') }}">
-                            <i class="icon-bar-chart"></i>المدراء والموظفين</a>
+                            <i class="icon-user"></i>المدراء والموظفين</a>
                     </li>
-                    <li class="{{ request()->is('admin/permissions*') ? 'active' : '' }}">
+                    <li class="{{ request()->is('admin/permissions') ? 'active' : '' }}">
                         <a href="{{ route('admin.permissions.index') }}">
-                            <i class="icon-bulb"></i>الصلاحيات</a>
+                            <i class="icon-bar-chart"></i>الصلاحيات</a>
                     </li>
                 </ul>
             </li>

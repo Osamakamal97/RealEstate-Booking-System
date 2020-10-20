@@ -10,9 +10,7 @@
     @if($show_create)
     @includeIf('livewire.permissions.create')
     @elseif($show_edit)
-    @includeIf('livewire.admin.edit')
-    @elseif($showPermissions)
-    @includeIf('livewire.admin.permissions')
+    @includeIf('livewire.permissions.edit')
     @endif
 
     @if ($showDeleteNotification)
@@ -23,7 +21,7 @@
         <div class="portlet box grey-cascade">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-user"></i>جدول المدراء والموظفين
+                    <i class="fa fa-line-chart"></i>جدول الصلاحيات
                 </div>
             </div>
             <div class="portlet-body">

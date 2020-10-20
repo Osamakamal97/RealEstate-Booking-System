@@ -36,3 +36,4 @@
     );
 });
 </script>
+@stack('script')

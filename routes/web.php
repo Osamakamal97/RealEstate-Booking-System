@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     // return view('admin.notifications.sweetalert');
-    return view('livewire.test');
+    // return view('livewire.test');
+    return view('welcome');
 });
 // Route::livewire('/', Test::class);
 

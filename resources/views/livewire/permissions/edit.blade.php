@@ -1,4 +1,5 @@
 <div class="col-md-12">
+    <!-- BEGIN SAMPLE FORM PORTLET-->
     <div class="portlet light bordered">
         <div class="portlet-title">
             <div class="caption font-red-sunglo">
@@ -14,62 +15,16 @@
         </div>
         <div class="portlet-body form">
             <form role="form" wire:submit.prevent="update">
-                {{-- {{ dd($admin_id) }} --}}
-                <input type="hidden" wire:model="admin_id">
-                <div class="col-md-6 ">
-                    <div class="form-body ">
-                        <div class="form-group form-md-line-input 
-                                @error('name') has-error @enderror">
-                            <input type="text" class="form-control" id="form_control_1" placeholder="ادخل الاسم"
-                                wire:model="name">
-                            <label for="form_control_1" @error('name') style="color: #F3565D" @enderror>الاسم</label>
-                            @error('name')
-                            <span id="name-error" class="help-block help-block-error"
-                                style="color: #F3565D">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
-                <div class=" col-md-6">
-                    <div class="form-body">
-                        <div class="form-group form-md-line-input 
-                                @error('email')  has-error @enderror">
-                            <input type="text" class="form-control" id="form_control_1" wire:model="email"
-                                placeholder="أدخل بريدك الإلكتروني">
-                            <label for="form_control_1" @error('email') style="color: #F3565D" @enderror">بريدك
-                                الإلكتروني</label>
-                            @error('email')
-                            <span id="name-error" class="help-block help-block-error"
-                                style="color: #F3565D">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
                 <div class="row">
-
                     <div class="col-md-6">
-                        <div class="form-group form-md-radios @error('role') has-error @enderror">
-                            <label>الدور</label>
-                            <div class="md-radio-inline">
-                                <div class="md-radio">
-                                    <input type="radio" id="role" name="role" class="md-radiobtn" value="1"
-                                        wire:model="role">
-                                    <label for="role">
-                                        <span class="inc"></span>
-                                        <span class="check"></span>
-                                        <span class="box"></span>
-                                        مدير</label>
-                                </div>
-                                <div class="md-radio">
-                                    <input type="radio" id="role2" name="role" class="md-radiobtn" value="2"
-                                        wire:model="role">
-                                    <label for="role2">
-                                        <span class="inc"></span>
-                                        <span class="check"></span>
-                                        <span class="box"></span>
-                                        موظف</label>
-                                </div>
-                                @error('role')
+                        <div class="form-body ">
+                            <div class="form-group form-md-line-input 
+                                @error('name') has-error @enderror">
+                                <input type="text" class="form-control" id="form_control_1" placeholder="ادخل الاسم"
+                                    wire:model="name">
+                                <label for="form_control_1" @error('name') style="color: #F3565D"
+                                    @enderror>الاسم</label>
+                                @error('name')
                                 <span id="name-error" class="help-block help-block-error"
                                     style="color: #F3565D">{{ $message }}</span>
                                 @enderror
@@ -77,42 +32,34 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group form-md-radios  @error('active') has-error @enderror">
-                            <label>الحالة</label>
-                            <div class="md-radio-inline">
-                                <div class="md-radio">
-                                    <input type="radio" id="active" name="active" class="md-radiobtn" value="1"
-                                        wire:model="active">
-                                    <label for="active">
+                        <div class="form-group form-md-checkboxes @error('manager_role') has-error @enderror">
+                            <label>الادوار</label>
+                            <div class="md-checkbox-inline">
+                                <div class="md-checkbox">
+                                    <input type="checkbox" id="checkbox6" class="md-check"
+                                        {{ $manager_role ? 'checked' : '' }} wire:model="manager_role">
+                                    <label for="checkbox6">
                                         <span class="inc"></span>
                                         <span class="check"></span>
                                         <span class="box"></span>
-                                        مفعل </label>
+                                        المدير </label>
                                 </div>
-                                <div class="md-radio">
-                                    <input type="radio" id="active2" name="active" class="md-radiobtn" value="0"
-                                        wire:model="active">
-                                    <label for="active2">
+                                <div class="md-checkbox">
+                                    <input type="checkbox" id="checkbox7" class="md-check"
+                                        {{ $employee_role ? 'checked' : '' }} wire:model="employee_role">
+                                    <label for="checkbox7">
                                         <span class="inc"></span>
                                         <span class="check"></span>
                                         <span class="box"></span>
-                                        غير مفعل </label>
+                                        الموظف </label>
                                 </div>
-                                @error('active')
-                                <span id="name-error" class="help-block help-block-error"
-                                    style="color: #F3565D">{{ $message }}</span>
-                                @enderror
                             </div>
+                            @error('manager_role')
+                            <span id="name-error" class="help-block help-block-error"
+                                style="color: #F3565D">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
-                    {{-- <div class="col-md-12">
-                        <ul>
-                            @foreach ($permissions as $permission)
-                            <li>{{ $permission }}</li>
-                            @endforeach
-
-                        </ul>
-                    </div> --}}
                 </div>
                 <div class="form-actions noborder">
                     <button type="submit" class="btn blue">Submit</button>

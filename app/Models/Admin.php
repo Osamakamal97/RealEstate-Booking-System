@@ -19,6 +19,11 @@ class Admin extends Authenticatable
         return $this->active == 1 ? 'مفعل' : 'غير مفعل';
     }
 
+    public function isActive()
+    {
+        return $this->active == 1 ? true : false;
+    }
+
     public function getArRoleName()
     {
         return $this->getRoleNames()[0] == 'manager' ? 'مدير' : 'موظف';
