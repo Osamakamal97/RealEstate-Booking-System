@@ -177,35 +177,6 @@ class Permissions extends Component
         $this->employee_role = false;
     }
 
-    // permissions things
-
-    public function showPermissions($id)
-    {
-        $permission = Permission::find($id);
-        $permission->givePermissionTo('view');
-        // dd($permission);
-        Role::findByName('manager', 'permission');
-        // role permissions
-        // remove permission from role
-        // Role::findByName('manager','permission')->revokePermissionTo('edit');
-        $role = Role::findByName('manager', 'permission');
-        // add permission to role
-        // Role::where('name', $permission->getRoleNames()[0])->first()->givePermissionTo('delete');
-        // dd(Role::where('name', $permission->getRoleNames()[0])->first()->givePermissionTo('view'));
-        // $permission->revokePermissionTo('edit');
-        // $permission->syncPermissions(['edit','delete']);
-        // view permissions for role
-        // dd($role->permissions()->get());
-        $this->rolePermissions = $role->permissions()->get()->pluck('name');
-        // user permissions
-        // dd($permission->permissions());
-        $this->userPermissions = $permission->permissions()->get()->pluck('name');
-        // clear other forms
-        $this->show_create = false;
-        $this->show_edit = false;
-        $this->showPermissions = true;
-    }
-
     // pagination things
     public function previousPage()
     {

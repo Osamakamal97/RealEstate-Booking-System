@@ -79,6 +79,7 @@
                             <tr>
                                 <th>الاسم</th>
                                 <th>الايميل</th>
+                                <th>ساعات العمل</th>
                                 <th>الدور</th>
                                 <th style="width: 60px">الحالة</th>
                                 <th style="width: 165px">الاعدادات</th>
@@ -88,6 +89,7 @@
                             @foreach ($admins as $admin)
                             <tr class="odd gradeX">
                                 <td>{{ $admin->name }}</td>
+                                <td>{{ $admin->email }}</td>
                                 <td>{{ $admin->email }}</td>
                                 <td>{{ $admin->getArRoleName() }}</td>
                                 <td>

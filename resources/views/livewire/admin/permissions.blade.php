@@ -28,6 +28,7 @@
                                 <span class="box"></span>
                                 {{ __('admin.'.$permission) }} </label>
                         </div>
+
                         @endforeach
 
                     </div>

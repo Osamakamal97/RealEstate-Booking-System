@@ -2,41 +2,37 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\Admin;
+use App\Models\User;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Spatie\Permission\Models\Role;
 
-class Admins extends Component
+class Users extends Component
 {
     use WithPagination, LivewireAlert;
 
-    public $admin_id, $name, $email, $password, $role, $active;
+
     public $show_create = false, $show_edit = false, $showPermissions = false;
     public $search = '', $perPage = 5, $page = 1;
     public $showDeleteNotification = false;
-    public $userPermissions = [], $rolePermissions = [], $checked_permissions;
 
     protected $rules = [
-        'name' => 'required',
-        'email' => "required|email|unique:admins,email",
-        'password' => 'required_without:admin_id',
-        'role' => 'required|in:1,2',
-        'active' => 'required|in:0,1',
+        'name' => 'required|unique:permissions,name',
+        'manager_role' => 'required_unless:employee_role,null',
+        'employee_role' => 'required_unless:manager_role,null',
     ];
 
     public function render()
     {
         if ($this->search != null) {
-            $admins = Admin::query()
+            $users = User::query()
                 ->where('name', 'LIKE', "%{$this->search}%")
-                ->orWhere('email', 'LIKE', "%{$this->search}%")
-                ->orWhere('active', 'LIKE', "%{$this->search}%")
+                ->where('email', 'LIKE', "%{$this->search}%")
                 ->indexSelection($this->perPage);
         } else
-            $admins = Admin::indexSelection($this->perPage);
-        return view('livewire.admin.index', ['admins' => $admins]);
+            $users = User::indexSelection($this->perPage);
+        return view('livewire.users.index', ['users' => $users]);
     }
 
     public function create()
@@ -47,16 +43,15 @@ class Admins extends Component
         $this->show_create = true;
     }
 
-
     public function store()
     {
         $validate_admin = $this->validate();
         // values in form is 1 or 2, so this convert role index to string
         $role = $this->role == 1 ? 'manager' : 'employee';
-        $admin = Admin::create($validate_admin);
+        $user = User::create($validate_admin);
         $assign_role = Role::where('name', $role)->get();
-        // give this admin a role
-        $admin->assignRole($assign_role);
+        // give this user a role
+        $user->assignRole($assign_role);
 
         $this->resetInputFields();
         $this->show_create = false;
@@ -82,16 +77,15 @@ class Admins extends Component
 
     public function edit($id)
     {
-        $admin = Admin::find($id);
-        if (!$admin)
+        $user = User::find($id);
+        if (!$user)
             session()->flash('error', 'لم يتم إيجاد هذا المسؤول');
-
         // Fill inputs with data
-        $this->admin_id = $admin->id;
-        $this->name = $admin->name;
-        $this->email = $admin->email;
-        $this->active = $admin->active;
-        $this->role = $admin->getRoleKey();
+        $this->admin_id = $user->id;
+        $this->name = $user->name;
+        $this->email = $user->email;
+        $this->active = $user->active;
+        $this->role = $user->getRoleKey();
         $this->show_create = false;
         $this->showPermissions = false;
         $this->show_edit = true;
@@ -106,15 +100,15 @@ class Admins extends Component
             'active' => 'required|in:0,1',
         ]);
 
-        $admin = Admin::find($this->admin_id);
-        if (!$admin)
+        $user = User::find($this->admin_id);
+        if (!$user)
             session()->flash('error', 'لم يتم إيجاد هذا المسؤول');
-        $admin->update($validate_admin);
+        $user->update($validate_admin);
         $role = $this->role == 1 ? 'manager' : 'employee';
-        if ($role != $admin->getRoleNames()[0]) {
+        if ($role != $user->getRoleNames()[0]) {
             $assign_role = Role::where('name', $role)->get();
             // this will delete old role and replace it with new role
-            $admin->syncRoles($assign_role);
+            $user->syncRoles($assign_role);
         }
         $this->resetInputFields();
         $this->show_edit = false;
@@ -133,10 +127,10 @@ class Admins extends Component
 
     public function deleteConfirm()
     {
-        $admin = Admin::find($this->admin_id);
-        if (!$admin)
+        $user = User::find($this->admin_id);
+        if (!$user)
             session()->flash('error', 'لم يتم إيجاد هذا المسؤول');
-        $admin->delete();
+        $user->delete();
         $this->showDeleteNotification = false;
         $this->alert('success', 'تم حذف المسؤول بنجاح', [
             'position'  =>  'center',
@@ -156,56 +150,12 @@ class Admins extends Component
     private function resetInputFields()
     {
         $this->name = '';
-        $this->email = '';
-        $this->password = '';
-        $this->role = '';
-        $this->active = '';
         $this->userPermissions = [];
         $this->rolePermissions = [];
         $this->checked_permissions = [];
     }
 
-    // permissions things
 
-    public function permissions($id)
-    {
-
-        $admin = Admin::find($id);
-        if (!$admin)
-            session()->flash('error', 'لم يتم إيجاد هذا المسؤول');
-        $this->admin_id = $id;
-        $role = Role::findByName($admin->getRoleNames()[0], 'admin');
-        // view permissions for role
-        $this->rolePermissions = $role->permissions()->get()->pluck('name');
-        // user permissions
-        $this->userPermissions = $admin->permissions()->get()->pluck('name');
-        // clear other forms
-        $this->show_create = false;
-        $this->show_edit = false;
-        $this->showPermissions = true;
-    }
-
-    public function updatePermissions()
-    {
-        $admin = Admin::find($this->admin_id);
-        if (!$admin)
-            session()->flash('error', 'لم يتم إيجاد هذا المسؤول');
-        $permissions = collect(array_keys($this->checked_permissions));
-        foreach ($permissions as $permission)
-            $admin->givePermissionTo($permission);
-
-        $this->show_create = false;
-        $this->show_edit = false;
-        $this->showPermissions = false;
-        $this->resetInputFields();
-        $this->alert('success', 'تم تحديث صلاحيات المسؤول بنجاح', [
-            'position'  =>  'center',
-            'timer'  =>  2000,
-            'toast'  =>  false,
-            'showCancelButton'  =>  false,
-            'showConfirmButton'  =>  false
-        ]);
-    }
 
     // pagination things
     public function previousPage()

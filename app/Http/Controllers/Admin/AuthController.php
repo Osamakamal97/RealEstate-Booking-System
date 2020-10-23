@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\Admin\LoginEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\LoginRequest;
 use Exception;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,11 +21,13 @@ class AuthController extends Controller
     {
         try {
             $credentials = ['email' => $request->email, 'password' => $request->password, 'active' => 1];
-            if (!Auth::guard('admin')->attempt($credentials)) {
+            $admin = Auth::guard('admin')->attempt($credentials);
+            if (!$admin) {
                 return redirect()->back()->with('error', 'البيانات المدخلة غير صحيحة أو لا يمكنك الدخول.')->withInput(['email' => $request->email]);
             }
-            // if (!$user->isActive())
-            //     return redirect()->route('admin.logout', ['error' => 'أنت لا تستطيع تسجيل الدخول. راجع الرئيس.']);
+
+            event(new Login('admin', auth('admin')->user(), false));
+            // event(new LoginEvent(auth('admin')->user()));
             return redirect()->route('admin.dashboard');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'حصلت مشكلة في النظام.');
@@ -32,7 +36,6 @@ class AuthController extends Controller
 
     public function logout()
     {
-
         Auth::logout();
         return redirect()->route('admin.loginForm');
     }

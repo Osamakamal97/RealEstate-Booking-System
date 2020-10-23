@@ -90,7 +90,12 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
         ],
-
+        'tracker' => [
+            'driver'   => 'mysql',
+            'host'     => env('DB_HOST', '127.0.0.1'),
+            'database' => env('DB_DATABASE', 'forge'),
+            'strict' => false,    // to avoid problems on some MySQL installs
+        ],
     ],
 
     /*

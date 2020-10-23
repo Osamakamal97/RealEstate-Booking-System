@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Livewire\Admin\Permissions;
 use Illuminate\Support\Facades\Route;
 
@@ -24,11 +25,12 @@ Route::group(['middleware' => 'guest:admin'], function () {
     Route::get('seedAdmins', [AuthController::class, 'seedAdmins']);
 });
 
-Route::group(['middleware' => 'auth:admin'], function () {
+Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resources([
         'admins' => AdminController::class,
-        'permissions' => PermissionController::class
+        'permissions' => PermissionController::class,
+        'users' => UserController::class,
     ]);
     // ? *************************** Permissions **********************************************
     Route::group(['middleware' => ['permission:delete']], function () {

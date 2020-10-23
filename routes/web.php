@@ -2,6 +2,7 @@
 
 use App\Http\Livewire\Test;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,6 +24,6 @@ Route::get("clear-cache", function() {
   Artisan::call('view:clear');
   });
 
-// Auth::routes();
+Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');

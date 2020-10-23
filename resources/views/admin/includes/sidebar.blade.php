@@ -24,8 +24,9 @@
                     <span class="title">الرئيسة</span>
                 </a>
             </li>
-            @role('super-admin' ,'admin')
-            <li class="{{ request()->is('admin/admins*') || request()->is('admin/permissions')  ? 'open active' : '' }}">
+            @role('super-admin')
+            <li
+                class="{{ request()->is('admin/admins*') || request()->is('admin/permissions')  ? 'open active' : '' }}">
                 <a href="javascript:;">
                     <i class="icon-users"></i>
                     <span class="title">إعدادات مستخدمي النظام</span>
@@ -44,6 +45,25 @@
                 </ul>
             </li>
             @endrole
+            <li class="heading">
+                <h3 class="uppercase">الزبائن</h3>
+            </li>
+            @hasanyrole('super-admin' ,'admin')
+            <li class="{{ request()->is('admin/users*')  ? 'open active' : '' }}">
+                <a href="javascript:;">
+                    <i class="icon-users"></i>
+                    <span class="title">الزبائن</span>
+                    <span class="selected"></span>
+                    <span class="arrow open"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="{{ request()->is('admin/users*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.users.index') }}">
+                            <i class="icon-user"></i>عرض جميع الزبائن</a>
+                    </li>
+                </ul>
+            </li>
+            @endhasanyrole
             <li class="heading">
                 <h3 class="uppercase">Features</h3>
             </li>

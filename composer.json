@@ -19,6 +19,7 @@
         "laravelcollective/html": "^6.2",
         "livewire/livewire": "^2.3",
         "mediconesystems/livewire-datatables": "^0.4.1",
+        "pragmarx/tracker": "^4.0",
         "spatie/laravel-permission": "^3.17"
     },
     "require-dev": {
