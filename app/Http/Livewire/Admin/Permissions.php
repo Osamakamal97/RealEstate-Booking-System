@@ -8,14 +8,11 @@ use Livewire\WithPagination;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class Permissions extends Component
+class Permissions extends Main
 {
-
     use WithPagination, LivewireAlert;
 
     public $name, $manager_role = false, $employee_role = false, $permission_id = 0;
-    public $show_create = false, $show_edit = false, $showPermissions = false;
-    public $search = '', $perPage = 5, $page = 1;
     public $showDeleteNotification = false;
     public $userPermissions = [], $rolePermissions = [];
 
@@ -27,7 +24,6 @@ class Permissions extends Component
 
     public function render()
     {
-        // dd(Role::findById(1));
         if ($this->search != null) {
             $permissions = Permission::query()
                 ->where('name', 'LIKE', "%{$this->search}%")
@@ -35,8 +31,6 @@ class Permissions extends Component
         } else
             $permissions = Permission::select('id', 'name')->get();
         return view('livewire.permissions.index', ['permissions' => $permissions]);
-
-        // return view('livewire.permission.index', ['permissions' => $permissions]);
     }
 
     public function create()
@@ -175,21 +169,5 @@ class Permissions extends Component
         $this->name = '';
         $this->manager_role = false;
         $this->employee_role = false;
-    }
-
-    // pagination things
-    public function previousPage()
-    {
-        $this->page = $this->page - 1;
-    }
-
-    public function nextPage()
-    {
-        $this->page = $this->page + 1;
-    }
-
-    public function gotoPage($page)
-    {
-        $this->page = $page;
     }
 }

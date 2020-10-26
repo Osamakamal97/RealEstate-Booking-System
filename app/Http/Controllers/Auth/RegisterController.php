@@ -38,7 +38,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware(['guest', 'is_blocked_user']);
     }
 
     /**
@@ -53,7 +53,7 @@ class RegisterController extends Controller
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'country' => ['required', 'string', 'max:255'],
-            'mobile_number' => ['required', 'string', 'max:255','unique:users'],
+            'mobile_number' => ['required', 'string', 'max:255', 'unique:users'],
             'mobile_number_country_code' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -68,6 +68,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $ip = request()->ip();
         return User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
@@ -76,6 +77,7 @@ class RegisterController extends Controller
             'mobile_number_country_code' => $data['mobile_number_country_code'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'ip' => $ip
         ]);
     }
 }

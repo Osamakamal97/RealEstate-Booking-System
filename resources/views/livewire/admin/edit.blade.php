@@ -15,13 +15,13 @@
         <div class="portlet-body form">
             <form role="form" wire:submit.prevent="update">
                 {{-- {{ dd($admin_id) }} --}}
-                <input type="hidden" wire:model="admin_id">
+                <input type="hidden" wire:model.defer="admin_id">
                 <div class="col-md-6 ">
                     <div class="form-body ">
                         <div class="form-group form-md-line-input 
                                 @error('name') has-error @enderror">
                             <input type="text" class="form-control" id="form_control_1" placeholder="ادخل الاسم"
-                                wire:model="name">
+                                wire:model.defer="name">
                             <label for="form_control_1" @error('name') style="color: #F3565D" @enderror>الاسم</label>
                             @error('name')
                             <span id="name-error" class="help-block help-block-error"
@@ -34,7 +34,7 @@
                     <div class="form-body">
                         <div class="form-group form-md-line-input 
                                 @error('email')  has-error @enderror">
-                            <input type="text" class="form-control" id="form_control_1" wire:model="email"
+                            <input type="text" class="form-control" id="form_control_1" wire:model.defer="email"
                                 placeholder="أدخل بريدك الإلكتروني">
                             <label for="form_control_1" @error('email') style="color: #F3565D" @enderror">بريدك
                                 الإلكتروني</label>
@@ -53,7 +53,7 @@
                             <div class="md-radio-inline">
                                 <div class="md-radio">
                                     <input type="radio" id="role" name="role" class="md-radiobtn" value="1"
-                                        wire:model="role">
+                                        wire:model.defer="role">
                                     <label for="role">
                                         <span class="inc"></span>
                                         <span class="check"></span>
@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="md-radio">
                                     <input type="radio" id="role2" name="role" class="md-radiobtn" value="2"
-                                        wire:model="role">
+                                        wire:model.defer="role">
                                     <label for="role2">
                                         <span class="inc"></span>
                                         <span class="check"></span>
@@ -82,7 +82,7 @@
                             <div class="md-radio-inline">
                                 <div class="md-radio">
                                     <input type="radio" id="active" name="active" class="md-radiobtn" value="1"
-                                        wire:model="active">
+                                        wire:model.defer="active">
                                     <label for="active">
                                         <span class="inc"></span>
                                         <span class="check"></span>
@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="md-radio">
                                     <input type="radio" id="active2" name="active" class="md-radiobtn" value="0"
-                                        wire:model="active">
+                                        wire:model.defer="active">
                                     <label for="active2">
                                         <span class="inc"></span>
                                         <span class="check"></span>

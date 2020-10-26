@@ -79,7 +79,7 @@
                             <tr>
                                 <th>الاسم</th>
                                 <th>الايميل</th>
-                                <th>ساعات العمل</th>
+                                <th>أخر دخول منذ</th>
                                 <th>الدور</th>
                                 <th style="width: 60px">الحالة</th>
                                 <th style="width: 165px">الاعدادات</th>
@@ -90,7 +90,7 @@
                             <tr class="odd gradeX">
                                 <td>{{ $admin->name }}</td>
                                 <td>{{ $admin->email }}</td>
-                                <td>{{ $admin->email }}</td>
+                                <td>{{ $admin->loginTime() }}</td>
                                 <td>{{ $admin->getArRoleName() }}</td>
                                 <td>
                                     @if($admin->active == 1)

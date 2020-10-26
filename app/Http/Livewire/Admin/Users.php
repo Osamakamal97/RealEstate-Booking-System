@@ -2,7 +2,10 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\BandUsers;
+use App\Models\BlockedUsers;
 use App\Models\User;
+use App\Models\UsersIps;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -146,6 +149,21 @@ class Users extends Component
         $this->showDeleteNotification = false;
     }
 
+    public function band($id)
+    {
+        $user = User::find($id);
+        if (!$user)
+            session()->flash('error', 'لم يتم إيجاد هذا المستخدم');
+        BlockedUsers::create(['user_id' => $user->id, 'ip' => $user->ip]);
+        $this->alert('success', 'تم حظر الزبون بنجاح', [
+            'position'  =>  'center',
+            'timer'  =>  2000,
+            'toast'  =>  false,
+            'showCancelButton'  =>  false,
+            'showConfirmButton'  =>  false
+        ]);
+    }
+
     // clear inputs
     private function resetInputFields()
     {
@@ -154,8 +172,6 @@ class Users extends Component
         $this->rolePermissions = [];
         $this->checked_permissions = [];
     }
-
-
 
     // pagination things
     public function previousPage()

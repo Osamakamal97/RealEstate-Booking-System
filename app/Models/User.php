@@ -23,7 +23,8 @@ class User extends Authenticatable
         'mobile_number_country_code',
         'email',
         'password',
-        'active'
+        'active',
+        'ip'
     ];
 
     /**
@@ -67,4 +68,5 @@ class User extends Authenticatable
         return $query->select('id', 'first_name', 'last_name', 'country', 'email', 'mobile_number', 'active')
             ->paginate($paginate);
     }
+
 }

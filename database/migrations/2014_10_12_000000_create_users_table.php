@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->unsignedTinyInteger('active')->default(1);
             $table->rememberToken();
+            $table->string('ip')->nullable();
             $table->timestamps();
         });
     }

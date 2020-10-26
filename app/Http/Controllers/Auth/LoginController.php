@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 
 class LoginController extends Controller
 {
@@ -19,7 +20,7 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers, ThrottlesLogins;
 
     /**
      * Where to redirect users after login.
@@ -28,6 +29,7 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+    protected $username;
     /**
      * Create a new controller instance.
      *
@@ -35,6 +37,29 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+
+        $this->middleware(['guest', 'is_blocked_user'])->except('logout');
+        $this->username = $this->findMobileNumber();
+    }
+
+    public function findMobileNumber()
+    {
+        $login = request()->input('login');
+
+        $fieldType = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'mobile_number';
+
+        request()->merge([$fieldType => $login]);
+
+        return $fieldType;
+    }
+
+    /**
+     * Get username property.
+     *
+     * @return string
+     */
+    public function username()
+    {
+        return $this->username;
     }
 }

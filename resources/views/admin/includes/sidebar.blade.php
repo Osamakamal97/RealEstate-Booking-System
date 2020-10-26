@@ -25,30 +25,41 @@
                 </a>
             </li>
             @role('super-admin')
-            <li
-                class="{{ request()->is('admin/admins*') || request()->is('admin/permissions')  ? 'open active' : '' }}">
-                <a href="javascript:;">
+            <li class="heading">
+                <h3 class="uppercase">النظام</h3>
+            </li>
+            <li class="{{ request()->is('admin/admins') ? 'active' : '' }}">
+                <a href="{{ route('admin.admins.index') }}">
                     <i class="icon-users"></i>
-                    <span class="title">إعدادات مستخدمي النظام</span>
-                    <span class="selected"></span>
-                    <span class="arrow open"></span>
+                    <span class="title">مستخدمي النظام</span>
                 </a>
-                <ul class="sub-menu">
-                    <li class="{{ request()->is('admin/admins*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.admins.index') }}">
-                            <i class="icon-user"></i>المدراء والموظفين</a>
-                    </li>
-                    <li class="{{ request()->is('admin/permissions') ? 'active' : '' }}">
-                        <a href="{{ route('admin.permissions.index') }}">
-                            <i class="icon-bar-chart"></i>الصلاحيات</a>
-                    </li>
-                </ul>
+            </li>
+            <li class="{{ request()->is('admin/permissions') ? 'active' : '' }}">
+                <a href="{{ route('admin.permissions.index') }}">
+                    <i class="icon-bar-chart"></i>
+                    <span class="title">الصلاحيات</span>
+                </a>
             </li>
             @endrole
+            @role('manager')
+            <li class="{{ request()->is('admin/employees') ? 'active' : '' }}">
+                <a href="{{ route('admin.employees.index') }}">
+                    <i class="material-icons">work</i>
+                    <span class="title">الموظفين</span>
+                </a>
+            </li>
+            @endcan
+
+            @hasDirectPermission('view_employees')
             <li class="heading">
                 <h3 class="uppercase">الزبائن</h3>
             </li>
-            @hasanyrole('super-admin' ,'admin')
+            @endHasDirectPermission
+
+            @can('view_users','admin')
+            <li class="heading">
+                <h3 class="uppercase">الزبائن</h3>
+            </li>
             <li class="{{ request()->is('admin/users*')  ? 'open active' : '' }}">
                 <a href="javascript:;">
                     <i class="icon-users"></i>
@@ -63,28 +74,10 @@
                     </li>
                 </ul>
             </li>
-            @endhasanyrole
+            @endcan
             <li class="heading">
                 <h3 class="uppercase">Features</h3>
             </li>
-            @hasanyrole('super-admin' ,'admin')
-            <li class="">
-                <a href="javascript:;">
-                    <i class="icon-user"></i>
-                    <span class="title">مدير</span>
-                    <span class="selected"></span>
-                </a>
-            </li>
-            @endhasanyrole
-            @hasanyrole('manager|employee|super-admin' ,'admin')
-            <li class="">
-                <a href="javascript:;">
-                    <i class="icon-user"></i>
-                    <span class="title">موظف</span>
-                    <span class="selected"></span>
-                </a>
-            </li>
-            @endhasanyrole
             <li class="last">
                 <a href="javascript:;">
                     <i class="icon-settings"></i>
@@ -93,7 +86,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="form_controls_md.html">
+                        <a href="#">
                             <span class="badge badge-roundless badge-danger">new</span>Material Design<br>
                             Form Controls</a>
                     </li>

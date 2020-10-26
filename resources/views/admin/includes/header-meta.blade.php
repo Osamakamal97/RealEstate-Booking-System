@@ -17,6 +17,8 @@
     type="text/css" />
 <!-- END GLOBAL MANDATORY STYLES -->
 <!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
+<link href="{{ asset('assets/admin/pages/css/error-rtl.css') }}" rel="stylesheet" type="text/css" />
+
 <link href="{{ asset('assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css') }}" rel="stylesheet"
     type="text/css" />
 <link href="{{ asset('assets/global/plugins/fullcalendar/fullcalendar.min.css') }}" rel="stylesheet" type="text/css" />
@@ -45,5 +47,6 @@
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.css" />
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+@stack('style')
 @livewireStyles

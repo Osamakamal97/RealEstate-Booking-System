@@ -1,3 +1,5 @@
+@section('content')
+<h3 class="page-title">الموظفين</h3>
 <div class="row">
     @if (session()->has('success'))
     <div class="col-md-12">
@@ -7,21 +9,11 @@
         </div>
     </div>
     @endif
-    @if($show_create)
-    @includeIf('livewire.users.create')
-    @elseif($show_edit)
-    @includeIf('livewire.users.edit')
-    @endif
-
-    @if ($showDeleteNotification)
-    @includeIf('admin.notifications.sweetalert')
-    @endif
-
     <div class="col-md-12">
         <div class="portlet box grey-cascade">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-line-chart"></i>جدول الصلاحيات
+                    <i class="fa fa-user"></i>جدول المدراء والموظفين
                 </div>
             </div>
             <div class="portlet-body">
@@ -76,39 +68,42 @@
                         <thead>
                             <tr>
                                 <th>الاسم</th>
-                                <th>البريد الالكتروني</th>
-                                <th>رقم الهاتف</th>
-                                <th>الدولة</th>
-                                <th>الحالة</th>
+                                <th>الايميل</th>
+                                <th>أخر دخول منذ</th>
+                                <th style="width: 60px">الحالة</th>
                                 <th style="width: 165px">الاعدادات</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $user)
+                            @foreach ($employees as $employee)
                             <tr class="odd gradeX">
-                                <td>{{ $user->fullName() }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->mobile_number }}</td>
-                                <td>{{ $user->country }}</td>
+                                <td>{{ $employee->name }}</td>
+                                <td>{{ $employee->email }}</td>
+                                <td>{{ $employee->loginTime() }}</td>
                                 <td>
-                                    @if($user->active == 1)
-                                    <span class="label label-sm label-success">{{ $user->getActive() }}</span>
+                                    @if($employee->active == 1)
+                                    <span class="label label-sm label-success">{{ $employee->getActive() }}</span>
                                     @else
-                                    <span class="label label-sm label-danger">{{ $user->getActive() }}</span>
+                                    <span class="label label-sm label-danger">{{ $employee->getActive() }}</span>
                                     @endif
                                 </td>
-                                <td style="width: 235px">
-                                    <button wire:click.prevent="edit({{ $user->id }})" class="btn btn-sm yellow">
+                                <td>
+                                    {{-- @can('update_employee_permissions')
+                                    <button wire:click.prevent="permissions({{ $employee->id }})"
+                                        class="btn btn-sm blue">
+                                        الصلاحيات <i class="icon-shield"></i>
+                                    </button>
+                                    @endcan --}}
+                                    @can('update_employee')
+                                    <button wire:click.prevent="edit({{ $employee->id }})" class="btn btn-sm yellow">
                                         تعديل <i class="fa fa-edit"></i>
                                     </button>
-                                    <button wire:click.prevent="destroy({{ $user->id }})" class="btn btn-sm red">
-                                        حذف <i class="fa fa-trash"></i>
-                                    </button>
-                                    @can('block_user')
-                                    <button wire:click.prevent="band({{ $user->id }})" class="btn btn-sm grey">
-                                        حظر <li class="glyphicon glyphicon-ban-circle"></li>
-                                    </button>
                                     @endcan
+                                    {{-- @can('delete_employee')
+                                    <buttin wire:click.prevent="destroy({{ $employee->id }})" class="btn btn-sm red">
+                                        حذف <i class="fa fa-trash"></i>
+                                    </buttin>
+                                    @endcan --}}
                                 </td>
                             </tr>
                             @endforeach
@@ -120,13 +115,13 @@
                 <div class="row">
                     <div class="col-md-5 col-sm-5">
                         <div class="dataTables_info" id="sample_1_info" role="status" aria-live="polite"> يظهر
-                            {{$users->firstItem()}} الى {{ $users->lastItem() }} عناصر من أصل
-                            {{ $users->total() }}
+                            {{$employees->firstItem()}} الى {{ $employees->lastItem() }} عناصر من أصل
+                            {{ $employees->total() }}
                         </div>
                     </div>
                     <div class="col-md-7 col-sm-7">
                         <div class="dataTables_paginate paging_bootstrap_full_number">
-                            {{ $users->links('livewire.pagination') }}
+                            {{ $employees->links('livewire.pagination') }}
                         </div>
                     </div>
                 </div>
@@ -134,3 +129,4 @@
         </div>
     </div>
 </div>
+@endsection

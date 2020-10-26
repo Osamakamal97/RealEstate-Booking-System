@@ -21,7 +21,7 @@
                             <div class="form-group form-md-line-input 
                                 @error('name') has-error @enderror">
                                 <input type="text" class="form-control" id="form_control_1" placeholder="ادخل الاسم"
-                                    wire:model="name">
+                                    wire:model.defer="name">
                                 <label for="form_control_1" @error('name') style="color: #F3565D"
                                     @enderror>الاسم</label>
                                 @error('name')
@@ -36,7 +36,7 @@
                             <label>الادوار</label>
                             <div class="md-checkbox-inline">
                                 <div class="md-checkbox">
-                                    <input type="checkbox" id="checkbox6" class="md-check" wire:model="manager_role">
+                                    <input type="checkbox" id="checkbox6" class="md-check" wire:model.defer="manager_role">
                                     <label for="checkbox6">
                                         <span class="inc"></span>
                                         <span class="check"></span>
@@ -44,7 +44,7 @@
                                         المدير </label>
                                 </div>
                                 <div class="md-checkbox">
-                                    <input type="checkbox" id="checkbox7" class="md-check" wire:model="employee_role">
+                                    <input type="checkbox" id="checkbox7" class="md-check" wire:model.defer="employee_role">
                                     <label for="checkbox7">
                                         <span></span>
                                         <span class="check"></span>

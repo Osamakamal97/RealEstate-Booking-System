@@ -64,6 +64,9 @@ type="text/javascript"> --}}
 <script type="text/javascript"
     src="{{ asset('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}">
 </script>
+<script src="http://maps.google.com/maps/api/js?key=AIzaSyBTVuX5HqCfrJkzLVte3NnsTrrJTygbFj4" type="text/javascript"></script>
+<script src="{{ asset('assets/global/plugins/gmaps/gmaps.min.js') }}" type="text/javascript"></script>
+
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="{{ asset('assets/global/scripts/metronic.js') }}" type="text/javascript"></script>
@@ -74,6 +77,8 @@ type="text/javascript"> --}}
 <script src="{{ asset('assets/admin/pages/scripts/tasks.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/admin/pages/scripts/table-managed.js') }}"></script>
 <script src="{{ asset('assets/admin/pages/scripts/form-validation.js') }}"></script>
+<script src="{{ asset('assets/admin/pages/scripts/maps-google.js') }}" type="text/javascript"></script>
+
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
     jQuery(document).ready(function() {    
@@ -92,70 +97,8 @@ type="text/javascript"> --}}
         TableManaged.init();
         FormValidation.init();
         UIConfirmations.init(); // init page demo
+        MapsGoogle.init();
     });
-</script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script>
-    const SwalModal = (icon, title, html) => {
-        Swal.fire({
-            icon,
-            title,
-            html
-        })
-    }
-
-    const SwalConfirm = (icon, title, html, confirmButtonText, method, params, callback) => {
-        Swal.fire({
-            icon,
-            title,
-            html,
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText,
-            reverseButtons: true,
-        }).then(result => {
-            if (result.value) {
-                return livewire.emit(method, params)
-            }
-
-            if (callback) {
-                return livewire.emit(callback)
-            }
-        })
-    }
-
-    const SwalAlert = (icon, title, timeout = 7000) => {
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: timeout,
-            onOpen: toast => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-
-        Toast.fire({
-            icon,
-            title
-        })
-    }
-
-    document.addEventListener('DOMContentLoaded', () => { 
-        this.livewire.on('swal:modal', data => {
-            SwalModal(data.icon, data.title, data.text)
-        })
-
-        this.livewire.on('swal:confirm', data => {
-            SwalConfirm(data.icon, data.title, data.text, data.confirmText, data.method, data.params, data.callback)
-        })
-
-        this.livewire.on('swal:alert', data => {
-            SwalAlert(data.icon, data.title, data.timeout)
-        }) 
-    })
 </script>
 @stack('script')
 @livewireScripts

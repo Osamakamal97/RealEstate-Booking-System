@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Events\Admin\LoginEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\LoginRequest;
+use App\Models\AdminTracker;
 use Exception;
-use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,9 +24,7 @@ class AuthController extends Controller
             if (!$admin) {
                 return redirect()->back()->with('error', 'البيانات المدخلة غير صحيحة أو لا يمكنك الدخول.')->withInput(['email' => $request->email]);
             }
-
-            event(new Login('admin', auth('admin')->user(), false));
-            // event(new LoginEvent(auth('admin')->user()));
+            AdminTracker::create(['user_id' => auth('admin')->id(), 'start_at' => time(), 'date' => now()->toDateString()]);
             return redirect()->route('admin.dashboard');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'حصلت مشكلة في النظام.');
@@ -36,6 +33,9 @@ class AuthController extends Controller
 
     public function logout()
     {
+        $tracker = AdminTracker::where('user_id', auth('admin')->user()->id)->get()->last();
+        $tracker->end_at = time();
+        $tracker->save();
         Auth::logout();
         return redirect()->route('admin.loginForm');
     }

@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Auth;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -50,6 +51,23 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        return parent::render($request, $exception);
+        if (env('APP_ENV') == 'productive' && $this->isHttpException($exception)) {
+            switch ($exception->getStatusCode() && $request->is('admin/*')) {
+                    // not found
+                case 404:
+                    return redirect()->route('admin.404');
+                    break;
+                    // internal error
+                case '500':
+                    return redirect()->route('notfound');
+                    break;
+
+                default:
+                    return $this->renderHttpException($exception);
+                    break;
+            }
+        } else {
+            return parent::render($request, $exception);
+        }
     }
 }

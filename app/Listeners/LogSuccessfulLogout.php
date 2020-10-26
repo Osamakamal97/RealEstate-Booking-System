@@ -28,6 +28,7 @@ class LogSuccessfulLogout
     public function handle(Logout $event)
     {
         $user = $event->user;
-        $user->last_login_at = date('Y-m-d H:i:s');
+        $user->last_logout_at = date('Y-m-d H:i:s');
+        $user->save();
     }
 }

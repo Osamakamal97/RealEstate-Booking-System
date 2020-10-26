@@ -17,18 +17,27 @@ class AdminSeeder extends Seeder
         $admin_role = Role::create(['name' => 'super-admin', 'guard_name' => 'admin']);
         $manager_role = Role::create(['name' => 'manager', 'guard_name' => 'admin']);
         $employee_role = Role::create(['name' => 'employee', 'guard_name' => 'admin']);
-        $view = Permission::create(['name' => 'view', 'guard_name' => 'admin']);
-        $edit = Permission::create(['name' => 'edit', 'guard_name' => 'admin']);
-        $delete = Permission::create(['name' => 'delete', 'guard_name' => 'admin']);
+        Permission::create(['name' => 'block_user', 'guard_name' => 'admin']);
+        Permission::create(['name' => 'view_users', 'guard_name' => 'admin']);
+        Permission::create(['name' => 'view_employees', 'guard_name' => 'admin']);
+        Permission::create(['name' => 'update_employee_permissions', 'guard_name' => 'admin']);
+        Permission::create(['name' => 'update_employee', 'guard_name' => 'admin']);
+        Permission::create(['name' => 'delete_employee', 'guard_name' => 'admin']);
 
-        $admin_role->givePermissionTo($view);
-        $admin_role->givePermissionTo($edit);
-        $admin_role->givePermissionTo($delete);
+        $admin_role->givePermissionTo([
+            'block_user',
+            'view_users',
+            'view_employees',
+            'update_employee_permissions',
+            'update_employee',
+            'delete_employee'
+        ]);
 
-        $manager_role->givePermissionTo($view);
-        $manager_role->givePermissionTo($edit);
-
-        $employee_role->givePermissionTo($view);
+        $manager_role->givePermissionTo([
+            'view_users',
+            'view_employees',
+            'update_employee'
+        ]);
 
         $admin = Admin::create(['name' => 'Osama', 'email' => 'osama@example.com', 'password' => 'password']);
         $admin->assignRole($admin_role);

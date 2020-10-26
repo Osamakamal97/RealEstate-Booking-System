@@ -12,24 +12,8 @@ class DashboardController extends Controller
         return view('admin.dashboard');
     }
 
-    public function give()
+    public function notFound()
     {
-        return auth()->user()->hasPermissionTo('delete');
-        // return auth()->user()->hasPermissionTo('delete');
-    }
-
-    public function view()
-    {
-        return 'this is view';
-    }
-
-    public function edit()
-    {
-        return 'this is edit';
-    }
-
-    public function delete()
-    {
-        return 'this is delete';
+        return view('admin.errors.404');
     }
 }

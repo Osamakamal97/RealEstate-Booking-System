@@ -21,7 +21,7 @@
                         <div class="md-checkbox">
                             <input type="checkbox" id="checkbox{{ $index }}" class="md-check"
                                 {{ $userPermissions->contains($permission) ? 'checked' : '' }} checked=""
-                                wire:model="checked_permissions.{{ $permission }}">
+                                wire:model.defer="checked_permissions.{{ $permission }}">
                             <label for="checkbox{{ $index }}">
                                 <span class="inc"></span>
                                 <span class="check"></span>
@@ -57,7 +57,6 @@
 
                         </ul>
                     </div>
-
                 </div>
                 <div class="form-actions noborder">
                     <button type="submit" class="btn blue">Submit</button>
