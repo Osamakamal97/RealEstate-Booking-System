@@ -31,7 +31,13 @@
             <li class="{{ request()->is('admin/admins') ? 'active' : '' }}">
                 <a href="{{ route('admin.admins.index') }}">
                     <i class="icon-users"></i>
-                    <span class="title">مستخدمي النظام</span>
+                    <span class="title">المدراء والموظفين</span>
+                </a>
+            </li>
+            <li class="{{ request()->is('admin/roles') ? 'active' : '' }}">
+                <a href="{{ route('admin.roles.index') }}">
+                    <i class="fa fa-check-square-o"></i>
+                    <span class="title">الأدوار</span>
                 </a>
             </li>
             <li class="{{ request()->is('admin/permissions') ? 'active' : '' }}">
@@ -73,6 +79,29 @@
                             <i class="icon-user"></i>عرض جميع الزبائن</a>
                     </li>
                 </ul>
+            </li>
+            @endcan
+            @can('send_messages_to_manager','admin')
+            <li class="{{ request()->is('admin/employee*')  ? 'open active' : '' }}">
+                <a href="javascript:;">
+                    <i class="icon-users"></i>
+                    <span class="title">الشكاوي والمشاكل</span>
+                    <span class="selected"></span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="{{ request()->is('admin/employee/problems') ? 'active' : '' }}">
+                        <a href="{{ route('admin.employee.problems.send') }}">
+                            <i class="icon-user"></i>إرسال شكوى لمدير</a>
+                    </li>
+
+                </ul>
+            </li>
+            @endcan
+            @can('view_employee_problems','admin')
+            <li class="tooltips {{ request()->is('admin/employee/problems/index') ? 'active' : '' }}">
+                <a href="{{ route('admin.employee.problems.index') }}">
+                    <i class="icon-user"></i>عرض جميل الشكاوي</a>
             </li>
             @endcan
             <li class="heading">

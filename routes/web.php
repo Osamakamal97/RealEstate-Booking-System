@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Test;
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -13,6 +13,8 @@ Route::get('/', function () {
 Route::get('/test', function () {
   return view('test');
 });
+
+Route::get('liveTest', [DashboardController::class, 'test']);
 
 Route::get('optimize', function () {
   Artisan::call('optimize:clear');

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 
 class Admin extends Authenticatable
@@ -22,11 +23,6 @@ class Admin extends Authenticatable
     public function isActive()
     {
         return $this->active == 1 ? true : false;
-    }
-
-    public function getArRoleName()
-    {
-        return $this->getRoleNames()[0] == 'manager' ? 'مدير' : 'موظف';
     }
 
     public function getRoleKey()
@@ -70,8 +66,8 @@ class Admin extends Authenticatable
 
     public function scopeIndexSelection($query, $paginate)
     {
-        return $query->select('id', 'name', 'email', 'active', 'last_login_at')
-            ->role(['manager', 'employee'])
+        $roles = Role::where('name', '!=', 'super-admin')->get()->pluck('name')->toArray();
+        return $query->role($roles)->select('id', 'name', 'email', 'active', 'last_login_at')
             ->paginate($paginate);
     }
 
@@ -87,5 +83,10 @@ class Admin extends Authenticatable
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = Hash::make($password);
+    }
+
+    public function employeeProblems()
+    {
+        return $this->hasMany(EmployeeProblems::class);
     }
 }

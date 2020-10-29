@@ -2,10 +2,8 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\BandUsers;
 use App\Models\BlockedUsers;
 use App\Models\User;
-use App\Models\UsersIps;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;

@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Admin;
 
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use Livewire\Component;
 use Livewire\WithPagination;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -14,7 +13,7 @@ class Permissions extends Main
 
     public $name, $manager_role = false, $employee_role = false, $permission_id = 0;
     public $showDeleteNotification = false;
-    public $userPermissions = [], $rolePermissions = [];
+    public $user_permissions = [], $role_permissions = [];
 
     protected $rules = [
         'name' => 'required|unique:permissions,name',
@@ -27,9 +26,9 @@ class Permissions extends Main
         if ($this->search != null) {
             $permissions = Permission::query()
                 ->where('name', 'LIKE', "%{$this->search}%")
-                ->get();
+                ->paginate($this->perPage);
         } else
-            $permissions = Permission::select('id', 'name')->get();
+            $permissions = Permission::select('id', 'name')->paginate($this->perPage);
         return view('livewire.permissions.index', ['permissions' => $permissions]);
     }
 

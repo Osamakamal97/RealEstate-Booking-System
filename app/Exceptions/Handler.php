@@ -51,23 +51,24 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        if (env('APP_ENV') == 'productive' && $this->isHttpException($exception)) {
-            switch ($exception->getStatusCode() && $request->is('admin/*')) {
-                    // not found
-                case 404:
-                    return redirect()->route('admin.404');
-                    break;
-                    // internal error
-                case '500':
-                    return redirect()->route('notfound');
-                    break;
+        // if (env('APP_ENV') == 'productive')
+            if ($this->isHttpException($exception)) {
+                switch ($exception->getStatusCode() && $request->is('admin/*')) {
+                        // not found
+                    case 404:
+                        return redirect()->route('admin.404');
+                        break;
+                        // internal error
+                    case '500':
+                        return redirect()->route('notfound');
+                        break;
 
-                default:
-                    return $this->renderHttpException($exception);
-                    break;
+                    default:
+                        return $this->renderHttpException($exception);
+                        break;
+                }
+            } else {
+                return parent::render($request, $exception);
             }
-        } else {
-            return parent::render($request, $exception);
-        }
     }
 }

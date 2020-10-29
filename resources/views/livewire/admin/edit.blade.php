@@ -46,35 +46,21 @@
                     </div>
                 </div>
                 <div class="row">
-
                     <div class="col-md-6">
-                        <div class="form-group form-md-radios @error('role') has-error @enderror">
-                            <label>الدور</label>
-                            <div class="md-radio-inline">
-                                <div class="md-radio">
-                                    <input type="radio" id="role" name="role" class="md-radiobtn" value="1"
-                                        wire:model.defer="role">
-                                    <label for="role">
-                                        <span class="inc"></span>
-                                        <span class="check"></span>
-                                        <span class="box"></span>
-                                        مدير</label>
-                                </div>
-                                <div class="md-radio">
-                                    <input type="radio" id="role2" name="role" class="md-radiobtn" value="2"
-                                        wire:model.defer="role">
-                                    <label for="role2">
-                                        <span class="inc"></span>
-                                        <span class="check"></span>
-                                        <span class="box"></span>
-                                        موظف</label>
-                                </div>
-                                @error('role')
-                                <span id="name-error" class="help-block help-block-error"
-                                    style="color: #F3565D">{{ $message }}</span>
-                                @enderror
-                            </div>
+                        <div
+                            class="form-group form-md-line-input form-md-floating-label @error('role') has-error @enderror">
+                            <select class="form-control edited" id="form_control_1" wire:model="role">
+                                <option value=""></option>
+                                @foreach ($roles as $role_name)
+                                <option value="{{ $role_name }}"> {{ $role_name }} </option>
+                                @endforeach
+                            </select>
+                            <label for="form_control_1">الدور</label>
                         </div>
+                        @error('role')
+                        <span id="name-error" class="help-block help-block-error"
+                            style="color: #F3565D">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="col-md-6">
                         <div class="form-group form-md-radios  @error('active') has-error @enderror">
@@ -109,15 +95,15 @@
                         <ul>
                             @foreach ($permissions as $permission)
                             <li>{{ $permission }}</li>
-                            @endforeach
+                    @endforeach
 
-                        </ul>
-                    </div> --}}
-                </div>
-                <div class="form-actions noborder">
-                    <button type="submit" class="btn blue">Submit</button>
-                </div>
-            </form>
+                    </ul>
+                </div> --}}
         </div>
+        <div class="form-actions noborder">
+            <button type="submit" class="btn blue">Submit</button>
+        </div>
+        </form>
     </div>
+</div>
 </div>

@@ -1,15 +1,13 @@
 <div class="row">
-    @if($show_create)
+    {{-- @if($show_create)
     @includeIf('livewire.roles.create')
     @elseif($show_edit)
     @includeIf('livewire.roles.edit')
-    @endif
+    @endif --}}
 
-    @if ($show_delete_notification)
+    {{-- @if ($show_delete_notification)
     @includeIf('admin.notifications.sweetalert')
-    @elseif($show_delete_permission_notification)
-    @includeIf('admin.notifications.edit_permission')
-    @endif
+    @endif --}}
 
     <div class="col-md-12">
         <div class="portlet box grey-cascade">
@@ -90,7 +88,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-md-5 col-sm-5">
                         <div class="dataTables_info" id="sample_1_info" role="status" aria-live="polite"> يظهر
                             {{$roles->firstItem()}} الى {{ $roles->lastItem() }} عناصر من أصل
@@ -102,7 +100,7 @@
                             {{ $roles->links('livewire.pagination') }}
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

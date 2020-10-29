@@ -14,19 +14,11 @@
 </script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
-{{-- <script src="{{ asset('') }}assets/global/plugins/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>
-<script src="{{ asset('') }}assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.russia.js" type="text/javascript">
+<script src="{{ asset('assets/global/plugins/fancybox/source/jquery.fancybox.pack.js') }}" type="text/javascript">
 </script>
-<script src="{{ asset('') }}assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.world.js" type="text/javascript">
+<script src="{{ asset('assets/global/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js') }}" type="text/javascript">
 </script>
-<script src="{{ asset('') }}assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.europe.js" type="text/javascript">
-</script>
-<script src="{{ asset('') }}assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.germany.js" type="text/javascript">
-</script>
-<script src="{{ asset('') }}assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.usa.js" type="text/javascript">
-</script>
-<script src="{{ asset('') }}assets/global/plugins/jqvmap/jqvmap/data/jquery.vmap.sampledata.js" type="text/javascript">
-    --}}
+<script src="{{ asset('assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js') }}" type="text/javascript">
 </script>
 {{-- <script src="{{ asset('') }}assets/global/plugins/flot/jquery.flot.min.js" type="text/javascript"></script>
 <script src="{{ asset('') }}assets/global/plugins/flot/jquery.flot.resize.min.js" type="text/javascript"></script>
@@ -34,8 +26,8 @@
 <script src="{{ asset('') }}assets/global/plugins/jquery.pulsate.min.js" type="text/javascript"></script>
 <script src="{{ asset('') }}assets/global/plugins/bootstrap-daterangepicker/moment.min.js" type="text/javascript">
 </script>
-<script src="{{ asset('') }}assets/global/plugins/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript">
-    --}}
+<script src="{{ asset('') }}assets/global/plugins/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"> --}}
+   
 </script>
 <script type="text/javascript" src="{{ asset('assets/global/plugins/jquery-validation/js/jquery.validate.min.js') }}">
 </script>
@@ -64,7 +56,8 @@ type="text/javascript"> --}}
 <script type="text/javascript"
     src="{{ asset('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}">
 </script>
-<script src="http://maps.google.com/maps/api/js?key=AIzaSyBTVuX5HqCfrJkzLVte3NnsTrrJTygbFj4" type="text/javascript"></script>
+<script src="http://maps.google.com/maps/api/js?key=AIzaSyBTVuX5HqCfrJkzLVte3NnsTrrJTygbFj4" type="text/javascript">
+</script>
 <script src="{{ asset('assets/global/plugins/gmaps/gmaps.min.js') }}" type="text/javascript"></script>
 
 <!-- END PAGE LEVEL PLUGINS -->
@@ -78,6 +71,7 @@ type="text/javascript"> --}}
 <script src="{{ asset('assets/admin/pages/scripts/table-managed.js') }}"></script>
 <script src="{{ asset('assets/admin/pages/scripts/form-validation.js') }}"></script>
 <script src="{{ asset('assets/admin/pages/scripts/maps-google.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/admin/pages/scripts/inbox.js') }}" type="text/javascript"></script>
 
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
@@ -98,6 +92,7 @@ type="text/javascript"> --}}
         FormValidation.init();
         UIConfirmations.init(); // init page demo
         MapsGoogle.init();
+        Inbox.init();
     });
 </script>
 @stack('script')

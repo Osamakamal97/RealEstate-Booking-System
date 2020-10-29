@@ -1,5 +1,3 @@
-@section('content')
-<h3 class="page-title">الموظفين</h3>
 <div class="row">
     @if (session()->has('success'))
     <div class="col-md-12">
@@ -9,22 +7,21 @@
         </div>
     </div>
     @endif
+    @if($show_full_problem_message)
+    @includeIf('livewire.employeesProblems.problem')
+    @endif
+
     <div class="col-md-12">
         <div class="portlet box grey-cascade">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-user"></i>جدول المدراء والموظفين
+                    <i class="fa fa-line-chart"></i>جدول الصلاحيات
                 </div>
             </div>
             <div class="portlet-body">
                 <div class="table-toolbar">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="btn-group">
-                                <button id="sample_editable_1_new" wire:click.prevent="create()" class="btn green">
-                                    إنشاء جديد <i class="fa fa-plus"></i>
-                                </button>
-                            </div>
                         </div>
                         <div class="col-md-6">
                             <div class="btn-group pull-right">
@@ -67,43 +64,25 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>الاسم</th>
-                                <th>الايميل</th>
-                                <th>أخر دخول منذ</th>
-                                <th style="width: 60px">الحالة</th>
+                                <th>العنوان</th>
+                                <th>المرسل</th>
+                                <th>الحالة</th>
                                 <th style="width: 165px">الاعدادات</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($employees as $employee)
+                            @foreach ($problems as $problem)
                             <tr class="odd gradeX">
-                                <td>{{ $employee->name }}</td>
-                                <td>{{ $employee->email }}</td>
-                                <td>{{ $employee->loginTime() }}</td>
+                                <td style="width: 280px">{{ $problem->title }}</td>
+                                <td>{{ $problem->admin->name }}</td>
+                                <td style="width: 80px">{{ $problem->getStatus() }}</td>
                                 <td>
-                                    @if($employee->active == 1)
-                                    <span class="label label-sm label-success">{{ $employee->getActive() }}</span>
-                                    @else
-                                    <span class="label label-sm label-danger">{{ $employee->getActive() }}</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    {{-- @can('update_employee_permissions')
-                                    <button wire:click.prevent="permissions({{ $employee->id }})"
-                                        class="btn btn-sm blue">
-                                        الصلاحيات <i class="icon-shield"></i>
+                                    <button wire:click.prevent="read({{ $problem->id }})" class="btn btn-sm yellow">
+                                        قراءة <i class="fa fa-edit"></i>
                                     </button>
-                                    @endcan --}}
-                                    @can('update_employee')
-                                    <button wire:click.prevent="edit({{ $employee->id }})" class="btn btn-sm yellow">
-                                        تعديل <i class="fa fa-edit"></i>
-                                    </button>
-                                    @endcan
-                                    {{-- @can('delete_employee')
-                                    <buttin wire:click.prevent="destroy({{ $employee->id }})" class="btn btn-sm red">
+                                    {{-- <button wire:click.prevent="destroy({{ $problem->id }})" class="btn btn-sm red">
                                         حذف <i class="fa fa-trash"></i>
-                                    </buttin>
-                                    @endcan --}}
+                                    </button> --}}
                                 </td>
                             </tr>
                             @endforeach
@@ -115,13 +94,13 @@
                 <div class="row">
                     <div class="col-md-5 col-sm-5">
                         <div class="dataTables_info" id="sample_1_info" role="status" aria-live="polite"> يظهر
-                            {{$employees->firstItem()}} الى {{ $employees->lastItem() }} عناصر من أصل
-                            {{ $employees->total() }}
+                            {{$problems->firstItem()}} الى {{ $problems->lastItem() }} عناصر من أصل
+                            {{ $problems->total() }}
                         </div>
                     </div>
                     <div class="col-md-7 col-sm-7">
                         <div class="dataTables_paginate paging_bootstrap_full_number">
-                            {{ $employees->links('livewire.pagination') }}
+                            {{ $problems->links('livewire.pagination') }}
                         </div>
                     </div>
                 </div>
@@ -129,4 +108,3 @@
         </div>
     </div>
 </div>
-@endsection

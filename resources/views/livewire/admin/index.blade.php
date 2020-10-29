@@ -91,7 +91,7 @@
                                 <td>{{ $admin->name }}</td>
                                 <td>{{ $admin->email }}</td>
                                 <td>{{ $admin->loginTime() }}</td>
-                                <td>{{ $admin->getArRoleName() }}</td>
+                                <td>{{ $admin->getRoleNames()[0] }}</td>
                                 <td>
                                     @if($admin->active == 1)
                                     <span class="label label-sm label-success">{{ $admin->getActive() }}</span>

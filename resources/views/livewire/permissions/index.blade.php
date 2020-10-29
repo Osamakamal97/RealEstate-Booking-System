@@ -109,20 +109,20 @@
                     </table>
 
                 </div>
-                {{-- <div class="row">
+                <div class="row">
                     <div class="col-md-5 col-sm-5">
                         <div class="dataTables_info" id="sample_1_info" role="status" aria-live="polite"> يظهر
                             {{$permissions->firstItem()}} الى {{ $permissions->lastItem() }} عناصر من أصل
-                {{ $permissions->total() }}
+                            {{ $permissions->total() }}
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-sm-7">
+                        <div class="dataTables_paginate paging_bootstrap_full_number">
+                            {{ $permissions->links('livewire.pagination') }}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-7 col-sm-7">
-            <div class="dataTables_paginate paging_bootstrap_full_number">
-                {{ $permissions->links('livewire.pagination') }}
-            </div>
-        </div>
-    </div> --}}
-</div>
-</div>
-</div>
+    </div>
 </div>

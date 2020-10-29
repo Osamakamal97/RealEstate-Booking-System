@@ -13,21 +13,14 @@
     <div class="page-container">
         @includeIf('admin.includes.sidebar')
         <div class="page-content-wrapper">
-            <div class="page-content">
+            <div class="page-content" style="background-color: white">
                 @yield('content')
             </div>
         </div>
     </div>
     @includeIf('admin.includes.footer')
     @includeIf('admin.includes.footer-meta')
-    @role('employee')
     <script>
-        /*
-         *   this script is for manage the logout of timeout
-         *   if user is inactive for 15 min
-         *   he will be logout : 
-         *
-         * */
         var logout = 'Are you sure to logout?';
         var timeout;
         var url =  "logout"; // route path;
@@ -53,7 +46,6 @@
                 }, 1000*60*5);
             };
     </script>
-    @endrole
 </body>
 
 </html>

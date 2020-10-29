@@ -18,7 +18,6 @@
 <!-- END GLOBAL MANDATORY STYLES -->
 <!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
 <link href="{{ asset('assets/admin/pages/css/error-rtl.css') }}" rel="stylesheet" type="text/css" />
-
 <link href="{{ asset('assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css') }}" rel="stylesheet"
     type="text/css" />
 <link href="{{ asset('assets/global/plugins/fullcalendar/fullcalendar.min.css') }}" rel="stylesheet" type="text/css" />
@@ -28,13 +27,17 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/global/plugins/select2/select2.css') }}" />
 <link rel="stylesheet" type="text/css"
     href="{{ asset('assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css') }}" />
+<link href="{{ asset('assets/global/plugins/fancybox/source/jquery.fancybox.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/global/plugins/jquery-file-upload/blueimp-gallery/blueimp-gallery.min.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/global/plugins/jquery-file-upload/css/jquery.fileupload.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/global/plugins/jquery-file-upload/css/jquery.fileupload-ui.css') }}" rel="stylesheet" />
 <link rel="stylesheet" type="text/css"
     href="{{ asset('assets/global/plugins/bootstrap-markdown/css/bootstrap-markdown.min.css') }}">
 <link rel="stylesheet" type="text/css"
     href="{{ asset('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}" />
 <!-- END PAGE LEVEL PLUGIN STYLES -->
 <!-- BEGIN PAGE STYLES -->
-<link href="{{ asset('') }}assets/admin/pages/css/tasks-rtl.css" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/admin/pages/css/tasks-rtl.css') }}" rel="stylesheet" type="text/css" />
 <!-- END PAGE STYLES -->
 <!-- BEGIN THEME STYLES -->
 <link href="{{ asset('assets/global/css/components-rtl.css') }}" id="style_components" rel="stylesheet"
@@ -48,5 +51,7 @@
 <link rel="shortcut icon" href="favicon.ico" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.css" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="{{ asset('assets/admin/pages/css/inbox-rtl.css') }}" rel="stylesheet" type="text/css">
+
 @stack('style')
 @livewireStyles

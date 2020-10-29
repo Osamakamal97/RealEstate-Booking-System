@@ -11,12 +11,13 @@ class Admins extends Main
 {
     use WithPagination, LivewireAlert;
 
-    public $admin_id, $name, $email, $password, $role, $active;
+    public $admin_id, $name, $email, $password, $role, $active, $roles;
     public $showPermissions = false, $showDeleteNotification = false;
     public $userPermissions = [], $rolePermissions = [], $checked_permissions;
 
     public function render()
     {
+
         if ($this->search != null) {
             $admins = Admin::query()
                 ->where('name', 'LIKE', "%{$this->search}%")
@@ -30,6 +31,8 @@ class Admins extends Main
 
     public function create()
     {
+        $roles = Role::get()->pluck('name')->toArray();
+        $this->roles = $roles;
         $this->resetInputFields();
         $this->show_create = true;
     }
@@ -40,35 +43,36 @@ class Admins extends Main
             'name' => 'required',
             'email' => "required|email|unique:admins,email",
             'password' => 'required_without:admin_id',
-            'role' => 'required|in:1,2',
+            'role' => 'required',
             'active' => 'required|in:0,1',
         ]);
         // values in form is 1 or 2, so this convert role index to string
-        $role = $this->role == 1 ? 'manager' : 'employee';
         $admin = Admin::create($validate_admin);
-        $assign_role = Role::where('name', $role)->get();
+        $assign_role = Role::where('name', $validate_admin['role'])->get();
         // give this admin a role
         $admin->assignRole($assign_role);
         // clear other forms
         $this->resetInputFields();
-        if ($role == 'manager')
-            $this->sendAlert('success', 'تم إنشاء المدير بنجاح');
-        $this->sendAlert('success', 'تم إنشاء الموظف بنجاح');
+        $this->roles = '';
+        $this->sendAlert('success', 'تم إنشاء المسؤول بنجاح');
     }
 
     public function edit($id)
     {
+
         $admin = Admin::find($id);
         if (!$admin)
             $this->sendAlert('error', 'لم يتم إيجاد هذا المسؤول');
         // clear other forms
         $this->resetInputFields();
         // Fill inputs with data
+        $roles = Role::get()->pluck('name')->toArray();
+        $this->roles = $roles;
         $this->admin_id = $admin->id;
         $this->name = $admin->name;
         $this->email = $admin->email;
         $this->active = $admin->active;
-        $this->role = $admin->getRoleKey();
+        $this->role = $admin->getRoleNames()[0];
         $this->show_edit = true;
     }
 
@@ -77,7 +81,7 @@ class Admins extends Main
         $validate_admin = $this->validate([
             'name' => 'required',
             'email' => "required|email|unique:admins,email,$this->admin_id",
-            'role' => 'required|in:1,2',
+            'role' => 'required',
             'active' => 'required|in:0,1',
         ]);
 
@@ -85,18 +89,14 @@ class Admins extends Main
         if (!$admin)
             $this->sendAlert('error', 'لم يتم إيجاد هذا المسؤول');
         $admin->update($validate_admin);
-        $role = $this->role == 1 ? 'manager' : 'employee';
-        if ($role != $admin->getRoleNames()[0]) {
-            $assign_role = Role::where('name', $role)->get();
-            // this will delete old role and replace it with new role
-            $admin->syncRoles($assign_role);
-        }
+        $assign_role = Role::where('name', $validate_admin['role'])->get();
+        // this will delete old role and replace it with new role
+        $admin->syncRoles($assign_role);
         // clear fields and views
         $this->resetInputFields();
-        if ($role == 'manager')
-            $this->sendAlert('success', 'تم تعديل المدير بنجاح');
-        else
-            $this->sendAlert('success', 'تم تعديل الموظف بنجاح');
+        $this->roles = '';
+
+        $this->sendAlert('success', 'تم تعديل المسؤول بنجاح');
     }
 
     public function destroy($id)

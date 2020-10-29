@@ -9,7 +9,7 @@ class Employees extends Main
     public function render()
     {
         $employees = Admin::employees($this->perPage);
-        return view('livewire.employees.index', ['employees' => $employees])
+        return view('livewire.employees.sendProblem', ['employees' => $employees])
             ->layout('layouts.dashboard');
     }
 }
