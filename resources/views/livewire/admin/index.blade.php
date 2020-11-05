@@ -15,7 +15,7 @@
     @includeIf('livewire.admin.permissions')
     @endif
 
-    @if ($showDeleteNotification)
+    @if ($show_delete_notification)
     @includeIf('admin.notifications.sweetalert')
     @endif
 

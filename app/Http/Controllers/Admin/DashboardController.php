@@ -3,12 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Notifications\NotifyUsers;
 
 class DashboardController extends Controller
 {
 
     public function index()
     {
+        // $user = User::find(1);
+        // dd($user->notifications->get(0)->markAsRead());
+
         return view('admin.dashboard');
     }
 
@@ -32,21 +37,36 @@ class DashboardController extends Controller
         return view('admin.users', ['title' => 'الزبائن']);
     }
 
+    public function notifyUsers()
+    {
+        return view('admin.notifyUsers', ['title' => 'إشعار الزبائن']);
+    }
+
+    public function usersResponse()
+    {
+        return view('admin.usersResponse', ['title' => 'إشعار الزبائن']);   
+    }
+
     public function roles()
     {
-        return view('admin.roles',['title' => 'الأدوار']);
+        return view('admin.roles', ['title' => 'الأدوار']);
     }
 
     public function employeeProblemsIndex()
     {
-        return view('admin.employeeProblems',['title'=>'جميع شكاوي الموظفين']);
+        return view('admin.employeeProblems', ['title' => 'جميع شكاوي الموظفين']);
+    }
+
+    public function profile()
+    {
+        return view('admin.profile', ['title' => 'الملف الشخصي']);
     }
 
     // employee
 
     public function employeeProblem()
     {
-        return view('admin.employee.problems',['title' => 'الشكاوي']);
+        return view('admin.employee.problems', ['title' => 'الشكاوي']);
     }
 
     public function notFound()

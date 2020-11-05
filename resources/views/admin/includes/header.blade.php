@@ -330,13 +330,13 @@
                         data-close-others="true">
                         <img alt="" class="img-circle" src="../../assets/admin/layout/img/avatar3_small.jpg" />
                         <span class="username username-hide-on-mobile">
-                            Nick </span>
+                            {{ auth('admin')->user()->name }} </span>
                         <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default">
                         <li>
-                            <a href="extra_profile.html">
-                                <i class="icon-user"></i> My Profile </a>
+                            <a href="{{ route('admin.profile.index') }}">
+                                <i class="icon-user"></i> الملف الشخصي </a>
                         </li>
                         <li>
                             <a href="page_calendar.html">
@@ -361,7 +361,7 @@
                                 <i class="icon-lock"></i> Lock Screen </a>
                         </li>
                         <li>
-                            <a href="login.html">
+                            <a href="{{ route('admin.logout') }}">
                                 <i class="icon-key"></i> Log Out </a>
                         </li>
                     </ul>

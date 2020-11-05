@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -13,6 +14,8 @@ Route::get('/', function () {
 Route::get('/test', function () {
   return view('test');
 });
+
+Route::post('response', [HomeController::class, 'response'])->name('response');
 
 Route::get('liveTest', [DashboardController::class, 'test']);
 

@@ -12,7 +12,7 @@ class Permissions extends Main
     use WithPagination, LivewireAlert;
 
     public $name, $manager_role = false, $employee_role = false, $permission_id = 0;
-    public $showDeleteNotification = false;
+    public $show_delete_notification = false;
     public $user_permissions = [], $role_permissions = [];
 
     protected $rules = [
@@ -138,7 +138,7 @@ class Permissions extends Main
         $this->permission_id = $id;
         $this->show_create = false;
         $this->show_edit = false;
-        $this->showDeleteNotification = true;
+        $this->show_delete_notification = true;
     }
 
     public function deleteConfirm()
@@ -147,7 +147,7 @@ class Permissions extends Main
         if (!$permission)
             session()->flash('error', 'لم يتم إيجاد هذا المسؤول');
         $permission->delete();
-        $this->showDeleteNotification = false;
+        $this->show_delete_notification = false;
         $this->alert('success', 'تم حذف الصلاحية بنجاح', [
             'position'  =>  'center',
             'timer'  =>  2000,
@@ -159,7 +159,7 @@ class Permissions extends Main
 
     public function deleteCancel()
     {
-        $this->showDeleteNotification = false;
+        $this->show_delete_notification = false;
     }
 
     // clear inputs
@@ -168,5 +168,6 @@ class Permissions extends Main
         $this->name = '';
         $this->manager_role = false;
         $this->employee_role = false;
+        $this->resetValidation();
     }
 }

@@ -69,8 +69,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($problems as $problem)
-                    <tr class="unread" data-messageid="1" wire:click.prevent="read({{ $problem->id }})">
+                    @foreach ($responses as $response)
+                    <tr class="unread" data-messageid="1" wire:click.prevent="read({{ $response->id }})">
                         <td class="inbox-small-cells">
                             <input type="checkbox" class="mail-checkbox">
                         </td>
@@ -78,16 +78,15 @@
                             <i class="fa fa-star"></i>
                         </td>
                         <td class="view-message hidden-xs">
-                            {{ $problem->admin->name }}
+                            {{ $response->data['response'] }}
                         </td>
                         <td class="view-message ">
-                            {{ $problem->title }}
                         </td>
                         <td class="view-message inbox-small-cells">
                             <i class="fa fa-paperclip"></i>
                         </td>
                         <td class="view-message text-right">
-                            {{ $problem->getSendTime() }}
+                            {{-- {{ $response->getSendTime() }} --}}
                         </td>
                     </tr>
                     @endforeach

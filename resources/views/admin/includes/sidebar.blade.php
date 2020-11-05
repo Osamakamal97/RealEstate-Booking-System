@@ -61,7 +61,6 @@
                 <h3 class="uppercase">الزبائن</h3>
             </li>
             @endHasDirectPermission
-
             @can('view_users','admin')
             <li class="heading">
                 <h3 class="uppercase">الزبائن</h3>
@@ -74,14 +73,25 @@
                     <span class="arrow open"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="{{ request()->is('admin/users*') ? 'active' : '' }}">
+                    <li class="{{ request()->is('admin/users') ? 'active' : '' }}">
                         <a href="{{ route('admin.users.index') }}">
                             <i class="icon-user"></i>عرض جميع الزبائن</a>
+                    </li>
+                    <li class="{{ request()->is('admin/users/notifications-response') ? 'active' : '' }}">
+                        <a href="{{ route('admin.users.notifications.index') }}">
+                       
+                            <i class="icon-user"></i>عرض جميع إشعارات الزبائن</a>
+                    </li>
+                    <li class="{{ request()->is('admin/users/notify') ? 'active' : '' }}">
+                        <a href="{{ route('admin.users.notify.index') }}">
+                            <i class="icon-user"></i>إرسال إشعارات للزبائن</a>
+                            
                     </li>
                 </ul>
             </li>
             @endcan
             @can('send_messages_to_manager','admin')
+            @role('employee','admin')
             <li class="{{ request()->is('admin/employee*')  ? 'open active' : '' }}">
                 <a href="javascript:;">
                     <i class="icon-users"></i>
@@ -97,6 +107,7 @@
 
                 </ul>
             </li>
+            @endrole
             @endcan
             @can('view_employee_problems','admin')
             <li class="tooltips {{ request()->is('admin/employee/problems/index') ? 'active' : '' }}">

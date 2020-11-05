@@ -12,7 +12,7 @@ class Admins extends Main
     use WithPagination, LivewireAlert;
 
     public $admin_id, $name, $email, $password, $role, $active, $roles;
-    public $showPermissions = false, $showDeleteNotification = false;
+    public $showPermissions = false, $show_delete_notification = false;
     public $userPermissions = [], $rolePermissions = [], $checked_permissions;
 
     public function render()
@@ -102,7 +102,7 @@ class Admins extends Main
     public function destroy($id)
     {
         $this->admin_id = $id;
-        $this->showDeleteNotification = true;
+        $this->show_delete_notification = true;
     }
 
     public function deleteConfirm()
@@ -113,13 +113,13 @@ class Admins extends Main
         if (!$admin)
             $this->sendAlert('error', 'لم يتم إيجاد هذا المسؤول');
         $admin->delete();
-        $this->showDeleteNotification = false;
+        $this->show_delete_notification = false;
         $this->sendAlert('success', 'تم حذف المسؤول بنجاح');
     }
 
     public function deleteCancel()
     {
-        $this->showDeleteNotification = false;
+        $this->show_delete_notification = false;
         $this->resetInputFields();
     }
 
@@ -135,10 +135,12 @@ class Admins extends Main
         $this->userPermissions = [];
         $this->rolePermissions = [];
         $this->checked_permissions = [];
+        $this->resetValidation();
         // clear views
         $this->show_create = false;
         $this->show_edit = false;
         $this->showPermissions = false;
+        
     }
 
     // permissions things

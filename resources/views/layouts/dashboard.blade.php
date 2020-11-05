@@ -20,6 +20,7 @@
     </div>
     @includeIf('admin.includes.footer')
     @includeIf('admin.includes.footer-meta')
+    @hasanyrole('employee|manager','admin')
     <script>
         var logout = 'Are you sure to logout?';
         var timeout;
@@ -46,6 +47,7 @@
                 }, 1000*60*5);
             };
     </script>
+    @endhasanyrole
 </body>
 
 </html>

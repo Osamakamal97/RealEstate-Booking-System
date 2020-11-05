@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -69,4 +69,15 @@ class User extends Authenticatable
             ->paginate($paginate);
     }
 
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = Hash::make($password);
+    }
+
+    // Relations 
+
+    // public function notifications()
+    // {
+    //     return $this->hasMany(UsersNotification::class);
+    // }
 }

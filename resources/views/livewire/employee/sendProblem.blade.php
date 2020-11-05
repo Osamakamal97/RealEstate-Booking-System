@@ -26,7 +26,7 @@
                 </div> --}}
                 <div class="form-group">
                     <div class="col-md-12">
-                        <textarea style="width: 100%" rows="10" wire:model.deffer="content"></textarea>
+                        <textarea style="width: 100%" rows="10" wire:model.defer="content"></textarea>
                         {{-- <div class="col-md-12">
                         <textarea data-provide="markdown" rows="10" wire:model.deffer="content2"
                             data-error-container="#editor_error"></textarea>

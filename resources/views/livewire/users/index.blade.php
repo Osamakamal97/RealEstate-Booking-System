@@ -12,7 +12,7 @@
     @elseif($show_edit)
     @includeIf('livewire.users.edit')
     @endif
-    @if ($showDeleteNotification)
+    @if ($show_delete_notification)
     @includeIf('admin.notifications.sweetalert')
     @endif
 

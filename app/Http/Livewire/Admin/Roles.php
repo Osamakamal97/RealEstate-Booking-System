@@ -142,6 +142,7 @@ class Roles extends Main
         $this->role_id = '';
         $this->selected_permission = '';
         $this->role_permissions = [];
+        $this->resetValidation();
         // clear views
         $this->show_create = false;
         $this->show_edit = false;

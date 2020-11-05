@@ -25,6 +25,8 @@ class AdminSeeder extends Seeder
         Permission::create(['name' => 'delete_employee', 'guard_name' => 'admin']);
         Permission::create(['name' => 'view_employee_problems', 'guard_name' => 'admin']);
         Permission::create(['name' => 'send_messages_to_manager', 'guard_name' => 'admin']);
+        Permission::create(['name' => 'notify_users', 'guard_name' => 'admin']);
+        Permission::create(['name' => 'view_users_notifications', 'guard_name' => 'admin']);
 
         $admin_role->givePermissionTo([
             'block_user',
@@ -34,6 +36,8 @@ class AdminSeeder extends Seeder
             'update_employee',
             'delete_employee',
             'view_employee_problems',
+            'notify_users',
+            'view_users_notifications'
         ]);
 
         $manager_role->givePermissionTo([

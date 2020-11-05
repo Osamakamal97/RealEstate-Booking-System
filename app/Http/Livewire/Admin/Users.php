@@ -16,7 +16,7 @@ class Users extends Component
 
     public $show_create = false, $show_edit = false, $showPermissions = false;
     public $search = '', $perPage = 5, $page = 1;
-    public $showDeleteNotification = false;
+    public $show_delete_notification = false;
 
     protected $rules = [
         'name' => 'required|unique:permissions,name',
@@ -123,7 +123,7 @@ class Users extends Component
     public function destroy($id)
     {
         $this->admin_id = $id;
-        $this->showDeleteNotification = true;
+        $this->show_delete_notification = true;
     }
 
     public function deleteConfirm()
@@ -132,7 +132,7 @@ class Users extends Component
         if (!$user)
             session()->flash('error', 'لم يتم إيجاد هذا المسؤول');
         $user->delete();
-        $this->showDeleteNotification = false;
+        $this->show_delete_notification = false;
         $this->alert('success', 'تم حذف المسؤول بنجاح', [
             'position'  =>  'center',
             'timer'  =>  2000,
@@ -144,7 +144,7 @@ class Users extends Component
 
     public function deleteCancel()
     {
-        $this->showDeleteNotification = false;
+        $this->show_delete_notification = false;
     }
 
     public function band($id)
@@ -169,6 +169,7 @@ class Users extends Component
         $this->userPermissions = [];
         $this->rolePermissions = [];
         $this->checked_permissions = [];
+        $this->resetValidation();
     }
 
     // pagination things

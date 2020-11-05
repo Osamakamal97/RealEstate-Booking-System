@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 
 class Admin extends Authenticatable
 {
-    use HasRoles;
+    use HasRoles, Notifiable;
 
     protected $fillable = ['id', 'name', 'email', 'password', 'active'];
 
@@ -67,7 +68,7 @@ class Admin extends Authenticatable
     public function scopeIndexSelection($query, $paginate)
     {
         $roles = Role::where('name', '!=', 'super-admin')->get()->pluck('name')->toArray();
-        return $query->role($roles)->select('id', 'name', 'email', 'active', 'last_login_at')
+        return $query->role($roles)->select('id', 'name', 'email', 'active')
             ->paginate($paginate);
     }
 
