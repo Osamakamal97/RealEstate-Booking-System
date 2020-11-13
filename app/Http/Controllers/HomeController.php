@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\User;
 use App\Notifications\ResponseAdminNotification;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class HomeController extends Controller
 {
@@ -27,6 +29,11 @@ class HomeController extends Controller
     {
         $notifications = auth()->user()->notifications->where('type', 'App\Notifications\NotifyUsers');
         return view('home', ['notifications' => $notifications]);
+    }
+
+    public function realEstateOwnerDashboard()
+    {
+        return view('realEstateOwner.dashboard',['title'=>'title']);
     }
 
     public function response(Request $request)

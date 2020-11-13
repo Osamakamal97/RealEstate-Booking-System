@@ -1,99 +1,120 @@
-<div class="row inbox">
-  <div class="col-md-2">
-    <ul class="inbox-nav margin-bottom-10">
-      <li class="compose-btn">
-        <a href="javascript:;" data-title="Compose" class="btn green">
-          <i class="fa fa-edit"></i> Compose </a>
-      </li>
-      <li class="inbox active">
-        <a class="btn" data-title="Inbox" wire:click.prevent="inbox"> الشكاوي </a>
-        <b></b>
-      </li>
-    </ul>
-  </div>
-  @if ($show_problem)
-  <div class="col-md-10">
-    @includeIf('livewire.employeesProblems.problem')
-  </div>
-  @elseif($show_problems)
-  <div class="col-md-10">
-    <div class="inbox-header">
-      <h1 class="pull-left">Inbox</h1>
-      <form class="form-inline pull-right" action="index.html">
-        <div class="input-group input-medium">
-          <input type="text" class="form-control" placeholder="Password">
-          <span class="input-group-btn">
-            <button type="submit" class="btn green"><i class="fa fa-search"></i></button>
-          </span>
-        </div>
-      </form>
-    </div>
-    <div class="inbox-content">
-      <table class="table table-striped table-advance table-hover">
-        <thead>
-          <tr>
-            <th colspan="3">
-              <input type="checkbox" class="mail-checkbox mail-group-checkbox">
-              <div class="btn-group">
-                <a class="btn btn-sm blue dropdown-toggle" href="javascript:;" data-toggle="dropdown">
-                  More <i class="fa fa-angle-down"></i>
-                </a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a href="javascript:;">
-                      <i class="fa fa-pencil"></i> Mark as Read </a>
-                  </li>
-                  <li>
-                    <a href="javascript:;">
-                      <i class="fa fa-ban"></i> Spam </a>
-                  </li>
-                  <li class="divider">
-                  </li>
-                  <li>
-                    <a href="javascript:;">
-                      <i class="fa fa-trash-o"></i> Delete </a>
-                  </li>
-                </ul>
+<div class="row">
+  <div class="col-md-12">
+      <!-- BEGIN PORTLET-->
+      <div class="portlet box red">
+          <div class="portlet-title">
+              <div class="caption">
+                  <i class="fa fa-gift"></i>Time Pickers </div>
+              <div class="tools">
+                  <a href="javascript:;" class="collapse"> </a>
+                  <a href="#portlet-config" data-toggle="modal" class="config"> </a>
+                  <a href="javascript:;" class="reload"> </a>
+                  <a href="javascript:;" class="remove"> </a>
               </div>
-            </th>
-            <th class="pagination-control" colspan="3">
-              <span class="pagination-info">
-                1-30 of 789 </span>
-              <a class="btn btn-sm blue">
-                <i class="fa fa-angle-left"></i>
-              </a>
-              <a class="btn btn-sm blue">
-                <i class="fa fa-angle-right"></i>
-              </a>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach ($problems as $problem)
-          <tr class="unread" data-messageid="1" wire:click.prevent="read({{ $problem->id }})">
-            <td class="inbox-small-cells">
-              <input type="checkbox" class="mail-checkbox">
-            </td>
-            <td class="inbox-small-cells">
-              <i class="fa fa-star"></i>
-            </td>
-            <td class="view-message hidden-xs">
-              {{ $problem->admin->name }}
-            </td>
-            <td class="view-message ">
-              {{ $problem->title }}
-            </td>
-            <td class="view-message inbox-small-cells">
-              <i class="fa fa-paperclip"></i>
-            </td>
-            <td class="view-message text-right">
-              {{ $problem->getSendTime() }}
-            </td>
-          </tr>
-          @endforeach
-        </tbody>
-      </table>
-    </div>
+          </div>
+          <div class="portlet-body form">
+              <!-- BEGIN FORM-->
+              <form action="#" class="form-horizontal form-bordered">
+                  <div class="form-body form">
+                      <div class="form-group">
+                          <label class="control-label col-md-3">Default Timepicker</label>
+                          <div class="col-md-3">
+                              <div class="input-icon">
+                                  <i class="fa fa-clock-o"></i>
+                                  <input type="text" class="form-control timepicker timepicker-default"> </div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="control-label col-md-3">Without Seconds</label>
+                          <div class="col-md-3">
+                              <div class="input-group">
+                                  <input type="text" class="form-control timepicker timepicker-no-seconds">
+                                  <span class="input-group-btn">
+                                      <button class="btn default" type="button">
+                                          <i class="fa fa-clock-o"></i>
+                                      </button>
+                                  </span>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="control-label col-md-3">24hr Timepicker</label>
+                          <div class="col-md-3">
+                              <div class="input-group">
+                                  <input type="text" class="form-control timepicker timepicker-24">
+                                  <span class="input-group-btn">
+                                      <button class="btn default" type="button">
+                                          <i class="fa fa-clock-o"></i>
+                                      </button>
+                                  </span>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="control-label col-md-3"></label>
+                          <div class="col-md-3">
+                              <a class="btn dark btn-outline" href="#form_modal4" data-toggle="modal"> View Timepicker in modal
+                                  <i class="fa fa-share"></i>
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+              </form>
+              <div id="form_modal4" class="modal fade" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                              <h4 class="modal-title">Timepickers In Modal</h4>
+                          </div>
+                          <div class="modal-body">
+                              <form action="#" class="form-horizontal">
+                                  <div class="form-group">
+                                      <label class="control-label col-md-4">Default Timepicker</label>
+                                      <div class="col-md-5">
+                                          <div class="input-icon">
+                                              <i class="fa fa-clock-o"></i>
+                                              <input type="text" class="form-control timepicker timepicker-default"> </div>
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label class="control-label col-md-4">Without Seconds</label>
+                                      <div class="col-md-5">
+                                          <div class="input-group">
+                                              <input type="text" class="form-control timepicker timepicker-no-seconds">
+                                              <span class="input-group-btn">
+                                                  <button class="btn default" type="button">
+                                                      <i class="fa fa-clock-o"></i>
+                                                  </button>
+                                              </span>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label class="control-label col-md-4">24hr Timepicker</label>
+                                      <div class="col-md-5">
+                                          <div class="input-group">
+                                              <input type="text" class="form-control timepicker timepicker-24">
+                                              <span class="input-group-btn">
+                                                  <button class="btn default" type="button">
+                                                      <i class="fa fa-clock-o"></i>
+                                                  </button>
+                                              </span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </form>
+                          </div>
+                          <div class="modal-footer">
+                              <button class="btn dark btn-outline" data-dismiss="modal" aria-hidden="true">Close</button>
+                              <button class="btn green btn-primary" data-dismiss="modal">Save changes</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!-- END FORM-->
+          </div>
+      </div>
+      <!-- END PORTLET-->
   </div>
-  @endif
 </div>

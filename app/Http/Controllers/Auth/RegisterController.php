@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -79,5 +80,21 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'ip' => $ip
         ]);
+    }
+
+    public function readEstateOwnerRegisterForm()
+    {
+        return view('auth.realEstate.registerOwner');
+    }
+
+    public function readEstateOwnerRegister(Request $request)
+    {
+        $real_estate_validated_data = $this->validator($request->toArray());
+        if ($real_estate_validated_data->fails()) {
+            return redirect()->route('register.real_estate_owner_form')
+                ->withErrors($real_estate_validated_data)
+                ->withInput();
+        }
+        User::create($request->all());
     }
 }

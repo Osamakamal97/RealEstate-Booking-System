@@ -329,8 +329,10 @@
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                         data-close-others="true">
                         <img alt="" class="img-circle" src="../../assets/admin/layout/img/avatar3_small.jpg" />
+                        @auth
                         <span class="username username-hide-on-mobile">
-                            {{ auth('admin')->user()->name }} </span>
+                            {{ auth('admin')->user() != null ? auth('admin')->user()->name : auth()->user()->first_name }} </span>
+                        @endauth
                         <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default">

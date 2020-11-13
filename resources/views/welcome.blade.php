@@ -77,6 +77,7 @@
 
 			@if (Route::has('register'))
 			<a href="{{ route('register') }}">انشاء زبون جديد</a>
+			<a href="{{ route('register.real_estate_owner_form') }}">انشاء صاحب عقار جديد</a>
 			@endif
 			@endauth
 			<a href="{{ route('admin.login') }}">تسجيل دخول ادمن</a>

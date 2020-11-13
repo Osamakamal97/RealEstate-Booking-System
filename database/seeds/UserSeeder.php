@@ -21,5 +21,16 @@ class UserSeeder extends Seeder
             'email'  => 'user@example.com',
             'password' => 'password',
         ]);
+
+        User::create([
+            'first_name' => 'user2',
+            'last_name' => 'user2',
+            'country' => 'palestine',
+            'mobile_number' => '05977777688',
+            'mobile_number_country_code' => '123',
+            'email'  => 'user2@example.com',
+            'password' => 'password',
+            'type' => '1'
+        ]);
     }
 }

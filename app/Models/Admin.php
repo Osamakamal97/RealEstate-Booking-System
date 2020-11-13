@@ -67,7 +67,7 @@ class Admin extends Authenticatable
 
     public function scopeIndexSelection($query, $paginate)
     {
-        $roles = Role::where('name', '!=', 'super-admin')->get()->pluck('name')->toArray();
+        $roles = Role::where('name', '!=', 'super-admin')->where('guard_name', 'admin')->get()->pluck('name')->toArray();
         return $query->role($roles)->select('id', 'name', 'email', 'active')
             ->paginate($paginate);
     }

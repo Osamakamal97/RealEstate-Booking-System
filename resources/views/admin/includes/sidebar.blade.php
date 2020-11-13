@@ -55,12 +55,41 @@
                 </a>
             </li>
             @endcan
-
-            @hasDirectPermission('view_employees')
+            @can('view_users','admin')
             <li class="heading">
-                <h3 class="uppercase">الزبائن</h3>
+                <h3 class="uppercase">العقارات وأصحاب العقارات</h3>
             </li>
-            @endHasDirectPermission
+            <li class="{{ request()->is('admin/users*')  ? 'open active' : '' }}">
+                <a href="javascript:;">
+                    <i class="icon-users"></i>
+                    <span class="title">أصحاب العقارات</span>
+                    <span class="selected"></span>
+                    <span class="arrow open"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="{{ request()->is('admin/realEstateOwners') ? 'active' : '' }}">
+                        <a href="{{ route('admin.realEstateOwners.index') }}">
+                            <i class="icon-user"></i>عرض جميع أصحاب العقارات</a>
+                    </li>
+                    {{-- <li class="{{ request()->is('admin/realEstateOwners/notifications-response') ? 'active' : '' }}">
+                        <a href="{{ route('admin.realEstateOwners.notifications.index') }}">
+                       
+                            <i class="icon-user"></i>عرض جميع إشعارات أصحاب العقارات</a>
+                    </li> --}}
+                    {{-- <li class="{{ request()->is('admin/realEstateOwners/notify') ? 'active' : '' }}">
+                        <a href="{{ route('admin.realEstateOwners.notify.index') }}">
+                            <i class="icon-user"></i>إرسال إشعارات لأصحاب العقارات</a>
+                            
+                    </li> --}}
+                </ul>
+            </li>
+            <li class="{{ request()->is('admin/real-estate/facilities') ? 'active' : '' }}">
+                <a href="{{ route('admin.realEstate.facilities') }}">
+                    <i class="icon-bar-chart"></i>
+                    <span class="title">مرافق العقارات</span>
+                </a>
+            </li>
+            @endcan
             @can('view_users','admin')
             <li class="heading">
                 <h3 class="uppercase">الزبائن</h3>

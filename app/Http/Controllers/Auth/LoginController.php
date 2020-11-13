@@ -62,4 +62,14 @@ class LoginController extends Controller
     {
         return $this->username;
     }
+
+    public function redirectTo()
+    {
+        $type = auth()->user()->type;
+        if ($type == 1) {
+            return '/realEstateOwner/dashboard';
+        }
+        return '/home';
+
+    }
 }

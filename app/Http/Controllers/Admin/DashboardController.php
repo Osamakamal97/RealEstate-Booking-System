@@ -32,6 +32,16 @@ class DashboardController extends Controller
         return view('admin.permissions', ['title' => 'الصلاحيات']);
     }
 
+    public function realEstateOwners()
+    {
+        return view('admin.realEstateOwner', ['title' => 'أصحاب العقارات']);
+    }
+
+    public function realEstateFacilities()
+    {
+        return view('admin.realEstateFacilities', ['title' => 'مرافق العقارات']);
+    }
+
     public function users()
     {
         return view('admin.users', ['title' => 'الزبائن']);
@@ -44,7 +54,7 @@ class DashboardController extends Controller
 
     public function usersResponse()
     {
-        return view('admin.usersResponse', ['title' => 'إشعار الزبائن']);   
+        return view('admin.usersResponse', ['title' => 'إشعار الزبائن']);
     }
 
     public function roles()

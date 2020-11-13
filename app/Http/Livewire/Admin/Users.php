@@ -30,9 +30,9 @@ class Users extends Component
             $users = User::query()
                 ->where('name', 'LIKE', "%{$this->search}%")
                 ->where('email', 'LIKE', "%{$this->search}%")
-                ->indexSelection($this->perPage);
+                ->customers($this->perPage);
         } else
-            $users = User::indexSelection($this->perPage);
+            $users = User::customers($this->perPage);
         return view('livewire.users.index', ['users' => $users]);
     }
 

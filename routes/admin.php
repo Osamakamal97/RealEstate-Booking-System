@@ -16,13 +16,15 @@ Route::group(['middleware' => ['auth:admin', 'session_expire']], function () {
     Route::get('admins', [DashboardController::class, 'admins'])->middleware('role:super-admin')->name('admins.index');
     Route::get('permissions', [DashboardController::class, 'permissions'])->middleware('role:super-admin')->name('permissions.index');
     Route::get('users', [DashboardController::class, 'users'])->middleware('can:view_users')->name('users.index');
+    Route::get('real-estate-owners', [DashboardController::class, 'realEstateOwners'])->middleware('can:view_real_estate_owners')->name('realEstateOwners.index');
     Route::get('users/notify', [DashboardController::class, 'notifyUsers'])->middleware('can:notify_users')->name('users.notify.index');
     Route::get('users/notifications-response', [DashboardController::class, 'usersResponse'])->middleware('can:view_users_notifications')->name('users.notifications.index');
     Route::get('employees', Employees::class)->middleware('permission:view_employees')->name('employees.index');
     Route::get('roles', [DashboardController::class, 'roles'])->name('roles.index');
     Route::get('profile', [DashboardController::class, 'profile'])->name('profile.index');
     Route::get('employee/problems', [DashboardController::class, 'employeeProblem'])->name('employee.problems.send');
-    Route::get('employeeProblems/index', [DashboardController::class, 'employeeProblemsIndex'])->name('employee.problems.index');
+    Route::get('real-estate/facilities', [DashboardController::class, 'realEstateFacilities'])->name('realEstate.facilities');
+    Route::get('employee-problems/index', [DashboardController::class, 'employeeProblemsIndex'])->name('employee.problems.index');
     Route::get('/not_found', [DashboardController::class, 'notFound'])->name('404');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });

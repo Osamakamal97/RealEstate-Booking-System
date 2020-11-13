@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -23,6 +24,7 @@ class User extends Authenticatable
         'mobile_number_country_code',
         'email',
         'password',
+        'type', // 0 to customer 1 to real estate owner
         'active',
         'ip'
     ];
@@ -63,9 +65,17 @@ class User extends Authenticatable
 
     // Scopes
 
-    public function scopeIndexSelection($query, $paginate)
+    public function scopeCustomers($query, $paginate)
     {
         return $query->select('id', 'first_name', 'last_name', 'country', 'email', 'mobile_number', 'active')
+            ->where('type', '0')
+            ->paginate($paginate);
+    }
+
+    public function scopeRealEstateOwners($query, $paginate)
+    {
+        return $query->select('id', 'first_name', 'last_name', 'country', 'email', 'mobile_number', 'active')
+            ->where('type', '1')
             ->paginate($paginate);
     }
 
