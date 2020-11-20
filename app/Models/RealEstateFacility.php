@@ -8,11 +8,11 @@ class RealEstateFacility extends Model
 {
     protected $table = 'facilities';
 
-    protected $fillable = ['place', 'name'];
+    protected $fillable = ['name', 'place', 'for_wedding_hall'];
 
     public function scopeIndexSelection($query, $paginate)
     {
-        return $query->select('id', 'name', 'place')
+        return $query->select('id', 'name', 'place','for_wedding_hall')
             ->paginate($paginate);
     }
 

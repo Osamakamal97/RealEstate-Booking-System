@@ -15,7 +15,6 @@
     @if ($show_delete_notification)
     @includeIf('admin.notifications.sweetalert')
     @endif
-
     <div class="col-md-12">
         <div class="portlet box grey-cascade">
             <div class="portlet-title">

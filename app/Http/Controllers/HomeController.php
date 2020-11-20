@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
-use App\Models\User;
 use App\Notifications\ResponseAdminNotification;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
 
 class HomeController extends Controller
 {
@@ -33,7 +31,7 @@ class HomeController extends Controller
 
     public function realEstateOwnerDashboard()
     {
-        return view('realEstateOwner.dashboard',['title'=>'title']);
+        return view('realEstateOwner.dashboard', ['title' => 'title']);
     }
 
     public function response(Request $request)

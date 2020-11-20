@@ -331,7 +331,8 @@
                         <img alt="" class="img-circle" src="../../assets/admin/layout/img/avatar3_small.jpg" />
                         @auth
                         <span class="username username-hide-on-mobile">
-                            {{ auth('admin')->user() != null ? auth('admin')->user()->name : auth()->user()->first_name }} </span>
+                            {{ auth('admin')->check() ? auth('admin')->user()->name : auth()->user()->first_name }}
+                        </span>
                         @endauth
                         <i class="fa fa-angle-down"></i>
                     </a>
@@ -363,15 +364,28 @@
                                 <i class="icon-lock"></i> Lock Screen </a>
                         </li>
                         <li>
+                            @if (auth('admin')->check())
                             <a href="{{ route('admin.logout') }}">
                                 <i class="icon-key"></i> Log Out </a>
+                            @elseif(auth('web')->check())
+                            <a href="{{ route('logout') }}">
+                                <i class="icon-key"></i> Log Out </a>
+                            @endif
+
                         </li>
                     </ul>
                 </li>
                 <li class="dropdown dropdown-quick-sidebar-toggler">
+                    @if (auth('admin')->check())
                     <a href="{{ route('admin.logout') }}" class="dropdown-toggle">
                         <i class="icon-logout"></i>
                     </a>
+                    @elseif(auth('web')->check())
+                    <a href="{{ route('logout') }}" class="dropdown-toggle">
+                        <i class="icon-logout"></i>
+                    </a>
+                    @endif
+
                 </li>
             </ul>
         </div>

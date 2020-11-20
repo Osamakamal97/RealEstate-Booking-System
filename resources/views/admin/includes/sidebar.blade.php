@@ -18,12 +18,21 @@
                     </div>
                 </form>
             </li>
+            @if (auth('admin')->check())
             <li class="start tooltips {{ request()->is('admin/dashboard') ? 'active' : '' }}">
                 <a href="{{ route('admin.dashboard') }}">
                     <i class="icon-home"></i>
                     <span class="title">الرئيسة</span>
                 </a>
             </li>
+            @elseif(auth('web')->check())
+            <li class="start tooltips {{ request()->is('realEstateOwner/dashboard') ? 'active' : '' }}">
+                <a href="{{ route('realEstateOwner.dashboard') }}">
+                    <i class="icon-home"></i>
+                    <span class="title">الرئيسة</span>
+                </a>
+            </li>
+            @endif
             @role('super-admin')
             <li class="heading">
                 <h3 class="uppercase">النظام</h3>
@@ -55,7 +64,7 @@
                 </a>
             </li>
             @endcan
-            @can('view_users','admin')
+            @can('view_users', 'super-admin')
             <li class="heading">
                 <h3 class="uppercase">العقارات وأصحاب العقارات</h3>
             </li>
@@ -73,13 +82,12 @@
                     </li>
                     {{-- <li class="{{ request()->is('admin/realEstateOwners/notifications-response') ? 'active' : '' }}">
                         <a href="{{ route('admin.realEstateOwners.notifications.index') }}">
-                       
+
                             <i class="icon-user"></i>عرض جميع إشعارات أصحاب العقارات</a>
-                    </li> --}}
-                    {{-- <li class="{{ request()->is('admin/realEstateOwners/notify') ? 'active' : '' }}">
+                    </li>
+                    <li class="{{ request()->is('admin/realEstateOwners/notify') ? 'active' : '' }}">
                         <a href="{{ route('admin.realEstateOwners.notify.index') }}">
                             <i class="icon-user"></i>إرسال إشعارات لأصحاب العقارات</a>
-                            
                     </li> --}}
                 </ul>
             </li>
@@ -108,13 +116,13 @@
                     </li>
                     <li class="{{ request()->is('admin/users/notifications-response') ? 'active' : '' }}">
                         <a href="{{ route('admin.users.notifications.index') }}">
-                       
+
                             <i class="icon-user"></i>عرض جميع إشعارات الزبائن</a>
                     </li>
                     <li class="{{ request()->is('admin/users/notify') ? 'active' : '' }}">
                         <a href="{{ route('admin.users.notify.index') }}">
                             <i class="icon-user"></i>إرسال إشعارات للزبائن</a>
-                            
+
                     </li>
                 </ul>
             </li>
@@ -133,7 +141,6 @@
                         <a href="{{ route('admin.employee.problems.send') }}">
                             <i class="icon-user"></i>إرسال شكوى لمدير</a>
                     </li>
-
                 </ul>
             </li>
             @endrole

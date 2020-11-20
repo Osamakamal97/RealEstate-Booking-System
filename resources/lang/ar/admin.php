@@ -85,7 +85,7 @@ return [
     'super-admin' => 'رئيس',
     'manager' => 'مدير',
     'employee' => 'موظف',
-    '' => '',
+    'realEstateOwner' => 'صاحب العقار',
     '' => '',
     '' => '',
 ];

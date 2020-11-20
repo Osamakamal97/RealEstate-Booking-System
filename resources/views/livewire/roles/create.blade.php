@@ -61,7 +61,6 @@
                         <span>{{ $permission }}.</span>
                         @else
                         <span>{{ $permission }},</span>
-
                         @endif
                         @endforeach
                     </div>

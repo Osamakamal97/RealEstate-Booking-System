@@ -2,9 +2,9 @@
     <!-- BEGIN SAMPLE FORM PORTLET-->
     <div class="portlet light bordered">
         <div class="portlet-title">
-            <div class="caption font-red-sunglo">
-                <i class="icon-user font-red-sunglo"></i>
-                <span class="caption-subject bold uppercase"> Line Inputs</span>
+            <div class="caption font-green">
+                <i class="fa fa-home" style="color: #26a69a"></i>
+                <span class="caption-subject bold uppercase"> إنشاء عقار جديد</span>
             </div>
             <div class="tools">
                 <a href="" class="collapse" data-original-title="" title="">
@@ -15,6 +15,7 @@
         </div>
         <div class="portlet-body form">
             <form role="form" wire:submit.prevent="store">
+                @if ($show_page_one)
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-body ">
@@ -118,38 +119,6 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-body ">
-                            <div class="form-group form-md-line-input 
-                                @error('google_map_address') has-error @enderror">
-                                <input type="text" class="form-control" id="form_control_1"
-                                    wire:model.defer="google_map_address">
-                                <label for="form_control_1" @error('google_map_address') style="color: #F3565D"
-                                    @enderror>العنوان
-                                    باستخدام خرائط قوقل</label>
-                                @error('google_map_address')
-                                <span id="google_map_address-error" class="help-block help-block-error"
-                                    style="color: #F3565D">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-body ">
-                            <div class="form-group form-md-line-input 
-                                @error('photos') has-error @enderror">
-                                <input type="text" class="form-control" id="form_control_1" wire:model.defer="photos">
-                                <label for="form_control_1" @error('photos') style="color: #F3565D" @enderror>صور
-                                    العقار</label>
-                                @error('photos')
-                                <span id="photos-error" class="help-block help-block-error"
-                                    style="color: #F3565D">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col-md-3">
                         <div class="form-body ">
                             <div class="form-group form-md-line-input 
@@ -227,6 +196,114 @@
                         </div>
                     </div>
                 </div>
+                @elseif($show_wedding_hall_page)
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-body ">
+                            <div class="form-group form-md-line-input 
+                                @error('space_in_square_meters') has-error @enderror">
+                                <input type="text" class="form-control" id="form_control_1"
+                                    wire:model.defer="space_in_square_meters" autocomplete="off">
+                                <label for="form_control_1" @error('space_in_square_meters') style="color: #F3565D"
+                                    @enderror>
+                                    المساحة بالمتر المربع
+                                </label>
+                                @error('space_in_square_meters')
+                                <span id="space_in_square_meters-error" class="help-block help-block-error"
+                                    style="color: #F3565D">{{ $message }}</span>
+                                @else
+                                <span class="help-block">إختر اسما قصيرا وفريدا ومحببا للناس ,وتجنب الإختصارات </span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-body ">
+                            <div class="form-group form-md-line-input 
+                                @error('length_in_meter') has-error @enderror">
+                                <input type="text" class="form-control" id="form_control_1"
+                                    wire:model.defer="length_in_meter" autocomplete="off">
+                                <label for="form_control_1" @error('length_in_meter') style="color: #F3565D" @enderror>
+                                    الطول بالمتر
+                                </label>
+                                @error('length_in_meter')
+                                <span id="length_in_meter-error" class="help-block help-block-error"
+                                    style="color: #F3565D">{{ $message }}</span>
+                                @else
+                                <span class="help-block">إختر اسما قصيرا وفريدا ومحببا للناس ,وتجنب الإختصارات </span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-body ">
+                            <div class="form-group form-md-line-input 
+                                @error('width_in_meter') has-error @enderror">
+                                <input type="text" class="form-control" id="form_control_1"
+                                    wire:model.defer="width_in_meter" autocomplete="off">
+                                <label for="form_control_1" @error('width_in_meter') style="color: #F3565D" @enderror>
+                                    العرض بالمتر
+                                </label>
+                                @error('width_in_meter')
+                                <span id="width_in_meter-error" class="help-block help-block-error"
+                                    style="color: #F3565D">{{ $message }}</span>
+                                @else
+                                <span class="help-block">إختر اسما قصيرا وفريدا ومحببا للناس ,وتجنب الإختصارات </span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-body">
+                            <div class="form-group form-md-line-input 
+                                @error('number_of_people') has-error @enderror">
+                                <input type="text" class="form-control" id="form_control_1"
+                                    wire:model.defer="number_of_people">
+                                <label for="form_control_1" @error('number_of_people') style="color: #F3565D" @enderror>
+                                    السعة الاستيعابية(عدد الأفراد)
+                                </label>
+                                @error('number_of_people')
+                                <span id="number_of_people-error" class="help-block help-block-error"
+                                    style="color: #F3565D">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @elseif($show_page_two)
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-body ">
+                            <div class="form-group form-md-line-input 
+                                @error('google_map_address') has-error @enderror">
+                                <input type="text" class="form-control" id="form_control_1"
+                                    wire:model.defer="google_map_address">
+                                <label for="form_control_1" @error('google_map_address') style="color: #F3565D"
+                                    @enderror>العنوان
+                                    باستخدام خرائط قوقل</label>
+                                @error('google_map_address')
+                                <span id="google_map_address-error" class="help-block help-block-error"
+                                    style="color: #F3565D">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-body ">
+                            <div class="form-group form-md-line-input 
+                                @error('photos') has-error @enderror">
+                                <input type="text" class="form-control" id="form_control_1" wire:model.defer="photos">
+                                <label for="form_control_1" @error('photos') style="color: #F3565D" @enderror>صور
+                                    العقار</label>
+                                @error('photos')
+                                <span id="photos-error" class="help-block help-block-error"
+                                    style="color: #F3565D">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @elseif($show_page_three)
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-body ">
@@ -248,7 +325,7 @@
                         <div class="form-body ">
                             <div class="form-group form-md-line-input 
                                 @error('beds_numbers') has-error @enderror">
-                                <input type="number" class="form-control" id="form_control_1" min="1" max="100"
+                                <input type="number" class="form-control" id="form_control_1" min="1" max="10"
                                     wire:model.defer="beds_numbers" autocomplete="off">
                                 <label for="form_control_1" @error('beds_numbers') style="color: #F3565D" @enderror>
                                     عدد الأسِرَة</label>
@@ -281,8 +358,7 @@
                             <div class="form-group form-md-line-input 
                                 @error('double_beds_numbers') has-error @enderror">
                                 <input type="number" class="form-control" id="form_control_1" min="1" max="10"
-                                     autocomplete="off"
-                                    wire:model.defer="double_beds_numbers">
+                                    autocomplete="off" wire:model.defer="double_beds_numbers">
                                 <label for="form_control_1" @error('double_beds_numbers') style="color: #F3565D"
                                     @enderror>
                                     عدد الأسرة المزدوجة</label>
@@ -508,28 +584,57 @@
                         </div>
                     </div>
                 </div>
+                @elseif($show_page_four)
                 <div class="row">
                     <div class="col-md-12">
-                        المرافق
-                        <div class="form-group">
-                            <label class="control-label col-md-3">24hr Timepicker</label>
-                            <div class="col-md-3">
-                                <div class="input-group">
-                                    <input type="text" class="form-control timepicker timepicker-24">
-                                    <span class="input-group-btn">
-                                        <button class="btn default" type="button">
-                                            <i class="fa fa-clock-o"></i>
-                                        </button>
-                                    </span>
+                        <div class="form-group form-md-checkboxes">
+                            <label>المرافق الداخلية</label>
+                            <div class="md-checkbox-inline">
+                                @foreach ($indoor_facilities as $facility)
+                                <div class="md-checkbox">
+                                    <input type="checkbox" id="{{ $facility->name }}" class="md-check"
+                                        wire:model.defer="selected_indoor_facilities.{{ $facility->id }}">
+                                    <label for="{{ $facility->name }}">
+                                        <span></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span> {{ $facility->name }} </label>
                                 </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="form-group form-md-checkboxes">
+                            <label>المرافق الخارجية</label>
+                            <div class="md-checkbox-inline">
+                                @foreach ($outdoor_facilities as $facility)
+                                <div class="md-checkbox">
+                                    <input type="checkbox" id="{{ $facility->name }}" class="md-check"
+                                        wire:model.defer="selected_outdoor_facilities.{{ $facility->id }}">
+                                    <label for="{{ $facility->name }}">
+                                        <span></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span> {{ $facility->name }} </label>
+                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
                 </div>
+                @elseif($show_check_form_page)
+
+                @endif
                 <div class="form-actions noborder">
+                    @if(!$show_page_one)
+                    <button type="button" class="btn blue" wire:click.prevent="previousPage">السابق</button>
+                    @endif
+                    @if (!$show_check_form_page)
+                    <button type="button" class="btn blue" wire:click.prevent="nextPage">التالي</button>
+                    @endif
+                    @if ($show_check_form_page)
                     <button type="submit" class="btn blue">Submit</button>
+                    @endif
                 </div>
             </form>
+
         </div>
     </div>
 </div>

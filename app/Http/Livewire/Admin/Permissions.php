@@ -11,14 +11,14 @@ class Permissions extends Main
 {
     use WithPagination, LivewireAlert;
 
-    public $name, $manager_role = false, $employee_role = false, $permission_id = 0;
+    public $name, $real_estate_owner_role = false, $admin_role = false, $permission_id = 0;
     public $show_delete_notification = false;
     public $user_permissions = [], $role_permissions = [];
 
     protected $rules = [
         'name' => 'required|unique:permissions,name',
-        'manager_role' => 'required_unless:employee_role,null',
-        'employee_role' => 'required_unless:manager_role,null',
+        'real_estate_owner_role' => 'required_unless:admin_role,null',
+        'admin_role' => 'required_unless:real_estate_owner_role,null',
     ];
 
     public function render()
@@ -50,23 +50,15 @@ class Permissions extends Main
         // validate
         $this->validate();
         // create permission
-        $permission = Permission::create(['name' => $this->name, 'guard_name' => 'admin']);
+        $this->admin_role == true ? $permission = Permission::create(['name' => $this->name, 'guard_name' => 'admin']) : '';
+        $this->real_estate_owner_role == true ? $permission = Permission::create(['name' => $this->name, 'guard_name' => 'web']) : '';
         // give permissions to roles
         Role::findByName('super-admin', 'admin')->givePermissionTo($permission);
-        $this->employee_role == true ? Role::findByName('employee', 'admin')->givePermissionTo($permission) : '';
-        $this->manager_role == true ? Role::findByName('manager', 'admin')->givePermissionTo($permission) : '';
         // clear inputs
         $this->resetInputFields();
         $this->show_create = false;
-
-        $this->alert('success', 'تم إنشاء الصلاحية بنجاح', [
-            'position'  =>  'center',
-            'timer'  =>  2000,
-            'toast'  =>  false,
-            'text'  =>  'I am a subtext',
-            'showCancelButton'  =>  false,
-            'showConfirmButton'  =>  false
-        ]);
+        // alert
+        $this->sendAlert('success', 'تم إنشاء الصلاحية بنجاح');
     }
 
     public function edit($id)
@@ -75,23 +67,16 @@ class Permissions extends Main
 
         $permission = Permission::findById($id, 'admin');
         if (!$permission)
-            $this->alert('error', 'لم يتم ايجاد هذا المسؤول', [
-                'position'  =>  'center',
-                'timer'  =>  2000,
-                'toast'  =>  false,
-                'text'  =>  'I am a subtext',
-                'showCancelButton'  =>  false,
-                'showConfirmButton'  =>  false
-            ]);
+            $this->sendAlert('error', 'لم يتم ايجاد هذا المسؤول');
         $this->permission_id = $id;
         // Fill inputs with data
         $this->name = $permission->name;
         $related_roles = $permission->roles()->get()->pluck('name')->toArray();
         if (in_array('manager', $related_roles)) {
-            $this->manager_role = true;
+            $this->real_estate_owner_role = true;
         }
         if (in_array('employee', $related_roles))
-            $this->employee_role = true;
+            $this->admin_role = true;
         $this->show_create = false;
         $this->showPermissions = false;
         $this->show_edit = true;
@@ -108,14 +93,14 @@ class Permissions extends Main
         // update permission name
         $permission->update(['name' => $this->name]);
         // update permissions for employee
-        if ($this->employee_role) {
+        if ($this->admin_role) {
             $role = Role::findByName('employee', 'admin');
             $role->hasPermissionTo($permission) ? '' : $role->givePermissionTo($permission);
         } else {
             Role::findByName('employee', 'admin')->revokePermissionTo($permission);
         }
         // update permissions for manager
-        if ($this->manager_role) {
+        if ($this->real_estate_owner_role) {
             $role = Role::findByName('manager', 'admin');
             $role->hasPermissionTo($permission) ? '' : $role->givePermissionTo($permission);
         } else {
@@ -124,13 +109,7 @@ class Permissions extends Main
         // clear fields and views
         $this->resetInputFields();
         $this->show_edit = false;
-        $this->alert('success', 'تم تعديل الصلاحية بنجاح', [
-            'position'  =>  'center',
-            'timer'  =>  2000,
-            'toast'  =>  false,
-            'showCancelButton'  =>  false,
-            'showConfirmButton'  =>  false
-        ]);
+        $this->sendAlert('success', 'تم تعديل الصلاحية بنجاح');
     }
 
     public function destroy($id)
@@ -148,13 +127,7 @@ class Permissions extends Main
             session()->flash('error', 'لم يتم إيجاد هذا المسؤول');
         $permission->delete();
         $this->show_delete_notification = false;
-        $this->alert('success', 'تم حذف الصلاحية بنجاح', [
-            'position'  =>  'center',
-            'timer'  =>  2000,
-            'toast'  =>  false,
-            'showCancelButton'  =>  false,
-            'showConfirmButton'  =>  false
-        ]);
+        $this->sendAlert('success', 'تم حذف الصلاحية بنجاح');
     }
 
     public function deleteCancel()
@@ -166,8 +139,8 @@ class Permissions extends Main
     private function resetInputFields()
     {
         $this->name = '';
-        $this->manager_role = false;
-        $this->employee_role = false;
+        $this->real_estate_owner_role = false;
+        $this->admin_role = false;
         $this->resetValidation();
     }
 }

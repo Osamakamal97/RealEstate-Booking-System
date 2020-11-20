@@ -59,7 +59,6 @@ class Admins extends Main
 
     public function edit($id)
     {
-
         $admin = Admin::find($id);
         if (!$admin)
             $this->sendAlert('error', 'لم يتم إيجاد هذا المسؤول');

@@ -35,7 +35,7 @@
                             url: url,
                             type: "GET",
                             headers: {
-                              // 'X-CSRF-TOKEN': window.project.csrfToken
+                                // 'X-CSRF-TOKEN': window.project.csrfToken
                             },
                             contentType: false,
                             processData: false,

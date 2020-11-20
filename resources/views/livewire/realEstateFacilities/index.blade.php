@@ -1,19 +1,9 @@
 <div class="row">
-    @if (session()->has('success'))
-    <div class="col-md-12">
-        <div class="alert alert-success">
-            <button class="close" data-close="alert"></button>
-            {{ session('success') }}
-        </div>
-    </div>
-    @endif
-    @if($show_create)
-    @includeIf('livewire.realEstateFacilities.create')
-    @elseif($show_edit)
-    @includeIf('livewire.realEstateFacilities.edit')
+    @if($show_form)
+    @includeIf('livewire.realEstateFacilities.form')
     @endif
     @if ($show_delete_notification)
-    @includeIf('admin.notifications.sweetalert')
+    @includeIf('admin.notifications.sweetalert',['notification_message' => $notification_message])
     @endif
 
     <div class="col-md-12">

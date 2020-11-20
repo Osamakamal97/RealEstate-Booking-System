@@ -32,27 +32,27 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group form-md-checkboxes @error('manager_role') has-error @enderror">
-                            <label>الادوار</label>
+                        <div class="form-group form-md-checkboxes @error('admin_role') has-error @enderror">
+                            <label> الادوار معطاه إلى</label>
                             <div class="md-checkbox-inline">
                                 <div class="md-checkbox">
-                                    <input type="checkbox" id="checkbox6" class="md-check" wire:model.defer="manager_role">
+                                    <input type="checkbox" id="checkbox6" class="md-check" wire:model.defer="admin_role">
                                     <label for="checkbox6">
                                         <span class="inc"></span>
                                         <span class="check"></span>
                                         <span class="box"></span>
-                                        المدير </label>
+                                        مسؤولي النظام </label>
                                 </div>
                                 <div class="md-checkbox">
-                                    <input type="checkbox" id="checkbox7" class="md-check" wire:model.defer="employee_role">
+                                    <input type="checkbox" id="checkbox7" class="md-check" wire:model.defer="real_estate_owner_role">
                                     <label for="checkbox7">
                                         <span></span>
                                         <span class="check"></span>
                                         <span class="box"></span>
-                                        الموظف </label>
+                                        صاحب العقار </label>
                                 </div>
                             </div>
-                            @error('manager_role')
+                            @error('admin_role')
                             <span id="name-error" class="help-block help-block-error"
                                 style="color: #F3565D">{{ $message }}</span>
                             @enderror

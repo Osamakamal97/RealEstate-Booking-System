@@ -17,7 +17,7 @@ class AdminSeeder extends Seeder
         $admin_role = Role::create(['name' => 'super-admin', 'guard_name' => 'admin']);
         $manager_role = Role::create(['name' => 'manager', 'guard_name' => 'admin']);
         $employee_role = Role::create(['name' => 'employee', 'guard_name' => 'admin']);
-        Role::create(['name' => 'realEstateOwner', 'guard_name' => 'web']);
+        $real_estate_owner = Role::create(['name' => 'realEstateOwner', 'guard_name' => 'web']);
         Permission::create(['name' => 'block_user', 'guard_name' => 'admin']);
         Permission::create(['name' => 'view_users', 'guard_name' => 'admin']);
         Permission::create(['name' => 'view_employees', 'guard_name' => 'admin']);
@@ -29,6 +29,8 @@ class AdminSeeder extends Seeder
         Permission::create(['name' => 'notify_users', 'guard_name' => 'admin']);
         Permission::create(['name' => 'view_users_notifications', 'guard_name' => 'admin']);
         Permission::create(['name' => 'view_real_estate_owners', 'guard_name' => 'admin']);
+        // Real Estate Permissions
+        Permission::create(['name' => 'view_real_estates', 'guard_name' => 'web']);
 
         $admin_role->givePermissionTo([
             'block_user',
@@ -51,6 +53,10 @@ class AdminSeeder extends Seeder
 
         $employee_role->givePermissionTo([
             'send_messages_to_manager',
+        ]);
+
+        $real_estate_owner->givePermissionTo([
+            'view_real_estates'
         ]);
 
         $admin = Admin::create(['name' => 'Osama', 'email' => 'osama@example.com', 'password' => 'password']);

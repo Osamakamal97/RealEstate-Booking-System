@@ -59,7 +59,7 @@ class Roles extends Main
     {
         $role = Role::find($id);
         if (!$role)
-            $this->sendAlert('error', 'لم يتم إيجاد هذا المسؤول');
+            $this->sendAlert('error', 'لم يتم إيجاد هذا الدور.');
         // clear other forms
         $this->resetInputFields();
         $this->role_permissions = $role->permissions->pluck('name')->toArray();
@@ -99,6 +99,7 @@ class Roles extends Main
             'name' => 'required',
         ]);
         $role = Role::find($this->role_id);
+        // dd($role);
         if (!$role)
             $this->sendAlert('error', 'لم يتم إيجاد هذا المسؤول');
         $role->update($validate_admin);

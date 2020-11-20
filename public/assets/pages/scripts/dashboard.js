@@ -1,20 +1,20 @@
-var Dashboard = function() {
+var Dashboard = function () {
 
     return {
 
-        initJQVMAP: function() {
+        initJQVMAP: function () {
             if (!jQuery().vectorMap) {
                 return;
             }
 
-            var showMap = function(name) {
+            var showMap = function (name) {
                 jQuery('.vmaps').hide();
                 jQuery('#vmap_' + name).show();
             }
 
-            var setMap = function(name) {
+            var setMap = function (name) {
                 var map = jQuery('#vmap_' + name);
-                
+
                 if (map.size() !== 1) {
                     return;
                 }
@@ -35,22 +35,22 @@ var Dashboard = function() {
                     selectedColor: '#c9dfaf',
                     selectedRegion: null,
                     showTooltip: true,
-                    onLabelShow: function(event, label, code) {
+                    onLabelShow: function (event, label, code) {
 
                     },
-                    onRegionOver: function(event, code) {
+                    onRegionOver: function (event, code) {
                         if (code == 'ca') {
                             event.preventDefault();
                         }
                     },
-                    onRegionClick: function(element, code, region) {
+                    onRegionClick: function (element, code, region) {
                         var message = 'You clicked "' + region + '" which has the code: ' + code.toUpperCase();
                         alert(message);
                     }
                 };
 
                 data.map = name + '_en';
-              
+
                 map.width(map.parent().parent().width());
                 map.show();
                 map.vectorMap(data);
@@ -64,36 +64,36 @@ var Dashboard = function() {
             setMap("germany");
             showMap("world");
 
-            jQuery('#regional_stat_world').click(function() {
+            jQuery('#regional_stat_world').click(function () {
                 showMap("world");
             });
 
-            jQuery('#regional_stat_usa').click(function() {
+            jQuery('#regional_stat_usa').click(function () {
                 showMap("usa");
             });
 
-            jQuery('#regional_stat_europe').click(function() {
+            jQuery('#regional_stat_europe').click(function () {
                 showMap("europe");
             });
-            jQuery('#regional_stat_russia').click(function() {
+            jQuery('#regional_stat_russia').click(function () {
                 showMap("russia");
             });
-            jQuery('#regional_stat_germany').click(function() {
+            jQuery('#regional_stat_germany').click(function () {
                 showMap("germany");
             });
 
             $('#region_statistics_loading').hide();
             $('#region_statistics_content').show();
 
-            App.addResizeHandler(function() {
-                jQuery('.vmaps').each(function() {
+            App.addResizeHandler(function () {
+                jQuery('.vmaps').each(function () {
                     var map = jQuery(this);
                     map.width(map.parent().width());
                 });
             });
         },
 
-        initCalendar: function() {
+        initCalendar: function () {
             if (!jQuery().fullCalendar) {
                 return;
             }
@@ -181,7 +181,7 @@ var Dashboard = function() {
             });
         },
 
-        initCharts: function() {
+        initCharts: function () {
             if (!jQuery.plot) {
                 return;
             }
@@ -242,24 +242,24 @@ var Dashboard = function() {
                 $('#site_statistics_content').show();
 
                 var plot_statistics = $.plot($("#site_statistics"), [{
-                        data: visitors,
-                        lines: {
-                            fill: 0.6,
-                            lineWidth: 0
-                        },
-                        color: ['#f89f9f']
-                    }, {
-                        data: visitors,
-                        points: {
-                            show: true,
-                            fill: true,
-                            radius: 5,
-                            fillColor: "#f89f9f",
-                            lineWidth: 3
-                        },
-                        color: '#fff',
-                        shadowSize: 0
-                    }],
+                    data: visitors,
+                    lines: {
+                        fill: 0.6,
+                        lineWidth: 0
+                    },
+                    color: ['#f89f9f']
+                }, {
+                    data: visitors,
+                    points: {
+                        show: true,
+                        fill: true,
+                        radius: 5,
+                        fillColor: "#f89f9f",
+                        lineWidth: 3
+                    },
+                    color: '#fff',
+                    shadowSize: 0
+                }],
 
                     {
                         xaxis: {
@@ -295,7 +295,7 @@ var Dashboard = function() {
                     });
 
                 var previousPoint = null;
-                $("#site_statistics").bind("plothover", function(event, pos, item) {
+                $("#site_statistics").bind("plothover", function (event, pos, item) {
                     $("#x").text(pos.x.toFixed(2));
                     $("#y").text(pos.y.toFixed(2));
                     if (item) {
@@ -401,7 +401,7 @@ var Dashboard = function() {
                         }
                     });
 
-                $("#site_activities").bind("plothover", function(event, pos, item) {
+                $("#site_activities").bind("plothover", function (event, pos, item) {
                     $("#x").text(pos.x.toFixed(2));
                     $("#y").text(pos.y.toFixed(2));
                     if (item) {
@@ -415,13 +415,13 @@ var Dashboard = function() {
                     }
                 });
 
-                $('#site_activities').bind("mouseleave", function() {
+                $('#site_activities').bind("mouseleave", function () {
                     $("#tooltip").remove();
                 });
             }
         },
 
-        initEasyPieCharts: function() {
+        initEasyPieCharts: function () {
             if (!jQuery().easyPieChart) {
                 return;
             }
@@ -447,8 +447,8 @@ var Dashboard = function() {
                 barColor: App.getBrandColor('red')
             });
 
-            $('.easy-pie-chart-reload').click(function() {
-                $('.easy-pie-chart .number').each(function() {
+            $('.easy-pie-chart-reload').click(function () {
+                $('.easy-pie-chart .number').each(function () {
                     var newValue = Math.floor(100 * Math.random());
                     $(this).data('easyPieChart').update(newValue);
                     $('span', this).text(newValue);
@@ -456,7 +456,7 @@ var Dashboard = function() {
             });
         },
 
-        initSparklineCharts: function() {
+        initSparklineCharts: function () {
             if (!jQuery().sparkline) {
                 return;
             }
@@ -504,7 +504,7 @@ var Dashboard = function() {
             });
         },
 
-        initMorisCharts: function() {
+        initMorisCharts: function () {
             if (Morris.EventEmitter && $('#sales_statistics').size() > 0) {
                 // Use Morris.Area instead of Morris.Line
                 dashboardMainChart = Morris.Area({
@@ -549,14 +549,14 @@ var Dashboard = function() {
             }
         },
 
-        initChat: function() {
+        initChat: function () {
             var cont = $('#chats');
             var list = $('.chats', cont);
             var form = $('.chat-form', cont);
             var input = $('input', form);
             var btn = $('.btn', form);
 
-            var handleClick = function(e) {
+            var handleClick = function (e) {
                 e.preventDefault();
 
                 var text = input.val();
@@ -582,9 +582,9 @@ var Dashboard = function() {
                 var msg = list.append(tpl);
                 input.val("");
 
-                var getLastPostPos = function() {
+                var getLastPostPos = function () {
                     var height = 0;
-                    cont.find("li.out, li.in").each(function() {
+                    cont.find("li.out, li.in").each(function () {
                         height = height + $(this).outerHeight();
                     });
 
@@ -596,7 +596,7 @@ var Dashboard = function() {
                 });
             }
 
-            $('body').on('click', '.message .name', function(e) {
+            $('body').on('click', '.message .name', function (e) {
                 e.preventDefault(); // prevent click event
 
                 var name = $(this).text(); // get clicked user's full name
@@ -606,7 +606,7 @@ var Dashboard = function() {
 
             btn.click(handleClick);
 
-            input.keypress(function(e) {
+            input.keypress(function (e) {
                 if (e.which == 13) {
                     handleClick(e);
                     return false; //<---- Add this line
@@ -614,7 +614,7 @@ var Dashboard = function() {
             });
         },
 
-        initDashboardDaterange: function() {
+        initDashboardDaterange: function () {
             if (!jQuery().daterangepicker) {
                 return;
             }
@@ -664,19 +664,19 @@ var Dashboard = function() {
                 //"startDate": "11/08/2015",
                 //"endDate": "11/14/2015",
                 opens: (App.isRTL() ? 'right' : 'left'),
-            }, function(start, end, label) {
+            }, function (start, end, label) {
                 if ($('#dashboard-report-range').attr('data-display-range') != '0') {
                     $('#dashboard-report-range span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
                 }
             });
-             if ($('#dashboard-report-range').attr('data-display-range') != '0') {
+            if ($('#dashboard-report-range').attr('data-display-range') != '0') {
                 $('#dashboard-report-range span').html(moment().subtract('days', 29).format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
             }
             $('#dashboard-report-range').show();
         },
 
-        initAmChart1: function() {
-            if (typeof(AmCharts) === 'undefined' || $('#dashboard_amchart_1').size() === 0) {
+        initAmChart1: function () {
+            if (typeof (AmCharts) === 'undefined' || $('#dashboard_amchart_1').size() === 0) {
                 return;
             }
 
@@ -890,8 +890,8 @@ var Dashboard = function() {
             });
         },
 
-        initAmChart2: function() {
-            if (typeof(AmCharts) === 'undefined' || $('#dashboard_amchart_2').size() === 0) {
+        initAmChart2: function () {
+            if (typeof (AmCharts) === 'undefined' || $('#dashboard_amchart_2').size() === 0) {
                 return;
             }
 
@@ -909,228 +909,228 @@ var Dashboard = function() {
                     map: "worldLow",
                     linkToObject: "london",
                     images: [{
-                            id: "london",
-                            color: "#009dc7",
-                            svgPath: targetSVG,
-                            title: "London",
-                            latitude: 51.5002,
-                            longitude: -0.1262,
-                            scale: 1.5,
-                            zoomLevel: 2.74,
-                            zoomLongitude: -20.1341,
-                            zoomLatitude: 49.1712,
+                        id: "london",
+                        color: "#009dc7",
+                        svgPath: targetSVG,
+                        title: "London",
+                        latitude: 51.5002,
+                        longitude: -0.1262,
+                        scale: 1.5,
+                        zoomLevel: 2.74,
+                        zoomLongitude: -20.1341,
+                        zoomLatitude: 49.1712,
 
-                            lines: [{
-                                latitudes: [51.5002, 50.4422],
-                                longitudes: [-0.1262, 30.5367]
-                            }, {
-                                latitudes: [51.5002, 46.9480],
-                                longitudes: [-0.1262, 7.4481]
-                            }, {
-                                latitudes: [51.5002, 59.3328],
-                                longitudes: [-0.1262, 18.0645]
-                            }, {
-                                latitudes: [51.5002, 40.4167],
-                                longitudes: [-0.1262, -3.7033]
-                            }, {
-                                latitudes: [51.5002, 46.0514],
-                                longitudes: [-0.1262, 14.5060]
-                            }, {
-                                latitudes: [51.5002, 48.2116],
-                                longitudes: [-0.1262, 17.1547]
-                            }, {
-                                latitudes: [51.5002, 44.8048],
-                                longitudes: [-0.1262, 20.4781]
-                            }, {
-                                latitudes: [51.5002, 55.7558],
-                                longitudes: [-0.1262, 37.6176]
-                            }, {
-                                latitudes: [51.5002, 38.7072],
-                                longitudes: [-0.1262, -9.1355]
-                            }, {
-                                latitudes: [51.5002, 54.6896],
-                                longitudes: [-0.1262, 25.2799]
-                            }, {
-                                latitudes: [51.5002, 64.1353],
-                                longitudes: [-0.1262, -21.8952]
-                            }, {
-                                latitudes: [51.5002, 40.4300],
-                                longitudes: [-0.1262, -74.0000]
-                            }],
+                        lines: [{
+                            latitudes: [51.5002, 50.4422],
+                            longitudes: [-0.1262, 30.5367]
+                        }, {
+                            latitudes: [51.5002, 46.9480],
+                            longitudes: [-0.1262, 7.4481]
+                        }, {
+                            latitudes: [51.5002, 59.3328],
+                            longitudes: [-0.1262, 18.0645]
+                        }, {
+                            latitudes: [51.5002, 40.4167],
+                            longitudes: [-0.1262, -3.7033]
+                        }, {
+                            latitudes: [51.5002, 46.0514],
+                            longitudes: [-0.1262, 14.5060]
+                        }, {
+                            latitudes: [51.5002, 48.2116],
+                            longitudes: [-0.1262, 17.1547]
+                        }, {
+                            latitudes: [51.5002, 44.8048],
+                            longitudes: [-0.1262, 20.4781]
+                        }, {
+                            latitudes: [51.5002, 55.7558],
+                            longitudes: [-0.1262, 37.6176]
+                        }, {
+                            latitudes: [51.5002, 38.7072],
+                            longitudes: [-0.1262, -9.1355]
+                        }, {
+                            latitudes: [51.5002, 54.6896],
+                            longitudes: [-0.1262, 25.2799]
+                        }, {
+                            latitudes: [51.5002, 64.1353],
+                            longitudes: [-0.1262, -21.8952]
+                        }, {
+                            latitudes: [51.5002, 40.4300],
+                            longitudes: [-0.1262, -74.0000]
+                        }],
 
-                            images: [{
-                                label: "Flights from London",
-                                svgPath: planeSVG,
-                                left: 100,
-                                top: 45,
-                                labelShiftY: 5,
-                                color: "#d93d5e",
-                                labelColor: "#d93d5e",
-                                labelRollOverColor: "#d93d5e",
-                                labelFontSize: 20
-                            }, {
-                                label: "show flights from Vilnius",
-                                left: 106,
-                                top: 70,
-                                labelColor: "#6c7b88",
-                                labelRollOverColor: "#d93d5e",
-                                labelFontSize: 11,
-                                linkToObject: "vilnius"
-                            }]
-                        },
+                        images: [{
+                            label: "Flights from London",
+                            svgPath: planeSVG,
+                            left: 100,
+                            top: 45,
+                            labelShiftY: 5,
+                            color: "#d93d5e",
+                            labelColor: "#d93d5e",
+                            labelRollOverColor: "#d93d5e",
+                            labelFontSize: 20
+                        }, {
+                            label: "show flights from Vilnius",
+                            left: 106,
+                            top: 70,
+                            labelColor: "#6c7b88",
+                            labelRollOverColor: "#d93d5e",
+                            labelFontSize: 11,
+                            linkToObject: "vilnius"
+                        }]
+                    },
 
-                        {
-                            id: "vilnius",
-                            color: "#009dc7",
-                            svgPath: targetSVG,
-                            title: "Vilnius",
-                            latitude: 54.6896,
-                            longitude: 25.2799,
-                            scale: 1.5,
-                            zoomLevel: 4.92,
-                            zoomLongitude: 15.4492,
-                            zoomLatitude: 50.2631,
+                    {
+                        id: "vilnius",
+                        color: "#009dc7",
+                        svgPath: targetSVG,
+                        title: "Vilnius",
+                        latitude: 54.6896,
+                        longitude: 25.2799,
+                        scale: 1.5,
+                        zoomLevel: 4.92,
+                        zoomLongitude: 15.4492,
+                        zoomLatitude: 50.2631,
 
-                            lines: [{
-                                latitudes: [54.6896, 50.8371],
-                                longitudes: [25.2799, 4.3676]
-                            }, {
-                                latitudes: [54.6896, 59.9138],
-                                longitudes: [25.2799, 10.7387]
-                            }, {
-                                latitudes: [54.6896, 40.4167],
-                                longitudes: [25.2799, -3.7033]
-                            }, {
-                                latitudes: [54.6896, 50.0878],
-                                longitudes: [25.2799, 14.4205]
-                            }, {
-                                latitudes: [54.6896, 48.2116],
-                                longitudes: [25.2799, 17.1547]
-                            }, {
-                                latitudes: [54.6896, 44.8048],
-                                longitudes: [25.2799, 20.4781]
-                            }, {
-                                latitudes: [54.6896, 55.7558],
-                                longitudes: [25.2799, 37.6176]
-                            }, {
-                                latitudes: [54.6896, 37.9792],
-                                longitudes: [25.2799, 23.7166]
-                            }, {
-                                latitudes: [54.6896, 54.6896],
-                                longitudes: [25.2799, 25.2799]
-                            }, {
-                                latitudes: [54.6896, 51.5002],
-                                longitudes: [25.2799, -0.1262]
-                            }, {
-                                latitudes: [54.6896, 53.3441],
-                                longitudes: [25.2799, -6.2675]
-                            }],
+                        lines: [{
+                            latitudes: [54.6896, 50.8371],
+                            longitudes: [25.2799, 4.3676]
+                        }, {
+                            latitudes: [54.6896, 59.9138],
+                            longitudes: [25.2799, 10.7387]
+                        }, {
+                            latitudes: [54.6896, 40.4167],
+                            longitudes: [25.2799, -3.7033]
+                        }, {
+                            latitudes: [54.6896, 50.0878],
+                            longitudes: [25.2799, 14.4205]
+                        }, {
+                            latitudes: [54.6896, 48.2116],
+                            longitudes: [25.2799, 17.1547]
+                        }, {
+                            latitudes: [54.6896, 44.8048],
+                            longitudes: [25.2799, 20.4781]
+                        }, {
+                            latitudes: [54.6896, 55.7558],
+                            longitudes: [25.2799, 37.6176]
+                        }, {
+                            latitudes: [54.6896, 37.9792],
+                            longitudes: [25.2799, 23.7166]
+                        }, {
+                            latitudes: [54.6896, 54.6896],
+                            longitudes: [25.2799, 25.2799]
+                        }, {
+                            latitudes: [54.6896, 51.5002],
+                            longitudes: [25.2799, -0.1262]
+                        }, {
+                            latitudes: [54.6896, 53.3441],
+                            longitudes: [25.2799, -6.2675]
+                        }],
 
-                            images: [{
-                                label: "Flights from Vilnius",
-                                svgPath: planeSVG,
-                                left: 100,
-                                top: 45,
-                                labelShiftY: 5,
-                                color: "#d93d5e",
-                                labelColor: "#d93d5e",
-                                labelRollOverColor: "#d93d5e",
-                                labelFontSize: 20
-                            }, {
-                                label: "show flights from London",
-                                left: 106,
-                                top: 70,
-                                labelColor: "#009dc7",
-                                labelRollOverColor: "#d93d5e",
-                                labelFontSize: 11,
-                                linkToObject: "london"
-                            }]
+                        images: [{
+                            label: "Flights from Vilnius",
+                            svgPath: planeSVG,
+                            left: 100,
+                            top: 45,
+                            labelShiftY: 5,
+                            color: "#d93d5e",
+                            labelColor: "#d93d5e",
+                            labelRollOverColor: "#d93d5e",
+                            labelFontSize: 20
                         }, {
-                            svgPath: targetSVG,
-                            title: "Brussels",
-                            latitude: 50.8371,
-                            longitude: 4.3676
-                        }, {
-                            svgPath: targetSVG,
-                            title: "Prague",
-                            latitude: 50.0878,
-                            longitude: 14.4205
-                        }, {
-                            svgPath: targetSVG,
-                            title: "Athens",
-                            latitude: 37.9792,
-                            longitude: 23.7166
-                        }, {
-                            svgPath: targetSVG,
-                            title: "Reykjavik",
-                            latitude: 64.1353,
-                            longitude: -21.8952
-                        }, {
-                            svgPath: targetSVG,
-                            title: "Dublin",
-                            latitude: 53.3441,
-                            longitude: -6.2675
-                        }, {
-                            svgPath: targetSVG,
-                            title: "Oslo",
-                            latitude: 59.9138,
-                            longitude: 10.7387
-                        }, {
-                            svgPath: targetSVG,
-                            title: "Lisbon",
-                            latitude: 38.7072,
-                            longitude: -9.1355
-                        }, {
-                            svgPath: targetSVG,
-                            title: "Moscow",
-                            latitude: 55.7558,
-                            longitude: 37.6176
-                        }, {
-                            svgPath: targetSVG,
-                            title: "Belgrade",
-                            latitude: 44.8048,
-                            longitude: 20.4781
-                        }, {
-                            svgPath: targetSVG,
-                            title: "Bratislava",
-                            latitude: 48.2116,
-                            longitude: 17.1547
-                        }, {
-                            svgPath: targetSVG,
-                            title: "Ljubljana",
-                            latitude: 46.0514,
-                            longitude: 14.5060
-                        }, {
-                            svgPath: targetSVG,
-                            title: "Madrid",
-                            latitude: 40.4167,
-                            longitude: -3.7033
-                        }, {
-                            svgPath: targetSVG,
-                            title: "Stockholm",
-                            latitude: 59.3328,
-                            longitude: 18.0645
-                        }, {
-                            svgPath: targetSVG,
-                            title: "Bern",
-                            latitude: 46.9480,
-                            longitude: 7.4481
-                        }, {
-                            svgPath: targetSVG,
-                            title: "Kiev",
-                            latitude: 50.4422,
-                            longitude: 30.5367
-                        }, {
-                            svgPath: targetSVG,
-                            title: "Paris",
-                            latitude: 48.8567,
-                            longitude: 2.3510
-                        }, {
-                            svgPath: targetSVG,
-                            title: "New York",
-                            latitude: 40.43,
-                            longitude: -74
-                        }
+                            label: "show flights from London",
+                            left: 106,
+                            top: 70,
+                            labelColor: "#009dc7",
+                            labelRollOverColor: "#d93d5e",
+                            labelFontSize: 11,
+                            linkToObject: "london"
+                        }]
+                    }, {
+                        svgPath: targetSVG,
+                        title: "Brussels",
+                        latitude: 50.8371,
+                        longitude: 4.3676
+                    }, {
+                        svgPath: targetSVG,
+                        title: "Prague",
+                        latitude: 50.0878,
+                        longitude: 14.4205
+                    }, {
+                        svgPath: targetSVG,
+                        title: "Athens",
+                        latitude: 37.9792,
+                        longitude: 23.7166
+                    }, {
+                        svgPath: targetSVG,
+                        title: "Reykjavik",
+                        latitude: 64.1353,
+                        longitude: -21.8952
+                    }, {
+                        svgPath: targetSVG,
+                        title: "Dublin",
+                        latitude: 53.3441,
+                        longitude: -6.2675
+                    }, {
+                        svgPath: targetSVG,
+                        title: "Oslo",
+                        latitude: 59.9138,
+                        longitude: 10.7387
+                    }, {
+                        svgPath: targetSVG,
+                        title: "Lisbon",
+                        latitude: 38.7072,
+                        longitude: -9.1355
+                    }, {
+                        svgPath: targetSVG,
+                        title: "Moscow",
+                        latitude: 55.7558,
+                        longitude: 37.6176
+                    }, {
+                        svgPath: targetSVG,
+                        title: "Belgrade",
+                        latitude: 44.8048,
+                        longitude: 20.4781
+                    }, {
+                        svgPath: targetSVG,
+                        title: "Bratislava",
+                        latitude: 48.2116,
+                        longitude: 17.1547
+                    }, {
+                        svgPath: targetSVG,
+                        title: "Ljubljana",
+                        latitude: 46.0514,
+                        longitude: 14.5060
+                    }, {
+                        svgPath: targetSVG,
+                        title: "Madrid",
+                        latitude: 40.4167,
+                        longitude: -3.7033
+                    }, {
+                        svgPath: targetSVG,
+                        title: "Stockholm",
+                        latitude: 59.3328,
+                        longitude: 18.0645
+                    }, {
+                        svgPath: targetSVG,
+                        title: "Bern",
+                        latitude: 46.9480,
+                        longitude: 7.4481
+                    }, {
+                        svgPath: targetSVG,
+                        title: "Kiev",
+                        latitude: 50.4422,
+                        longitude: 30.5367
+                    }, {
+                        svgPath: targetSVG,
+                        title: "Paris",
+                        latitude: 48.8567,
+                        longitude: 2.3510
+                    }, {
+                        svgPath: targetSVG,
+                        title: "New York",
+                        latitude: 40.43,
+                        longitude: -74
+                    }
                     ]
                 },
 
@@ -1166,8 +1166,8 @@ var Dashboard = function() {
             });
         },
 
-        initAmChart3: function() {
-            if (typeof(AmCharts) === 'undefined' || $('#dashboard_amchart_3').size() === 0) {
+        initAmChart3: function () {
+            if (typeof (AmCharts) === 'undefined' || $('#dashboard_amchart_3').size() === 0) {
                 return;
             }
 
@@ -1256,8 +1256,8 @@ var Dashboard = function() {
             });
         },
 
-        initAmChart4: function() {
-            if (typeof(AmCharts) === 'undefined' || $('#dashboard_amchart_4').size() === 0) {
+        initAmChart4: function () {
+            if (typeof (AmCharts) === 'undefined' || $('#dashboard_amchart_4').size() === 0) {
                 return;
             }
 
@@ -1294,7 +1294,7 @@ var Dashboard = function() {
                     "enabled": true
                 }
             });
-            jQuery('.chart-input').off().on('input change', function() {
+            jQuery('.chart-input').off().on('input change', function () {
                 var property = jQuery(this).data('property');
                 var target = chart;
                 var value = Number(this.value);
@@ -1309,7 +1309,7 @@ var Dashboard = function() {
             });
         },
 
-        initWorldMapStats: function() {
+        initWorldMapStats: function () {
             if ($('#mapplic').size() === 0) {
                 return;
             }
@@ -1369,7 +1369,7 @@ var Dashboard = function() {
             });
         },
 
-        init: function() {
+        init: function () {
 
             this.initJQVMAP();
             this.initCalendar();
@@ -1392,7 +1392,7 @@ var Dashboard = function() {
 }();
 
 if (App.isAngularJsApp() === false) {
-    jQuery(document).ready(function() {
+    jQuery(document).ready(function () {
         Dashboard.init(); // init metronic core componets
     });
 }

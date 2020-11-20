@@ -3,17 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Notifications\NotifyUsers;
 
 class DashboardController extends Controller
 {
 
     public function index()
     {
-        // $user = User::find(1);
-        // dd($user->notifications->get(0)->markAsRead());
-
         return view('admin.dashboard');
     }
 

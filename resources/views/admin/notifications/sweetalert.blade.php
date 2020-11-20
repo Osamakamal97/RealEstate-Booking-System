@@ -12,7 +12,7 @@
             <div class="swal2-icon swal2-info" style="display: none;"></div>
             <div class="swal2-icon swal2-success" style="display: none;"></div><img class="swal2-image"
                 style="display: none;">
-            <h2 class="swal2-title" id="swal2-title" style="display: flex;">هل تريد حذف هذا المسؤول؟</h2><button
+            <h2 class="swal2-title" id="swal2-title" style="display: flex;">{{ $notification_message }}</h2><button
                 type="button" class="swal2-close" style="display: none;" aria-label="Close this dialog">×</button>
         </div>
         <div class="swal2-content">
@@ -29,11 +29,11 @@
             <button type="button" class="swal2-confirm swal2-styled"
                 style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"
                 aria-label="" wire:click="deleteConfirm">
-                OK
+                نعم
             </button>
             <button type="button" class="swal2-cancel swal2-styled" style="display: inline-block;"
                 wire:click="deleteCancel">
-                Cancel
+                إلغاء
             </button>
         </div>
         <div class="swal2-footer" style="display: none;"></div>
