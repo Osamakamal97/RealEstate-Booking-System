@@ -16,9 +16,39 @@
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 <script src="{{ asset('assets/global/plugins/fancybox/source/jquery.fancybox.pack.js') }}" type="text/javascript">
 </script>
+<script src="{{ asset('assets/global/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js') }}"
+    type="text/javascript"></script>
+{{-- form_fileupload --}}
+<script src="{{ asset('assets/global/plugins/jquery-file-upload/js/vendor/tmpl.min.js') }}" type="text/javascript">
+</script>
+<script src="{{ asset('assets/global/plugins/jquery-file-upload/js/vendor/load-image.min.js') }}"
+    type="text/javascript"></script>
+<script src="{{ asset('assets/global/plugins/jquery-file-upload/js/vendor/canvas-to-blob.min.js') }}"
+    type="text/javascript"></script>
+<script src="{{ asset('assets/global/plugins/jquery-file-upload/blueimp-gallery/jquery.blueimp-gallery.min.js') }}"
+    type="text/javascript"></script>
+<script src="{{ asset('assets/global/plugins/jquery-file-upload/js/jquery.iframe-transport.js') }}"
+    type="text/javascript"></script>
+<script src="{{ asset('assets/global/plugins/jquery-file-upload/js/jquery.fileupload.js') }}" type="text/javascript">
+</script>
+<script src="{{ asset('assets/global/plugins/jquery-file-upload/js/jquery.fileupload-process.js') }}"
+    type="text/javascript"></script>
+<script src="{{ asset('assets/global/plugins/jquery-file-upload/js/jquery.fileupload-image.js') }}"
+    type="text/javascript"></script>
+<script src="{{ asset('assets/global/plugins/jquery-file-upload/js/jquery.fileupload-audio.js') }}"
+    type="text/javascript"></script>
+<script src="{{ asset('assets/global/plugins/jquery-file-upload/js/jquery.fileupload-video.js') }}"
+    type="text/javascript"></script>
+<script src="{{ asset('assets/global/plugins/jquery-file-upload/js/jquery.fileupload-validate.js') }}"
+    type="text/javascript"></script>
+<script src="{{ asset('assets/global/plugins/jquery-file-upload/js/jquery.fileupload-ui.js') }}" type="text/javascript">
+</script>
+{{-- end form_fileupload --}}
 <script src="{{ asset('assets/global/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js') }}" type="text/javascript">
 </script>
 <script src="{{ asset('assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js') }}" type="text/javascript">
+</script>
+<script src="{{ asset('assets/pages/scripts/form-samples.min.js') }}" type="text/javascript">
 </script>
 {{-- <script src="{{ asset('') }}assets/global/plugins/flot/jquery.flot.min.js" type="text/javascript"></script>
 <script src="{{ asset('') }}assets/global/plugins/flot/jquery.flot.resize.min.js" type="text/javascript"></script>
@@ -57,9 +87,9 @@ type="text/javascript"> --}}
 <script type="text/javascript"
     src="{{ asset('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}">
 </script>
-<script src="http://maps.google.com/maps/api/js?key=AIzaSyBTVuX5HqCfrJkzLVte3NnsTrrJTygbFj4" type="text/javascript">
-</script>
-<script src="{{ asset('assets/global/plugins/gmaps/gmaps.min.js') }}" type="text/javascript"></script>
+{{-- <script src="http://maps.google.com/maps/api/js?key=AIzaSyBTVuX5HqCfrJkzLVte3NnsTrrJTygbFj4" type="text/javascript">
+</script> --}}
+{{-- <script src="{{ asset('assets/global/plugins/gmaps/gmaps.min.js') }}" type="text/javascript"></script> --}}
 
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
@@ -71,16 +101,18 @@ type="text/javascript"> --}}
 <script src="{{ asset('assets/admin/pages/scripts/tasks.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/admin/pages/scripts/table-managed.js') }}"></script>
 <script src="{{ asset('assets/admin/pages/scripts/form-validation.js') }}"></script>
-<script src="{{ asset('assets/admin/pages/scripts/maps-google.js') }}" type="text/javascript"></script>
+{{-- <script src="{{ asset('assets/admin/pages/scripts/maps-google.js') }}" type="text/javascript"></script> --}}
 <script src="{{ asset('assets/admin/pages/scripts/inbox.js') }}" type="text/javascript"></script>
 
 <!-- END PAGE LEVEL SCRIPTS -->
+{{-- google adsense test --}}
+<script data-ad-client="ca-pub-7622792590495371" async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script>
     jQuery(document).ready(function() {    
         Metronic.init(); // init metronic core componets
         Layout.init(); // init layout
         QuickSidebar.init(); // init quick sidebar
-        // Demo.init(); // init demo features
         Index.init();   
         Index.initDashboardDaterange();
         Index.initJQVMAP(); // init index page's custom scripts
@@ -91,8 +123,7 @@ type="text/javascript"> --}}
         Tasks.initDashboardWidget();
         TableManaged.init();
         FormValidation.init();
-        UIConfirmations.init(); // init page demo
-        MapsGoogle.init();
+        // MapsGoogle.init();
         Inbox.init();
     });
 </script>

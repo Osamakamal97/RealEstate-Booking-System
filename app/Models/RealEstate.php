@@ -24,22 +24,46 @@ class RealEstate extends Model
         'status'
     ];
 
+    public function details()
+    {
+        return $this->hasOne(RealEstateDetails::class, 'id');
+    }
+
+    public function scopeIndexSelection($query, $paginate)
+    {
+        $roles = RealEstate::select('name', 'type', 'address', 'price')->toArray();
+        return $query->role($roles)->select('id', 'name', 'email', 'active')
+            ->paginate($paginate);
+    }
+
     public function getStatus()
     {
         return $this->status == 1 ? 'مفعل' : 'غير مفعل';
     }
 
-    public function setIsCancelBookFreeAttribute($is_cancel_book_free)
+    public function getConfirm()
     {
-        return $is_cancel_book_free == 0 ?
-            $this->attributes['is_cancel_book_free'] = false :
-            $this->attributes['is_cancel_book_free'] = true;
+        return $this->confirmed == true ? 'مقبول' : 'مرفوض';
     }
 
-    public function setPostInOtherWebsiteAttribute($post_in_other_websites)
-    {
-        return $post_in_other_websites == 0 ?
-            $this->attributes['post_in_other_websites'] = false :
-            $this->attributes['post_in_other_websites'] = true;
-    }
+    // public function setIsCancelBookFreeAttribute($is_cancel_book_free)
+    // {
+    //     return $is_cancel_book_free == 0 ?
+    //         $this->attributes['is_cancel_book_free'] = false :
+    //         $this->attributes['is_cancel_book_free'] = true;
+    // }
+
+    // public function setPostInOtherWebsiteAttribute($post_in_other_websites)
+    // {
+    //     return $post_in_other_websites == 0 ?
+    //         $this->attributes['post_in_other_websites'] = false :
+    //         $this->attributes['post_in_other_websites'] = true;
+    // }
+
+    // public function getPostInOtherWebsites($post_in_other_websites)
+    // {
+    //     return $post_in_other_websites == 0 ?
+    //         $this->attributes['post_in_other_websites'] = 'لا' :
+    //         $this->attributes['post_in_other_websites'] = 'نعم';
+    // }
 }

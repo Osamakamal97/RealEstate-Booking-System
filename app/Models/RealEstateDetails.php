@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class RealEstateDetails extends Model
 {
-
     protected $fillable = [
         'real_estate_id',
         'bedrooms_number',
@@ -28,6 +27,11 @@ class RealEstateDetails extends Model
         'outdoor_facilities',
     ];
 
+    public function realEstate()
+    {
+        return $this->belongsTo(RealEstate::class, 'real_estate_id');
+    }
+
     public function setStartArriveAtAttribute($start_arrive_at)
     {
         $time = explode(':', $start_arrive_at);
@@ -36,6 +40,7 @@ class RealEstateDetails extends Model
         $dt->minute($time[1]);
         return $this->attributes['start_arrive_at'] = $dt;
     }
+
     public function setEndArriveAtAttribute($end_arrive_at)
     {
         $time = explode(':', $end_arrive_at);
@@ -44,6 +49,7 @@ class RealEstateDetails extends Model
         $dt->minute($time[1]);
         return $this->attributes['end_arrive_at'] = $dt;
     }
+
     public function setStartLeaveAtAttribute($start_leave_at)
     {
         $time = explode(':', $start_leave_at);
@@ -52,6 +58,7 @@ class RealEstateDetails extends Model
         $dt->minute($time[1]);
         return $this->attributes['start_leave_at'] = $dt;
     }
+
     public function setEndLeaveAtAttribute($end_leave_at)
     {
         $time = explode(':', $end_leave_at);

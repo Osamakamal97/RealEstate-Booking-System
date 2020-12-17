@@ -16,6 +16,7 @@ Route::group(['middleware' => ['auth:admin', 'session_expire']], function () {
     Route::get('admins', [DashboardController::class, 'admins'])->middleware('role:super-admin')->name('admins.index');
     Route::get('permissions', [DashboardController::class, 'permissions'])->middleware('role:super-admin')->name('permissions.index');
     Route::get('users', [DashboardController::class, 'users'])->middleware('can:view_users')->name('users.index');
+    Route::get('real-estates', [DashboardController::class, 'realEstates'])->middleware('can:view_real_estates')->name('realEstates.index');
     Route::get('real-estate-owners', [DashboardController::class, 'realEstateOwners'])->middleware('can:view_real_estate_owners')->name('realEstateOwners.index');
     Route::get('users/notify', [DashboardController::class, 'notifyUsers'])->middleware('can:notify_users')->name('users.notify.index');
     Route::get('users/notifications-response', [DashboardController::class, 'usersResponse'])->middleware('can:view_users_notifications')->name('users.notifications.index');

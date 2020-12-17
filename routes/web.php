@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
   return view('welcome');
 })->name('welcome');
-Route::get('time', function () {
+Route::get('test2', function () {
   return view('time');
 })->name('time');
 Route::get('/test', function () {

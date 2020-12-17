@@ -27,7 +27,7 @@ class CreateRealEstatesTable extends Migration
             $table->unsignedTinyInteger('days_before_cancel_book');
             $table->boolean('is_cancel_book_free')->default(true);
             $table->string('discount_percent_when_cancel_book', 2)->default('10');
-            $table->boolean('confirmed')->default(false);
+            $table->enum('confirmed', ['-1', '0', '1'])->default(0);
             $table->boolean('status')->default(false);
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');

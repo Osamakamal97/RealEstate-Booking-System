@@ -12,8 +12,7 @@ use Spatie\Permission\Models\Role;
 class Users extends Component
 {
     use WithPagination, LivewireAlert;
-
-
+    
     public $show_create = false, $show_edit = false, $showPermissions = false;
     public $search = '', $perPage = 5, $page = 1;
     public $show_delete_notification = false;

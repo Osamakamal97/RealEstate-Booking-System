@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="portlet-body form">
-            <form role="form" wire:submit.prevent="store" enctype="multipart/form-data">
+            <form role="form" wire:submit.prevent="{{ $form_method }}" enctype="multipart/form-data">
                 @if ($show_page_one)
                 @includeIf('livewire.realEstate.formPages.page1')
                 @elseif($show_wedding_hall_page)

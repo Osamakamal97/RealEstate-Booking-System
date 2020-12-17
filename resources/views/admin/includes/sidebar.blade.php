@@ -21,7 +21,7 @@
             @if (auth('admin')->check())
             <li class="start tooltips {{ request()->is('admin/dashboard') ? 'active' : '' }}">
                 <a href="{{ route('admin.dashboard') }}">
-                    <i class="icon-home"></i>
+                    <i class="icon-grid"></i>
                     <span class="title">الرئيسة</span>
                 </a>
             </li>
@@ -45,13 +45,13 @@
             </li>
             <li class="{{ request()->is('admin/roles') ? 'active' : '' }}">
                 <a href="{{ route('admin.roles.index') }}">
-                    <i class="fa fa-check-square-o"></i>
+                    <i class="icon-note"></i>
                     <span class="title">الأدوار</span>
                 </a>
             </li>
             <li class="{{ request()->is('admin/permissions') ? 'active' : '' }}">
                 <a href="{{ route('admin.permissions.index') }}">
-                    <i class="icon-bar-chart"></i>
+                    <i class="icon-user-following"></i>
                     <span class="title">الصلاحيات</span>
                 </a>
             </li>
@@ -91,6 +91,12 @@
                     </li> --}}
                 </ul>
             </li>
+            <li class="{{ request()->is('admin/real-estate/index') ? 'active' : '' }}">
+                <a href="{{ route('admin.realEstates.index') }}">
+                    <i class="icon-home"></i>
+                    <span class="title">العقارات</span>
+                </a>
+            </li>
             <li class="{{ request()->is('admin/real-estate/facilities') ? 'active' : '' }}">
                 <a href="{{ route('admin.realEstate.facilities') }}">
                     <i class="icon-bar-chart"></i>
@@ -104,7 +110,7 @@
             </li>
             <li class="{{ request()->is('admin/users*')  ? 'open active' : '' }}">
                 <a href="javascript:;">
-                    <i class="icon-users"></i>
+                    <i class="fa fa-users"></i>
                     <span class="title">الزبائن</span>
                     <span class="selected"></span>
                     <span class="arrow open"></span>
@@ -112,7 +118,7 @@
                 <ul class="sub-menu">
                     <li class="{{ request()->is('admin/users') ? 'active' : '' }}">
                         <a href="{{ route('admin.users.index') }}">
-                            <i class="icon-user"></i>عرض جميع الزبائن</a>
+                            <i class="fa fa-users"></i>عرض جميع الزبائن</a>
                     </li>
                     <li class="{{ request()->is('admin/users/notifications-response') ? 'active' : '' }}">
                         <a href="{{ route('admin.users.notifications.index') }}">

@@ -37,7 +37,6 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-
         $this->middleware(['guest', 'is_blocked_user'])->except('logout');
         $this->username = $this->findMobileNumber();
     }
@@ -65,8 +64,7 @@ class LoginController extends Controller
 
     public function redirectTo()
     {
-        $type = auth()->user()->type;
-        if ($type == 1)
+        if (auth()->user()->type == 1)
             return '/realEstateOwner/dashboard';
         else
             return '/home';

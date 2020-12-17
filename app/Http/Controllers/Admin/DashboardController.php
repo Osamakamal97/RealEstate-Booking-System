@@ -27,6 +27,10 @@ class DashboardController extends Controller
         return view('admin.permissions', ['title' => 'الصلاحيات']);
     }
 
+    public function realEstates()
+    {
+        return view('admin.realEstates', ['title' => 'العقارات']);
+    }
     public function realEstateOwners()
     {
         return view('admin.realEstateOwner', ['title' => 'أصحاب العقارات']);
