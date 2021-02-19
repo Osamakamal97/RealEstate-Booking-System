@@ -2,22 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8c072364-09de-455b-bdb6-ca5d30577429" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/DashboardController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/RealEstates.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/RealEstates.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/includes/footer-meta.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/includes/footer-meta.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/includes/header-meta.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/includes/header-meta.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/livewire/realEstate/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/realEstate/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/livewire/realEstate/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/realEstate/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/livewire/roles/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/roles/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/test.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/test.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -143,12 +135,15 @@
   <component name="ProjectId" id="1kNndDdvrTZ0hpSL0qoVjnjQseL" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Invoices" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Console Font" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
@@ -166,16 +161,13 @@
       <option name="presentableId" value="Default" />
       <updated>1605550006086</updated>
       <workItem from="1605550009702" duration="77000" />
+      <workItem from="1608914999269" duration="63000" />
+      <workItem from="1608921951997" duration="1316000" />
+      <workItem from="1608924951641" duration="172000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="193" y="31" width="1052" height="737" key="SettingsEditor" timestamp="1605550083322">
-      <screen x="72" y="27" width="1294" height="741" />
-    </state>
-    <state x="193" y="31" width="1052" height="737" key="SettingsEditor/72.27.1294.741@72.27.1294.741" timestamp="1605550083322" />
   </component>
 </project>

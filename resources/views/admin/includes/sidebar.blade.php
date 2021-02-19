@@ -49,12 +49,12 @@
                     <span class="title">الأدوار</span>
                 </a>
             </li>
-            <li class="{{ request()->is('admin/permissions') ? 'active' : '' }}">
+            {{-- <li class="{{ request()->is('admin/permissions') ? 'active' : '' }}">
                 <a href="{{ route('admin.permissions.index') }}">
                     <i class="icon-user-following"></i>
                     <span class="title">الصلاحيات</span>
                 </a>
-            </li>
+            </li> --}}
             @endrole
             @role('manager')
             <li class="{{ request()->is('admin/employees') ? 'active' : '' }}">
