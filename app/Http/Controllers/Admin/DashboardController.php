@@ -9,7 +9,7 @@ class DashboardController extends Controller
 
     public function index()
     {
-        return view('admin.dashboard');realstate management system
+        return view('admin.dashboard');
     }
 
     public function test()

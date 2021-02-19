@@ -10,7 +10,7 @@
         <div class="portlet box grey-cascade">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-line-chart"></i>جدول الصلاحيات
+                    <i class="fa fa-line-chart"></i>{{ __('admin.realEstate_table') }}
                 </div>
             </div>
             <div class="portlet-body">
