@@ -6,7 +6,7 @@ use App\Models\RealEstateFacility;
 
 class RealEstateFacilities extends Main
 {
-    public $name, $place, $for_wedding_hall, $form_method, $facility_id, 
+    public $name, $place, $for_wedding_hall, $form_method, $facility_id, $title,
     $notification_message = 'هل تريد حذف المرفق؟ ';
 
     protected $messages = [
@@ -16,6 +16,7 @@ class RealEstateFacilities extends Main
 
     public function render()
     {
+        $this->title = __('admin.real_estate_facilities');
         if ($this->search == null) {
             $facilities = RealEstateFacility::indexSelection($this->perPage);
             return view('livewire.realEstateFacilities.index', compact('facilities'));

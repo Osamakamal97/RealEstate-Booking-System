@@ -365,10 +365,11 @@
                         </li>
                         <li>
                             @if (auth('admin')->check())
-                            <a href="{{ route('admin.logout') }}">
+                            <a href="#"
+                                onclick="event.preventDefault();document.getElementById('admin-logout').submit();">
                                 <i class="icon-key"></i> Log Out </a>
                             @elseif(auth('web')->check())
-                            <a href="{{ route('logout') }}">
+                            <a href="#" onclick="event.preventDefault();document.getElementById('logout').submit();">
                                 <i class="icon-key"></i> Log Out </a>
                             @endif
 
@@ -377,16 +378,23 @@
                 </li>
                 <li class="dropdown dropdown-quick-sidebar-toggler">
                     @if (auth('admin')->check())
-                    <a href="{{ route('admin.logout') }}" class="dropdown-toggle">
+                    <a href="#" onclick="event.preventDefault();document.getElementById('admin-logout').submit();"
+                        class="dropdown-toggle">
                         <i class="icon-logout"></i>
                     </a>
                     @elseif(auth('web')->check())
-                    <a href="{{ route('logout') }}" class="dropdown-toggle">
+                    <a href="#" onclick="event.preventDefault();document.getElementById('logout').submit();"
+                        class="dropdown-toggle">
                         <i class="icon-logout"></i>
                     </a>
                     @endif
-
                 </li>
+                <form action="{{ route('logout') }}" id="logout" method="POST">
+                    @csrf
+                </form>
+                <form action="{{ route('admin.logout') }}" id="admin-logout" method="POST">
+                    @csrf
+                </form>
             </ul>
         </div>
     </div>

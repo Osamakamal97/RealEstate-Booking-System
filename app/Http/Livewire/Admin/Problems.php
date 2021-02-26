@@ -23,6 +23,12 @@ class Problems extends Main
         $this->show_problem = false;
     }
 
+    public function mainPage()
+    {
+        $this->show_problems = true;
+        $this->show_problem = false;
+    }
+
     public function read($problem_id)
     {
         $problem = EmployeeProblems::find($problem_id);

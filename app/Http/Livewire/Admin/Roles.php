@@ -8,19 +8,18 @@ use Spatie\Permission\Models\Role;
 class Roles extends Main
 {
 
-    public $role_id, $name, $role_permissions = [],
-        $selected_permission, $permission_search = '', $permission_name = '';
-    public $show_delete_notification = false, $show_delete_permission_notification = false;
+    public $role_id, $name, $role_permissions = [], $selected_permission, $permission_search = '', $title,
+        $permission_name = '', $show_delete_notification = false, $show_delete_permission_notification = false;
 
     public function render()
     {
+        $this->title = 'roles';
         if ($this->search == null)
             $roles = Role::select('id', 'name')->paginate(5);
         else
             $roles = Role::select('id', 'name')
                 ->where('name', 'LIKE', '%' . $this->search . '%')
                 ->paginate(5);
-
 
         $permissions = Permission::select('name')
             ->where('name', 'LIKE', '%' . $this->permission_search . '%')

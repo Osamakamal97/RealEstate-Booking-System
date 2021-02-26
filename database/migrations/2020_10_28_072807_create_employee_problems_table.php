@@ -15,12 +15,11 @@ class CreateEmployeeProblemsTable extends Migration
     {
         Schema::create('employee_problems', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('admin_id');
             $table->string('title', 150);
             $table->text('content');
             $table->unsignedTinyInteger('status')->default(0);
+            $table->foreignId('admin_id')->constrained('admins','id')->cascadeOnDelete;
             $table->timestamps();
-            $table->foreign('admin_id')->references('id')->on('admins');
         });
     }
 

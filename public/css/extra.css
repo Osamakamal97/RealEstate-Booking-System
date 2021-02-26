@@ -1,0 +1,36 @@
+.form-group.form-md-line-input .help-block{
+    opacity: 1.0;
+}
+
+.inbox .inbox-nav li button {
+    color: #4d82a3;
+    display: block;
+    font-size: 15px;
+    border-right: none;
+    text-align: right !important;
+    padding: 8px 44px;
+    margin-bottom: 1px;
+    background: #f4f9fd;
+  }
+
+  .inbox .inbox-nav li.active button,
+  .inbox .inbox-nav li.active:hover button {
+    color: #fff;
+    border-right: none;
+    background: #169ef4 !important;
+    text-decoration: none;
+  }
+
+  .inbox .inbox-nav li:hover button {
+    color: #4d82a3;
+    background: #eef4f7 !important;
+    text-decoration: none;
+  }
+
+  .inbox .inbox-nav li.compose-btn button {
+    color: #fff;
+    text-shadow: none;
+    text-align: center;
+    margin-bottom: 18px;
+    background: #35aa47;
+  }

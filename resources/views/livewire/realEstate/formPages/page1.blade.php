@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-body ">
-                <div class="form-group form-md-line-input 
+                <div class="form-group form-md-line-input
                 @error('name') has-error @enderror">
                     <input type="text" class="form-control" id="form_control_1" wire:model.defer="name"
                         autocomplete="off">
@@ -37,7 +37,7 @@
         </div>
         <div class="col-md-3">
             <div class="form-body">
-                <div class="form-group form-md-line-input 
+                <div class="form-group form-md-line-input
                 @error('postal_code') has-error @enderror">
                     <input type="text" class="form-control" id="form_control_1" wire:model.defer="postal_code">
                     <label for="form_control_1" @error('postal_code') style="color: #F3565D" @enderror>الرمز
@@ -53,7 +53,7 @@
     <div class="row">
         <div class="col-md-9">
             <div class="form-body">
-                <div class="form-group form-md-line-input 
+                <div class="form-group form-md-line-input
                 @error('address') has-error @enderror">
                     <input type="text" class="form-control" id="form_control_1" wire:model.defer="address"
                         autocomplete="off">
@@ -119,7 +119,7 @@
         </div>
         <div class="col-md-3">
             <div class="form-body ">
-                <div class="form-group form-md-line-input 
+                <div class="form-group form-md-line-input
                 @error('days_before_cancel_book') has-error @enderror">
                     <input type="number" class="form-control" id="form_control_1" min="1" max="100"
                         wire:model.defer="days_before_cancel_book" autocomplete="off">
@@ -164,7 +164,7 @@
         </div>
         <div class="col-md-3">
             <div class="form-body ">
-                <div class="form-group form-md-line-input 
+                <div class="form-group form-md-line-input
                 @error('discount_percent_when_cancel_book') has-error @enderror input-group">
                     <input type="number" class="form-control edited" id="form_control_1" min="10" max="50"
                         @if($is_cancel_book_free=='1' ) disabled @endif autocomplete="off"
@@ -172,11 +172,12 @@
                     <span class="input-group-addon" style="border-radius: 0;background: none;border: 0;">%</span>
                     <label for="form_control_1" @error('discount_percent_when_cancel_book') style="color: #F3565D"
                         @enderror>
-                        نسبة الخصم عند الغاء الحجز</label>
-                    {{-- @error('discount_percent_when_cancel_book') --}}
-                    <span id="discount_percent_when_cancel_book-error" class="help-block help-block-error"
-                        style="color: #F3565D">message message</span>
-                    {{-- @enderror --}}
+                        نسبة الخصم عند الغاء الحجز
+                        @error('discount_percent_when_cancel_book')
+                        <span id="discount_percent_when_cancel_book-error" class="help-block help-block-error"
+                            style="color: #F3565D;padding-top: 35px;">{{ $message }}</span>
+                        @enderror
+                    </label>
                 </div>
             </div>
         </div>

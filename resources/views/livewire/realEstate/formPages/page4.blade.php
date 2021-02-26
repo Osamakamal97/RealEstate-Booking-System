@@ -1,13 +1,14 @@
 <div style="height: 380px">
     <div class="row">
         <div class="col-md-12">
+            {{-- {{ dump($indoor_facilities) }} --}}
             <div class="form-group form-md-checkboxes">
                 <label>المرافق الداخلية</label>
                 <div class="md-checkbox-inline">
                     @foreach ($indoor_facilities as $facility)
                     <div class="md-checkbox" style="padding-bottom: 20px;padding-left: 15px;">
                         <input type="checkbox" id="{{ $facility->name }}" class="md-check"
-                            wire:model.defer="selected_indoor_facilities.{{ $facility->id }}">
+                            wire:model.defer="selected_indoor_facilities.{{ $facility->id }}" value="{{ $facility->id }}">
                         <label for="{{ $facility->name }}">
                             <span></span>
                             <span class="check"></span>
@@ -20,6 +21,7 @@
                     @enderror
                 </div>
             </div>
+            {{-- {{ dd($outdoor_facilities) }} --}}
             <div class="form-group form-md-checkboxes">
                 <label>المرافق الخارجية</label>
                 <div class="md-checkbox-inline">

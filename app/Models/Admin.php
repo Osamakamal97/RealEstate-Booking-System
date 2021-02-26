@@ -12,18 +12,18 @@ class Admin extends Authenticatable
 {
     use HasRoles, Notifiable;
 
-    protected $fillable = ['id', 'name', 'email', 'password', 'active'];
+    protected $fillable = ['id', 'name', 'email', 'password', 'status'];
 
     protected $hidden = ['password', 'email_verified_at', 'remember_token', 'created_at', 'updated_at'];
 
-    public function getActive()
+    public function getStatus()
     {
-        return $this->active == 1 ? 'مفعل' : 'غير مفعل';
+        return $this->status == 1 ? 'مفعل' : 'غير مفعل';
     }
 
     public function isActive()
     {
-        return $this->active == 1 ? true : false;
+        return $this->status == 1 ? true : false;
     }
 
     public function getRoleKey()
@@ -68,13 +68,13 @@ class Admin extends Authenticatable
     public function scopeIndexSelection($query, $paginate)
     {
         $roles = Role::where('name', '!=', 'super-admin')->where('guard_name', 'admin')->get()->pluck('name')->toArray();
-        return $query->role($roles)->select('id', 'name', 'email', 'active')
+        return $query->role($roles)->select('id', 'name', 'email', 'status')
             ->paginate($paginate);
     }
 
     public function scopeEmployees($query, $paginate)
     {
-        return $query->select('id', 'name', 'email', 'active', 'last_login_at')
+        return $query->select('id', 'name', 'email', 'status', 'last_login_at')
             ->role('employee')
             ->paginate($paginate);
     }

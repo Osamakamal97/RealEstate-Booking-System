@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @push('style')
-<link href="{{ asset('assets/admin/pages/css/error-.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/admin/pages/css/error-rtl.css') }}" rel="stylesheet" type="text/css" />
 @endpush
 @section('content')
 <br><br><br><br><br><br>

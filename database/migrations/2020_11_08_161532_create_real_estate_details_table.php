@@ -15,7 +15,6 @@ class CreateRealEstateDetailsTable extends Migration
     {
         Schema::create('real_estate_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('real_estate_id');
             $table->unsignedTinyInteger('bedrooms_number');
             $table->unsignedTinyInteger('beds_numbers');
             $table->unsignedTinyInteger('single_beds_numbers');
@@ -33,7 +32,7 @@ class CreateRealEstateDetailsTable extends Migration
             $table->timestamp('start_leave_at');
             $table->timestamp('end_leave_at');
             $table->timestamps();
-            $table->foreign('real_estate_id')->references('id')->on('real_estates');
+            $table->foreignId('real_estate_id')->constrained('real_estates','id')->cascadeOnDelete;
         });
     }
 

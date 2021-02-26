@@ -69,5 +69,6 @@ rel="stylesheet" type="text/css" /> --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.css" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href="{{ asset('assets/admin/pages/css/inbox-rtl.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ asset('css/extra.css') }}" rel="stylesheet" type="text/css">
 @stack('style')
 @livewireStyles

@@ -25,7 +25,7 @@ class User extends Authenticatable
         'email',
         'password',
         'type', // 0 to customer 1 to real estate owner
-        'active',
+        'status',
         'ip'
     ];
 
@@ -53,28 +53,28 @@ class User extends Authenticatable
         return $this->first_name . ' ' . $this->last_name;
     }
 
-    public function getActive()
+    public function getStatus()
     {
-        return $this->active == 1 ? 'مفعل' : 'غير مفعل';
+        return $this->status == 1 ? 'مفعل' : 'غير مفعل';
     }
 
     public function isActive()
     {
-        return $this->active == 1 ? true : false;
+        return $this->status == 1 ? true : false;
     }
 
     // Scopes
 
     public function scopeCustomers($query, $paginate)
     {
-        return $query->select('id', 'first_name', 'last_name', 'country', 'email', 'mobile_number', 'active')
+        return $query->select('id', 'first_name', 'last_name', 'country', 'email', 'mobile_number', 'status')
             ->where('type', '0')
             ->paginate($paginate);
     }
 
     public function scopeRealEstateOwners($query, $paginate)
     {
-        return $query->select('id', 'first_name', 'last_name', 'country', 'email', 'mobile_number', 'active')
+        return $query->select('id', 'first_name', 'last_name', 'country', 'email', 'mobile_number', 'status')
             ->where('type', '1')
             ->paginate($paginate);
     }
@@ -84,7 +84,7 @@ class User extends Authenticatable
         $this->attributes['password'] = Hash::make($password);
     }
 
-    // Relations 
+    // Relations
 
     // public function notifications()
     // {

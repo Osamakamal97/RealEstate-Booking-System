@@ -29,6 +29,10 @@ class AdminSeeder extends Seeder
         Permission::create(['name' => 'notify_users', 'guard_name' => 'admin']);
         Permission::create(['name' => 'view_users_notifications', 'guard_name' => 'admin']);
         Permission::create(['name' => 'view_real_estate_owners', 'guard_name' => 'admin']);
+        Permission::create(['name' => 'create_real_estate_owner', 'guard_name' => 'admin']);
+        Permission::create(['name' => 'edit_real_estate_owner', 'guard_name' => 'admin']);
+        Permission::create(['name' => 'delete_real_estate_owner', 'guard_name' => 'admin']);
+        Permission::create(['name' => 'block_real_estate_owner', 'guard_name' => 'admin']);
         // Real Estate Permissions
         Permission::create(['name' => 'view_real_estates', 'guard_name' => 'web']);
 
@@ -43,6 +47,11 @@ class AdminSeeder extends Seeder
             'notify_users',
             'view_users_notifications',
             'view_real_estate_owners',
+            'create_real_estate_owner',
+            'edit_real_estate_owner',
+            'delete_real_estate_owner',
+            'block_real_estate_owner',
+            // '',
         ]);
 
         $manager_role->givePermissionTo([

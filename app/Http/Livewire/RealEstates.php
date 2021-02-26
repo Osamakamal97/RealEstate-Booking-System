@@ -34,6 +34,8 @@ class RealEstates extends Main
         'required_unless' => 'هذا الحقل مطلوب في حال تواجد خصم إلغاء الطلب',
         'numeric' => 'يجب على هذا الحقل اي يكون رقماً.'
     ];
+    public $table_name = 'real_estates';
+
 
     protected $rules = [
         'name' => 'required',
@@ -75,6 +77,7 @@ class RealEstates extends Main
         $this->real_estate_owner_id = auth()->user()->id;
         $indoor_facilities = RealEstateFacility::select('id', 'name')->where('place', '0')
             ->where('for_wedding_hall', '0')->get();
+        // dd($indoor_facilities);
         $outdoor_facilities = RealEstateFacility::select('id', 'name')->where('place', '1')->get();
 
         $wedding_hall_indoor_facilities = RealEstateFacility::select('id', 'name')->where('place', '0')
@@ -96,6 +99,8 @@ class RealEstates extends Main
 
     public function create()
     {
+        // $this->selected_indoor_facilities = [];
+        // dd($this->selected_indoor_facilities);
         $this->show_page_one = true;
         $this->resetInputFields();
         $indoor_facilities = RealEstateFacility::select('id', 'name')->where('place', '0')
@@ -139,30 +144,21 @@ class RealEstates extends Main
             'end_arrive_at' => 'required',
             'start_leave_at' => 'required',
             'end_leave_at' => 'required',
+            'selected_indoor_facilities' => 'required',
+            'selected_outdoor_facilities' => 'required',
         ]);
-        dd(collect($this->selected_indoor_facilities));
-        // 'selected_indoor_facilities' => 'required',
-        // 'selected_outdoor_facilities' => 'required',
+        $facilities = RealEstateFacility::all();
         $indoor_facilities = '';
         $outdoor_facilities = '';
-        $index = 1;
-        // dd($this->array2string($validate_data['selected_indoor_facilities']));
-        // dd(json_encode($validate_data['selected_indoor_facilities']));
-        foreach ($validate_data['selected_indoor_facilities'] as $key => $val) {
-            if (sizeof($validate_data['selected_indoor_facilities']) - 1 == $key)
-                $indoor_facilities .= $key . '=>' . ($val == true ? 'true' : 'false');
-            else
-                $indoor_facilities .= $key . '=>' . ($val == true ? 'true' : 'false') . ',';
-        }
-        dd($indoor_facilities);
-        foreach ($validate_data['selected_outdoor_facilities'] as $facility => $val)
-            if (sizeof($validate_data['selected_outdoor_facilities']) == $index)
-                $outdoor_facilities .= $facility;
-            else
-                $outdoor_facilities .= $facility . ',';
+        foreach ($validate_data['selected_indoor_facilities'] as $key => $val)
+            if ($val == true)
+                $indoor_facilities .= $facilities[$val]->id . ',';
+        foreach ($validate_data['selected_outdoor_facilities'] as $key => $val)
+            if ($val == true)
+                $outdoor_facilities .= $facilities[$key]->id . ',';
         $validate_data = Arr::add($validate_data, 'user_id', $this->real_estate_owner_id);
-        // $real_estate = RealEstate::create($validate_data);
-        // $validate_data = Arr::add($validate_data, 'real_estate_id', $real_estate->id);
+        $real_estate = RealEstate::create($validate_data);
+        $validate_data = Arr::add($validate_data, 'real_estate_id', $real_estate->id);
         $validate_data = Arr::add($validate_data, 'indoor_facilities', $indoor_facilities);
         $validate_data = Arr::add($validate_data, 'outdoor_facilities', $outdoor_facilities);
         RealEstateDetails::create($validate_data);
@@ -312,6 +308,8 @@ class RealEstates extends Main
         $this->end_arrive_at = '';
         $this->start_leave_at = '';
         $this->end_leave_at = '';
+        $this->selected_indoor_facilities = [];
+        $this->selected_outdoor_facilities = [];
         $this->resetErrorBag();
         // clear views
         $this->show_create = false;

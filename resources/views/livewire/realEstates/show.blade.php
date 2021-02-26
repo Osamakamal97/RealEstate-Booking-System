@@ -156,28 +156,28 @@
                     <div class="col-md-3">
                         <div class="form-group form-md-line-input ">
                             <input type="text" class="form-control" disabled id="form_control_1"
-                                value="{{ $real_estate_details_data->smoke_allow }}">
+                                value="{{ $real_estate_details_data->smoke_allow == 1 ? __('admin.allow') : __('admin.not_allow') }}">
                             <label for="form_control_1">التدخين مسموح</label>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group form-md-line-input ">
                             <input type="text" class="form-control" disabled id="form_control_1"
-                                value="{{ $real_estate_details_data->pets_allow }}">
+                                value="{{ $real_estate_details_data->pets_allow == 1 ? __('admin.allow') : __('admin.not_allow')}}">
                             <label for="form_control_1">الحيوانات الأليفة مسموحة</label>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group form-md-line-input ">
                             <input type="text" class="form-control" disabled id="form_control_1"
-                                value="{{ $real_estate_details_data->kids_allow }}">
+                                value="{{ $real_estate_details_data->kids_allow == 1 ? __('admin.allow') : __('admin.not_allow')}}">
                             <label for="form_control_1">مسموح بإقامة الأطفال</label>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group form-md-line-input ">
                             <input type="text" class="form-control" disabled id="form_control_1"
-                                value="{{ $real_estate_details_data->party_allow }}">
+                                value="{{ $real_estate_details_data->party_allow == 1 ? __('admin.allow') : __('admin.not_allow')}}">
                             <label for="form_control_1">مسموح بإقامة الحفلات</label>
                         </div>
                     </div>
@@ -186,28 +186,28 @@
                     <div class="col-md-3">
                         <div class="form-group form-md-line-input ">
                             <input type="text" class="form-control" disabled id="form_control_1"
-                                value="{{ $real_estate_details_data->party_allow }}">
+                                value="{{ $real_estate_details_data->start_arrive_at }}">
                             <label for="form_control_1">وقت تسجيل الوصول من</label>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group form-md-line-input ">
                             <input type="text" class="form-control" disabled id="form_control_1"
-                                value="{{ $real_estate_details_data->party_allow }}">
+                                value="{{ $real_estate_details_data->end_arrive_at }}">
                             <label for="form_control_1">وقت تسجيل الوصول إلى</label>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group form-md-line-input ">
                             <input type="text" class="form-control" disabled id="form_control_1"
-                                value="{{ $real_estate_details_data->party_allow }}">
+                                value="{{ $real_estate_details_data->start_leave_at }}">
                             <label for="form_control_1">وقت تسجيل المغادرة من</label>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group form-md-line-input ">
                             <input type="text" class="form-control" disabled id="form_control_1"
-                                value="{{ $real_estate_details_data->party_allow }}">
+                                value="{{ $real_estate_details_data->end_leave_at }}">
                             <label for="form_control_1">وقت تسجيل المغادرة إلى</label>
                         </div>
                     </div>
@@ -217,24 +217,22 @@
                         <div class="form-group form-md-checkboxes">
                             <label>المرافق الداخلية</label>
                             <div class="md-checkbox-inline">
-                                {{ $real_estate_details_data->indoor_facilities }}
-                                {{-- @foreach ($indoor_facilities as $facility)
-                                <div class="md-checkbox">
-                                    <input type="checkbox" id="{{ $facility->name }}" class="md-check"
-                                wire:model.defer="selected_indoor_facilities.{{ $facility->id }}">
-                                <label for="{{ $facility->name }}">
-                                    <span></span>
-                                    <span class="check"></span>
-                                    <span class="box"></span> {{ $facility->name }} </label>
-                            </div>
-                            @endforeach --}}
+                                @foreach (explode(',',$real_estate_details_data->indoor_facilities) as $facility)
+                                @if(!$loop->last)
+                                {{ $facilities->where('id', $facility)->first()->name.', ' }}
+                                @endif
+                                @endforeach
                         </div>
                     </div>
+
+
                     <div class="form-group form-md-checkboxes">
                         <label>المرافق الخارجية</label>
                         <div class="md-checkbox-inline">
                             @foreach (explode(',',$real_estate_details_data->outdoor_facilities) as $facility)
-                            {{ $facilities[$facility] }}
+                            @if(!$loop->last)
+                            {{ $facilities->where('id', $facility)->first()->name.', ' }}
+                            @endif
                             @endforeach
                         </div>
                     </div>

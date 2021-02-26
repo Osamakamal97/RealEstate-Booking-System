@@ -96,5 +96,6 @@ class RegisterController extends Controller
                 ->withInput();
         }
         User::create($request->all());
+        return redirect()->route('realEstateOwner.dashboard');
     }
 }

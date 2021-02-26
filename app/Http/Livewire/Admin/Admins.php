@@ -11,18 +11,17 @@ class Admins extends Main
 {
     use WithPagination, LivewireAlert;
 
-    public $admin_id, $name, $email, $password, $role, $active, $roles;
-    public $showPermissions = false, $show_delete_notification = false;
-    public $userPermissions = [], $rolePermissions = [], $checked_permissions;
+    public $admin_id, $name, $email, $password, $role, $status, $roles, $showPermissions = false, $title,
+     $show_delete_notification = false, $userPermissions = [], $rolePermissions = [], $checked_permissions;
 
     public function render()
     {
-
+        $this->title = 'admins';
         if ($this->search != null) {
             $admins = Admin::query()
                 ->where('name', 'LIKE', "%{$this->search}%")
                 ->orWhere('email', 'LIKE', "%{$this->search}%")
-                ->orWhere('active', 'LIKE', "%{$this->search}%")
+                ->orWhere('status', 'LIKE', "%{$this->search}%")
                 ->indexSelection($this->perPage);
         } else
             $admins = Admin::indexSelection($this->perPage);
@@ -44,7 +43,7 @@ class Admins extends Main
             'email' => "required|email|unique:admins,email",
             'password' => 'required_without:admin_id',
             'role' => 'required',
-            'active' => 'required|in:0,1',
+            'status' => 'required|in:0,1',
         ]);
         // values in form is 1 or 2, so this convert role index to string
         $admin = Admin::create($validate_admin);
@@ -70,7 +69,7 @@ class Admins extends Main
         $this->admin_id = $admin->id;
         $this->name = $admin->name;
         $this->email = $admin->email;
-        $this->active = $admin->active;
+        $this->status = $admin->status;
         $this->role = $admin->getRoleNames()[0];
         $this->show_edit = true;
     }
@@ -81,7 +80,7 @@ class Admins extends Main
             'name' => 'required',
             'email' => "required|email|unique:admins,email,$this->admin_id",
             'role' => 'required',
-            'active' => 'required|in:0,1',
+            'status' => 'required|in:0,1',
         ]);
 
         $admin = Admin::find($this->admin_id);
@@ -101,6 +100,7 @@ class Admins extends Main
     public function destroy($id)
     {
         $this->admin_id = $id;
+        $this->notification_message = __('notification.delete_admin');
         $this->show_delete_notification = true;
     }
 
@@ -130,7 +130,7 @@ class Admins extends Main
         $this->email = '';
         $this->password = '';
         $this->role = '';
-        $this->active = '';
+        $this->status = '';
         $this->userPermissions = [];
         $this->rolePermissions = [];
         $this->checked_permissions = [];
@@ -139,7 +139,6 @@ class Admins extends Main
         $this->show_create = false;
         $this->show_edit = false;
         $this->showPermissions = false;
-        
     }
 
     // permissions things
@@ -169,7 +168,7 @@ class Admins extends Main
         $permissions = collect(array_keys($this->checked_permissions));
         $admin->syncPermissions();
         // because give permissions can take string or array of permissions that can't be
-        // assign directly so do that inside array  
+        // assign directly so do that inside array
         foreach ($permissions as $permission)
             $admin->givePermissionTo($permission);
         $this->resetInputFields();

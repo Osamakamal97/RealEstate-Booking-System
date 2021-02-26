@@ -19,7 +19,7 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         try {
-            $credentials = ['email' => $request->email, 'password' => $request->password, 'active' => 1];
+            $credentials = ['email' => $request->email, 'password' => $request->password, 'status' => 1];
             $admin = Auth::guard('admin')->attempt($credentials);
             if (!$admin) {
                 return redirect()->back()->with('error', 'البيانات المدخلة غير صحيحة أو لا يمكنك الدخول.')->withInput(['email' => $request->email]);

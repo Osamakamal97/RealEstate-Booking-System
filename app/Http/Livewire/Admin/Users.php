@@ -12,8 +12,8 @@ use Spatie\Permission\Models\Role;
 class Users extends Component
 {
     use WithPagination, LivewireAlert;
-    
-    public $show_create = false, $show_edit = false, $showPermissions = false;
+
+    public $show_create = false, $show_edit = false, $showPermissions = false, $title;
     public $search = '', $perPage = 5, $page = 1;
     public $show_delete_notification = false;
 
@@ -25,6 +25,7 @@ class Users extends Component
 
     public function render()
     {
+        $this->title = __('admin.users');
         if ($this->search != null) {
             $users = User::query()
                 ->where('name', 'LIKE', "%{$this->search}%")
@@ -84,7 +85,7 @@ class Users extends Component
         $this->admin_id = $user->id;
         $this->name = $user->name;
         $this->email = $user->email;
-        $this->active = $user->active;
+        $this->status = $user->status;
         $this->role = $user->getRoleKey();
         $this->show_create = false;
         $this->showPermissions = false;
@@ -97,7 +98,7 @@ class Users extends Component
             'name' => 'required',
             'email' => "required|email|unique:admins,email,$this->admin_id",
             'role' => 'required|in:1,2',
-            'active' => 'required|in:0,1',
+            'status' => 'required|in:0,1',
         ]);
 
         $user = User::find($this->admin_id);

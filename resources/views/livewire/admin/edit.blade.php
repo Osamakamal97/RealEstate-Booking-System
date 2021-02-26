@@ -18,7 +18,7 @@
                 <input type="hidden" wire:model.defer="admin_id">
                 <div class="col-md-6 ">
                     <div class="form-body ">
-                        <div class="form-group form-md-line-input 
+                        <div class="form-group form-md-line-input
                                 @error('name') has-error @enderror">
                             <input type="text" class="form-control" id="form_control_1" placeholder="ادخل الاسم"
                                 wire:model.defer="name">
@@ -32,7 +32,7 @@
                 </div>
                 <div class=" col-md-6">
                     <div class="form-body">
-                        <div class="form-group form-md-line-input 
+                        <div class="form-group form-md-line-input
                                 @error('email')  has-error @enderror">
                             <input type="text" class="form-control" id="form_control_1" wire:model.defer="email"
                                 placeholder="أدخل بريدك الإلكتروني">
@@ -63,28 +63,28 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group form-md-radios  @error('active') has-error @enderror">
+                        <div class="form-group form-md-radios  @error('status') has-error @enderror">
                             <label>الحالة</label>
                             <div class="md-radio-inline">
                                 <div class="md-radio">
-                                    <input type="radio" id="active" name="active" class="md-radiobtn" value="1"
-                                        wire:model.defer="active">
-                                    <label for="active">
+                                    <input type="radio" id="status" name="status" class="md-radiobtn" value="1"
+                                        wire:model.defer="status">
+                                    <label for="status">
                                         <span class="inc"></span>
                                         <span class="check"></span>
                                         <span class="box"></span>
                                         مفعل </label>
                                 </div>
                                 <div class="md-radio">
-                                    <input type="radio" id="active2" name="active" class="md-radiobtn" value="0"
-                                        wire:model.defer="active">
-                                    <label for="active2">
+                                    <input type="radio" id="status2" name="status" class="md-radiobtn" value="0"
+                                        wire:model.defer="status">
+                                    <label for="status2">
                                         <span class="inc"></span>
                                         <span class="check"></span>
                                         <span class="box"></span>
                                         غير مفعل </label>
                                 </div>
-                                @error('active')
+                                @error('status')
                                 <span id="name-error" class="help-block help-block-error"
                                     style="color: #F3565D">{{ $message }}</span>
                                 @enderror

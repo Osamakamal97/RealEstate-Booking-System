@@ -1,12 +1,5 @@
 <div class="row">
-    @if (session()->has('success'))
-    <div class="col-md-12">
-        <div class="alert alert-success">
-            <button class="close" data-close="alert"></button>
-            {{ session('success') }}
-        </div>
-    </div>
-    @endif
+
     @if($show_create)
     @includeIf('livewire.permissions.create')
     @elseif($show_edit)

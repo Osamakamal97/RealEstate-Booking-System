@@ -1,19 +1,61 @@
 <div class="row">
-    @if (session()->has('success'))
-    <div class="col-md-12">
-        <div class="alert alert-success">
-            <button class="close" data-close="alert"></button>
-            {{ session('success') }}
-        </div>
-    </div>
-    @endif
+
     @if($show_form)
     @includeIf('livewire.realEstate.form')
     @endif
     @if ($show_delete_notification)
     @includeIf('admin.notifications.sweetalert')
     @endif
-    <div class="col-md-12">
+    <x-tables.table :title="$table_name" :table="$real_estates">
+        <thead>
+            <tr>
+                <th>الاسم</th>
+                <th>النوع</th>
+                <th>السعر للليلة</th>
+                <th>الحالة</th>
+                <th>الموافقة</th>
+                <th style="width: 165px">الاعدادات</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($real_estates as $real_estate)
+            <tr class="odd gradeX">
+                <td>{{ $real_estate->name }}</td>
+                <td>{{ $real_estate->type }}</td>
+                <td>{{ $real_estate->price.' شيكل' }}</td>
+                <td>
+                    @if($real_estate->status == 1)
+                    <span class="label label-sm label-success">{{ $real_estate->getStatus() }}</span>
+                    @else
+                    <span class="label label-sm label-danger">{{ $real_estate->getStatus() }}</span>
+                    @endif
+                </td>
+                <td>
+                    @if($real_estate->confirmed == 1)
+                    <span class="label label-sm label-success">{{ $real_estate->getConfirm() }}</span>
+                    @else
+                    <span class="label label-sm label-danger">{{ $real_estate->getConfirm() }}</span>
+                    @endif
+                </td>
+                <td style="width: 235px">
+                    <button wire:click.prevent="edit({{ $real_estate->id }})" class="btn btn-sm yellow">
+                        تعديل <i class="fa fa-edit"></i>
+                    </button>
+                    <button wire:click.prevent="destroy({{ $real_estate->id }})" class="btn btn-sm red">
+                        حذف <i class="fa fa-trash"></i>
+                    </button>
+                    @can('block_real_estate')
+                    <button wire:click.prevent="band({{ $real_estate->id }})" class="btn btn-sm grey">
+                        حظر <li class="glyphicon glyphicon-ban-circle"></li>
+                    </button>
+                    @endcan
+                </td>
+            </tr>
+            @endforeach
+
+        </tbody>
+    </x-tables.real-estates>
+    {{-- <div class="col-md-12">
         <div class="portlet box grey-cascade">
             <div class="portlet-title">
                 <div class="caption">
@@ -134,5 +176,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>

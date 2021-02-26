@@ -32,7 +32,7 @@ class RealEstate extends Model
     public function scopeIndexSelection($query, $paginate)
     {
         $roles = RealEstate::select('name', 'type', 'address', 'price')->toArray();
-        return $query->role($roles)->select('id', 'name', 'email', 'active')
+        return $query->role($roles)->select('id', 'name', 'email', 'status')
             ->paginate($paginate);
     }
 

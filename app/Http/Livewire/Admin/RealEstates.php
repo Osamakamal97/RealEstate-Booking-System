@@ -8,8 +8,11 @@ use App\Models\RealEstateFacility;
 
 class RealEstates extends Main
 {
-    public $real_estate_id, $real_estate_data, $real_estate_details_data, $facilities;
+
+    public $real_estate_id, $real_estate_data, $real_estate_details_data, $facilities,
+        $table_name = 'realEstates_table';
     public $show_real_estate_data = false;
+
 
     public function render()
     {

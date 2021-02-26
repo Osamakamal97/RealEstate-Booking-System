@@ -15,7 +15,6 @@ class CreateRealEstatesTable extends Migration
     {
         Schema::create('real_estates', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
             $table->string('name', 150);
             $table->string('type', 30);
             $table->string('address');
@@ -30,7 +29,7 @@ class CreateRealEstatesTable extends Migration
             $table->enum('confirmed', ['-1', '0', '1'])->default(0);
             $table->boolean('status')->default(false);
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->constrained('users','id')->cascadeOnDelete;
         });
     }
 

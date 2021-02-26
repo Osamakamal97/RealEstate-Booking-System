@@ -50,10 +50,10 @@
                 </a>
             </li>
             {{-- <li class="{{ request()->is('admin/permissions') ? 'active' : '' }}">
-                <a href="{{ route('admin.permissions.index') }}">
-                    <i class="icon-user-following"></i>
-                    <span class="title">الصلاحيات</span>
-                </a>
+            <a href="{{ route('admin.permissions.index') }}">
+                <i class="icon-user-following"></i>
+                <span class="title">الصلاحيات</span>
+            </a>
             </li> --}}
             @endrole
             @role('manager')
@@ -68,7 +68,7 @@
             <li class="heading">
                 <h3 class="uppercase">العقارات وأصحاب العقارات</h3>
             </li>
-            <li class="{{ request()->is('admin/users*')  ? 'open active' : '' }}">
+            <li class="{{ request()->is('admin/real-estate-owners*')  ? 'open active' : '' }}">
                 <a href="javascript:;">
                     <i class="icon-users"></i>
                     <span class="title">أصحاب العقارات</span>
@@ -76,19 +76,22 @@
                     <span class="arrow open"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="{{ request()->is('admin/realEstateOwners') ? 'active' : '' }}">
+                    <li class="{{ request()->is('admin/real-estate-owners') ? 'active' : '' }}">
                         <a href="{{ route('admin.realEstateOwners.index') }}">
                             <i class="icon-user"></i>عرض جميع أصحاب العقارات</a>
                     </li>
-                    {{-- <li class="{{ request()->is('admin/realEstateOwners/notifications-response') ? 'active' : '' }}">
-                        <a href="{{ route('admin.realEstateOwners.notifications.index') }}">
-
+                    <li class="{{ request()->is('admin/real-estate-owners/notifications-response') ? 'active' : '' }}">
+                        <a
+                        {{-- href="{{ route('admin.realEstateOwners.notifications.index') }}" --}}
+                        >
                             <i class="icon-user"></i>عرض جميع إشعارات أصحاب العقارات</a>
                     </li>
                     <li class="{{ request()->is('admin/realEstateOwners/notify') ? 'active' : '' }}">
-                        <a href="{{ route('admin.realEstateOwners.notify.index') }}">
+                        <a
+                        {{-- href="{{ route('admin.realEstateOwners.notify.index') }}" --}}
+                        >
                             <i class="icon-user"></i>إرسال إشعارات لأصحاب العقارات</a>
-                    </li> --}}
+                    </li>
                 </ul>
             </li>
             <li class="{{ request()->is('admin/real-estate/index') ? 'active' : '' }}">

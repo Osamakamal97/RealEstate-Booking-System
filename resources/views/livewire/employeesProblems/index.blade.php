@@ -6,8 +6,9 @@
                     <i class="fa fa-edit"></i> Compose </a>
             </li>
             <li class="inbox active">
-                <a class="btn" data-title="Inbox" wire:click.prevent="inbox"> الشكاوي </a>
-                <b></b>
+                <a class="btn" data-title="Inbox" wire:click.prevent="inbox">
+                    الشكاوي </a>
+                {{-- <b></b> --}}
             </li>
         </ul>
     </div>
@@ -19,14 +20,14 @@
     <div class="col-md-10">
         <div class="inbox-header">
             <h1 class="pull-left">Inbox</h1>
-            <form class="form-inline pull-right" action="index.html">
+            {{-- <form class="form-inline pull-right">
                 <div class="input-group input-medium">
                     <input type="text" class="form-control" placeholder="Password">
                     <span class="input-group-btn">
                         <button type="submit" class="btn green"><i class="fa fa-search"></i></button>
                     </span>
                 </div>
-            </form>
+            </form> --}}
         </div>
         <div class="inbox-content">
             <table class="table table-striped table-advance table-hover">

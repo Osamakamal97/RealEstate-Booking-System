@@ -64,9 +64,9 @@ class LoginController extends Controller
 
     public function redirectTo()
     {
-        if (auth()->user()->type == 1)
+        // if (auth()->user()->type == 1)
             return '/realEstateOwner/dashboard';
-        else
-            return '/home';
+        // else
+            // return '/home';
     }
 }

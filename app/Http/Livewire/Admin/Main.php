@@ -10,7 +10,8 @@ class Main extends Component
 {
     use WithPagination, LivewireAlert;
 
-    public $show_create = false, $show_edit = false, $show_delete_notification = false,$show_form = false;
+    public $show_create = false, $show_edit = false, $show_delete_notification = false,
+        $show_form = false, $notification_message;
     public $search = '', $perPage = 5, $page = 1;
 
     public function sendAlert($status, $message)
